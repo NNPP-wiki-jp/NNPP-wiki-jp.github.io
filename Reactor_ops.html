@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Reactor Operations (RO) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Reactor Operations (RO)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "The heart of the Naramo Power Plant. Operates the reactor from the control room and completes power orders."
+                <br><small>- ナラモ原子力発電所の心臓部。制御室から原子炉を操作し、電力供給指令を遂行する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Reactor Operations (RO)</b>は、原子炉の制御、電力供給、および発電の最適化を担う部門である。Shift Managerと共にプラント運営において最も重要な役割を果たす。ANRO（Advanced Noobic Reactor Operations）に関する詳細は<a href="https://naramo-nuclear-plant-v2.fandom.com/wiki/Factions#ANRO_(Advanced_Noobic_Reactor_Operations)">こちら</a>を参照。</p>
+
+            <h2 id="requirements">解放条件</h2>
+            <p><a href="Logistical_Operations.html">Logistical Operations</a>にて8,000 XPに到達することで解放される。</p>
+
+            <h2 id="duties">任務</h2>
+            <p>原子炉の燃料補給、電力供給指令（Power Orders）の遂行、メルトダウンの防止が主な任務である。また、Plant DirectorやShift Managerの指示による安全なSCRAM実施も担当する。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>特記事項</th></tr>
+                <tr><td>Trainee</td><td>0</td><td>デフォルト装備</td></tr>
+                <tr><td>Junior Operator</td><td>2,000</td><td>半袖ポロシャツ</td></tr>
+                <tr><td>Reactor Operator</td><td>10,000</td><td>-</td></tr>
+                <tr><td>Experienced Operator</td><td>25,000</td><td>-</td></tr>
+                <tr><td>Engineer</td><td>50,000</td><td>-</td></tr>
+                <tr><td>Chief Engineer</td><td>100,000</td><td>専用ベルト、赤いヘルメット、B-Keycard</td></tr>
+                <tr><td>Head of Reactor Operations</td><td>200,000</td><td>黒いヘルメット、専用衣装、レンチ、A-Keycard</td></tr>
+            </table>
+
+            <h2 id="tips">用語とヒント</h2>
+            <p>詳細な操作は<a href="Reactor_Guide.html">Reactor Guide</a>ページを参照すること。</p>
+            <ul>
+                <li><b>主な略語:</b> SM (Shift Manager), PO (Power Order), FW (Feedwater), RO (Reactor Operations), HORO (Head of Reactor Operations), RV (Relief valves), CR (Control Room)</li>
+                <li><b>ヒント:</b> 制御棒 (Ctrl Rods) は効率化のため55%に維持すること。冷却ポンプ (Cooling pump) は略してはならない。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
