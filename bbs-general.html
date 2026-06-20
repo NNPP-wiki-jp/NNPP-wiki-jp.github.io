@@ -16,25 +16,7 @@
     </header>
 
     <div class="container">
-        <nav class="side-nav">
-            <div class="nav-section">
-                <div class="nav-title">案内</div>
-                <ul>
-                    <li><a href="index.html">メインページ</a></li>
-                    <li><a href="rules.html">コミュニティルール</a></li>
-                    <li><a href="departments.html">各部門の解説</a></li>
-                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
-                </ul>
-            </div>
-            <div class="nav-section">
-                <div class="nav-title">各種掲示板</div>
-                <ul>
-                    <li><a href="bbs-general.html">雑談掲示板</a></li>
-                    <li><a href="bbs-qa.html">質問掲示板</a></li>
-                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
-                </ul>
-            </div>
-        </nav>
+        <nav class="side-nav" id="sidebar"></nav>
 
         <main class="main-content">
             <h1 class="page-title">雑談掲示板</h1>
@@ -67,14 +49,19 @@
     </div>
 
     <script>
-        // 提供されたGASウェブアプリのURLを埋め込み済み
+        // 🔴 共通サイドバーを読み込む処理
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+
         const GAS_URL = "https://script.google.com/macros/s/AKfycbwr6n6Y8CHKJhC8DNl9YrIRwDZxjvIFXKNOyr8GGh2YXW0IRCXyuMcRH_D8_1ScKpbC-Q/exec";
 
         window.onload = function() {
             loadComments();
         };
 
-        // スプレッドシートからコメントを読み込む
         async function loadComments() {
             const commentsArea = document.getElementById("bbs-comments-area");
             try {
@@ -88,7 +75,6 @@
                     return;
                 }
 
-                // 最新の書き込みが上に来るように逆順で表示
                 comments.reverse().forEach(comment => {
                     const commentDiv = document.createElement("div");
                     commentDiv.className = "bbs-comment-card";
@@ -107,7 +93,6 @@
             }
         }
 
-        // スプレッドシートへ書き込む
         async function postMessage(event) {
             event.preventDefault();
             const nameInput = document.getElementById("bbs-name");
@@ -119,7 +104,6 @@
 
             if (!text) return;
 
-            // 連投防止のためにボタンを無効化
             submitBtn.disabled = true;
             submitBtn.textContent = "送信中...";
 
@@ -131,9 +115,7 @@
                     body: JSON.stringify({ name, text })
                 });
 
-                // 送信完了したらフォームをクリアして再読み込み
                 textInput.value = "";
-                // 即時反映を確約できないため、1秒だけ待ってからリロード
                 setTimeout(loadComments, 1000);
             } catch (error) {
                 console.error("送信エラー:", error);
