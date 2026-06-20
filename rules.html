@@ -11,34 +11,38 @@
     </header>
 
     <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
         <main class="main-content">
             <h1 class="page-title">コミュニティルール</h1>
 
             <h2 id="rules">利用規約とコミュニティルール</h2>
-            <p>当Wikiを快適に利用・運営するために、以下のルールを遵守してください。</p>
+            <p>当Wikiの利用にあたっては、以下のルールを遵守すること。違反が確認された場合は編集権限の制限等の措置を講じる場合がある。</p>
             <ul>
-                <li><b>中立的かつ客観的な記述:</b> 個人の主観や偏見に基づいた内容ではなく、ゲーム内の事実や検証結果に基づいた情報を記述してください。</li>
-                <li><b>荒らし行為の禁止:</b> 意図的なページの削除、不正確な情報の流布、罵倒や攻撃的な言葉遣いは厳禁です。</li>
-                <li><b>著作権の尊重:</b> ゲームのスクリーンショット等は適切に使用し、他者が権利を持つ素材を無断で不適切に加工・流用しないでください。</li>
-                <li><b>プライバシー保護:</b> 他のプレイヤーの個人情報を特定したり、晒し上げたりする行為は禁止します。</li>
+                <li><b>客観的な記述:</b> 個人の主観や偏見に基づいた内容ではなく、ゲーム内の事実や検証結果に基づいた情報を記述すること。</li>
+                <li><b>荒らし行為の禁止:</b> 意図的なページの改ざん、情報の削除、不正確な情報の流布、攻撃的な表現の使用は禁止である。</li>
+                <li><b>著作権の尊重:</b> ゲームの素材等は適切に使用すること。権利関係に抵触する素材の無断転載は行わない。</li>
+                <li><b>プライバシー保護:</b> 他プレイヤーの個人情報を特定、あるいは開示する行為は厳禁。</li>
             </ul>
 
             <h2 id="editors">編集者募集</h2>
-            <p>当Wikiでは、情報の鮮度を保つために編集者を募集しています。ゲームの最新情報に詳しい方、執筆に協力いただける方はぜひご応募ください。</p>
+            <p>当Wikiでは、情報の更新に協力する編集者を募集しています。</p>
             
             <h3>応募方法</h3>
-            <p>以下のGoogleフォームより、簡単な自己紹介と連絡先（メールアドレスまたはGitHubアカウント）を送信してください。</p>
-            <div style="background: #e7f3fe; border: 1px solid #b6d4fe; padding: 20px; border-radius: 5px; text-align: center;">
-                <a href="https://forms.gle/qAgbfXhjTCXRPYdR8" style="font-size: 1.2em; font-weight: bold; color: #007bff;"> 編集者応募フォームはこちら</a>
+            <p>以下のフォームより、簡単な自己紹介、および連絡先としてメールアドレスまたはGitHubアカウントを送信してください。</p>
+            <div style="background: #f8f9fa; border: 1px solid #a2a9b1; padding: 20px; text-align: center;">
+                <a href="https://forms.gle/mwTCBoC6X9EguTPR9" style="font-weight: bold;">編集者応募フォームはこちら</a>
             </div>
 
-            <h3 id="requirements">応募資格</h3>
+            <h3 id="requirements">応募要件</h3>
             <ul>
-                <li>NNPPのプレイヤーであり、ゲーム内容を理解していること</li>
-                <li>荒らし行為を行わず、コミュニティルールを遵守できること</li>
-                <li>定期的な情報更新に協力できる方（大歓迎です！）</li>
+                <li>NNPPのプレイヤーであり、ゲーム内容を十分に理解していること。</li>
+                <li>コミュニティルールを遵守し、中立的な立場での執筆が可能であること。</li>
             </ul>
         </main>
     </div>
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
 </body>
 </html>
