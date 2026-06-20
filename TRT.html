@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Tactical Response Team - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Tactical Response Team (TRT)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Handles threats and high-risk operations that regular SECFOR can't deal with. Responsible for protecting Plant Directors."
+                <br><small>— 通常の警備部隊では対処できない脅威や高リスクの作戦を処理する。プラント責任者（Plant Directors）の保護を担当する。</small>
+            </blockquote>
+
+            <h2 id="duties">任務</h2>
+            <p><b>Tactical Response Team (TRT)</b>は、プラントを守るためのエリート即応部隊である。通常の部隊よりも高性能な武器や装備（ICV-1 APCなど）を運用する。主な任務は、施設本体およびプラントへの入り口の警備、そしてプラント責任者の護衛である。</p>
+
+            <h2 id="ranks">階級と要件</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>主な装備・変更点</th></tr>
+                <tr><td>Private</td><td>0</td><td>Weston SMG, CMP-44, DX-21, ICV-1 APC</td></tr>
+                <tr><td>Corporal</td><td>10,000</td><td>Falkenkruez</td></tr>
+                <tr><td>Sergeant</td><td>25,000</td><td>T-29 Springbolt, D-19 STAR</td></tr>
+                <tr><td>Squad Leader</td><td>40,000</td><td>D-22 STAR</td></tr>
+                <tr><td>Commander</td><td>100,000</td><td>PSAT, D-23 STAR, LLMV</td></tr>
+                <tr><td>Special Response Team</td><td>600,000</td><td>TRT Blackouts Uniform</td></tr>
+            </table>
+
+            <h2 id="equipment">装備と車両</h2>
+            <p><b>主な装備:</b> D-23 STAR, M-19, Ammobox, Falkenkreuz, PAT-1, PSAT, T-29 Springbolt, BS-Card等。<br>
+            ※TRTではHeavyクラスは使用不可。</p>
+            <p><b>使用可能な車両:</b> Security Car, ICV-1 APC, Tactical Response LLMV。</p>
+
+            <h2 id="trivia">豆知識</h2>
+            <p>150万XPに到達すると、新チーム「<a href="PSD.html">Personal Security Detachment (PSD)</a>」が解放される。ただし、これにはPlant Securityで50万XPが必要となる。</p>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
