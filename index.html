@@ -14,7 +14,9 @@
             <span class="wiki-subtitle">The Free Encyclopedia</span>
         </div>
         <div class="search-box">
-            <input type="text" placeholder="Wiki内を検索">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off">
+            </form>
         </div>
     </header>
 
@@ -30,10 +32,19 @@
                 </ul>
             </div>
             <div class="nav-section">
-                <div class="nav-title">コミュニティ</div>
+                <div class="nav-title">各種掲示板</div>
                 <ul>
-                    <li><a href="history.html">事件・歴史</a></li>
-                    <li><a href="#">最近の更新</a></li>
+                    <li><a href="bbs-general.html">雑談掲示板</a></li>
+                    <li><a href="bbs-qa.html">質問掲示板</a></li>
+                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-title">最近編集・作成された記事</div>
+                <ul>
+                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
+                    <li><a href="departments.html">各部門の解説</a></li>
+                    <li><a href="rules.html">コミュニティルール</a></li>
                 </ul>
             </div>
         </nav>
@@ -44,7 +55,7 @@
             <p class="lead-text">このサイトは、Robloxの原子力発電所シミュレーター「NNPP」のプレイヤー有志による非公式ファンWikiです。どなたでも自由に情報を閲覧・編集の参考にしていただけます。</p>
             
             <div class="wiki-notice">
-                <div class="notice-title">⚠️ 免責事項</div>
+                <div class="notice-title">免責事項</div>
                 <p>当サイトは有志によって運営されているファンサイトであり、ゲームの公式運営およびRoblox運営とは一切関係がありません。</p>
             </div>
 
@@ -54,23 +65,55 @@
             <h2>注目コンテンツ</h2>
             <div class="content-grid">
                 <div class="content-card">
-                    <h3><a href="strategy.html">🔰 初心者向け攻略ガイド</a></h3>
+                    <h3><a href="strategy.html">初心者向け攻略ガイド</a></h3>
                     <p>ゲームの始め方、基本操作、各アイテムやツールの使い方を分かりやすく解説しています。</p>
                 </div>
                 <div class="content-card">
-                    <h3><a href="departments.html">🛡️ 部門紹介</a></h3>
+                    <h3><a href="departments.html">部門紹介</a></h3>
                     <p>保安・警備部門（Security）や技術部門（Engineering）など、各部門の特徴や加入方法。</p>
                 </div>
                 <div class="content-card">
-                    <h3><a href="history.html">📜 コミュニティの歴史</a></h3>
-                    <p>過去に起きた大規模なサーバーイベントや、ゲーム内グループの歴史・変遷をまとめています。</p>
+                    <h3><a href="bbs-general.html">各種掲示板</a></h3>
+                    <p>プレイヤー同士の雑談、質問、ゲーム内組織・連隊のメンバー募集を行うコミュニティスペースです。</p>
                 </div>
             </div>
 
             <h2>編集に参加される方へ</h2>
-            <p>記事の追加や修正の提案、新しい情報の提供は大歓迎です！記述を始める前に、まずは <a href="rules.html">コミュニティルール</a> を一読してください。</p>
+            <p>記事の追加や修正の提案、新しい情報の提供は大歓迎です！記述を始める前に、まずはコミュティルールを一読してください。</p>
         </main>
     </div>
 
+    <script>
+        // Wiki内のページとキーワードのデータベース（ページを増やしたらここに追加します）
+        const wikiPages = [
+            { url: "index.html", title: "メインページ トップページ", keywords: ["nnpp", "メイン", "トップ", "概要", "ファンwiki"] },
+            { url: "rules.html", title: "コミュニティルール", keywords: ["ルール", "規則", "条例", "禁止事項", "編集法"] },
+            { url: "departments.html", title: "各部門の解説", keywords: ["部門", "警備", "保安", "技術", "security", "engineering"] },
+            { url: "strategy.html", title: "初心者攻略・マニュアル", keywords: ["初心者", "攻略", "マニュアル", "操作", "基本", "起動"] },
+            { url: "bbs-general.html", title: "雑談掲示板", keywords: ["雑談", "コミュニティ", "掲示板", "bbs", "会話"] },
+            { url: "bbs-qa.html", title: "質問掲示板", keywords: ["質問", "ヘルプ", "qa", "疑問"] },
+            { url: "bbs-group.html", title: "グループ宣伝掲示板", keywords: ["グループ", "宣伝", "募集", "連隊", "クラン"] }
+        ];
+
+        function performSearch(event) {
+            event.preventDefault(); // 画面の更新を阻止
+            const input = document.getElementById("search-input").value.trim().toLowerCase();
+            if (!input) return;
+
+            // 部分一致でページを検索
+            const matchedPage = wikiPages.find(page => 
+                page.title.toLowerCase().includes(input) || 
+                page.keywords.some(keyword => keyword.includes(input))
+            );
+
+            if (matchedPage) {
+                // 見つかったらそのページにジャンプ
+                window.location.href = matchedPage.url;
+            } else {
+                // 見つからなかった場合
+                alert("該当するページが見つかりませんでした。");
+            }
+        }
+    </script>
 </body>
 </html>
