@@ -49,19 +49,21 @@
     </div>
 
     <script>
-        // 🔴 共通サイドバーを読み込む処理
+        // 共通サイドバーを自動で読み込む処理
         fetch('sidebar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             });
 
+        // GASウェブアプリのURL
         const GAS_URL = "https://script.google.com/macros/s/AKfycbwr6n6Y8CHKJhC8DNl9YrIRwDZxjvIFXKNOyr8GGh2YXW0IRCXyuMcRH_D8_1ScKpbC-Q/exec";
 
         window.onload = function() {
             loadComments();
         };
 
+        // スプレッドシートからコメントを読み込む
         async function loadComments() {
             const commentsArea = document.getElementById("bbs-comments-area");
             try {
@@ -75,6 +77,7 @@
                     return;
                 }
 
+                // 最新の書き込みが上に来るように逆順で表示
                 comments.reverse().forEach(comment => {
                     const commentDiv = document.createElement("div");
                     commentDiv.className = "bbs-comment-card";
@@ -93,6 +96,7 @@
             }
         }
 
+        // スプレッドシートへ書き込む（URLパラメータ送信方式）
         async function postMessage(event) {
             event.preventDefault();
             const nameInput = document.getElementById("bbs-name");
@@ -104,18 +108,23 @@
 
             if (!text) return;
 
+            // 連投防止のためにボタンを無効化
             submitBtn.disabled = true;
             submitBtn.textContent = "送信中...";
 
+            // URLの末尾に文字をくっつけてGoogle（GAS）に送る
+            const postUrl = `${GAS_URL}?name=${encodeURIComponent(name)}&text=${encodeURIComponent(text)}`;
+
             try {
-                await fetch(GAS_URL, {
+                await fetch(postUrl, {
                     method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, text })
+                    mode: "no-cors" // クロスドメイン制限を回避
                 });
 
+                // 送信完了したら入力をクリア
                 textInput.value = "";
+                
+                // スプレッドシートへの書き込み時間を考慮して1秒待ってからリロード
                 setTimeout(loadComments, 1000);
             } catch (error) {
                 console.error("送信エラー:", error);
