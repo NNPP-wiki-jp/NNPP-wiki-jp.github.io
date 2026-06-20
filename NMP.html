@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Noobic Military Police - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+        .phase-box { background: #f0f7ff; border-left: 5px solid #007bff; padding: 15px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Noobic Military Police (NMP)</h1>
+
+            <blockquote>
+                "This unit houses all local Military Police for the Naramo area and other relevant Interior Service personnel."
+                <br><small>— Game Description</small>
+            </blockquote>
+
+            <p><b>Noobic Military Police (NMP)</b>は、Noobic Stratocracyの指定軍事警察であり、Naramo原子力発電所内にステーションを構えている。公式派閥（Official Faction）であり、入隊には申請および士官学校（Cadet Academy）の修了が必須である。</p>
+
+            <h2 id="duties">任務</h2>
+            <p>全てのDOE（エネルギー省）および戦闘要員（Combatant Personnel）の規律を監視・維持し、施設周辺の秩序と平和を守ることを主目的とする。</p>
+            <p><small>※NMPはNAMSと同等の権限は保持していない。</small></p>
+
+            <h2 id="ranks">階級と要件</h2>
+            <table class="wikitable">
+                <tr><th>階級</th><th>昇進要件</th></tr>
+                <tr><td>Patrol Cadet</td><td>申請合格（隔週金曜開示）</td></tr>
+                <tr><td>Junior Patrol Officer</td><td>オリエンテーション＋ユニットパトロール3回＋最終試験合格</td></tr>
+                <tr><td>Patrol Officer</td><td>100ポイント＋Junior Patrol Officerで1週間勤務</td></tr>
+                <tr><td>Senior Patrol Officer</td><td>200ポイント＋Patrol Officerで1週間勤務</td></tr>
+                <tr><td>Field Patrol Officer</td><td>300ポイント＋SPOとして1週間勤務</td></tr>
+                <tr><td>Lead Patrol Officer</td><td>400ポイント＋FPOとして2週間勤務</td></tr>
+                <tr><td>Patrol Specialist</td><td>指名制（2ヶ月以上の勤務必須）</td></tr>
+                <tr><td>Patrol Corporal</td><td>Junior NCOアプリケーション合格</td></tr>
+                <tr><td>Patrol Sergeant</td><td>Junior Leadershipプログラム合格</td></tr>
+                <tr><td>Lieutenant以上</td><td>Chief of Police等による指名制</td></tr>
+            </table>
+
+            <h2 id="tools">装備・ツール</h2>
+            <table class="wikitable">
+                <tr><th>ツール</th><th>概要</th></tr>
+                <tr><td>Handcuffs</td><td>指名手配者を拘束。「P」キーで赤点表示。</td></tr>
+                <tr><td>Taser</td><td>手配者を麻痺させる。</td></tr>
+                <tr><td>Warning Clipboard</td><td>不正行為への警告用（2回で手配）。</td></tr>
+                <tr><td>Authorize Clipboard</td><td>民間人の認可/許可取り消し用。</td></tr>
+                <tr><td>Vehicle Deleter</td><td>道路閉塞車両の削除用。</td></tr>
+            </table>
+
+            <h2 id="academy">士官学校（Cadet Academy）</h2>
+            <p>候補生（Patrol Cadet）は、最終試験に向けて以下のフェーズを経て教育を受ける。</p>
+            <div class="phase-box">
+                <b>Phase 1: オリエンテーション</b><br>
+                基本ルール、ツールの使い方、イベント、階級制度の学習。
+            </div>
+            <div class="phase-box">
+                <b>Phase 2: パトロール</b><br>
+                ユニットパトロール3回およびシャドウパトロール1回の実施。
+            </div>
+            <div class="phase-box">
+                <b>Phase 3: 最終試験</b><br>
+                20分間の筆記試験（合格まで1回のみ）。合格でJunior Patrol Officerへ昇進。
+            </div>
+
+            <h2 id="points">ポイントシステム</h2>
+            <p>NMPは独自のポイント制を採用している。</p>
+            <ul>
+                <li>Solo Patrol: 1pt/30分 (最大4pt)</li>
+                <li>Unit Patrol: 3pt</li>
+                <li>Shift Guarding: 2pt</li>
+                <li>Joint Event: 5pt</li>
+            </ul>
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
