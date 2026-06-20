@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Maintenance - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Plant Maintenance (PM)</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0;">
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+                </div>
+            </div>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "The backbone of the plant. Maintenance staff repairs infrastructure and handles supplies delivered by Logistics."
+                <br><small>- プラントの背骨。メンテナンススタッフはインフラを修理し、ロジスティクスによって配送された物資を扱う。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Plant Maintenance (PM)</b>は、プラントの維持管理を専門とするチームである。発電設備やインフラの修理を行い、正常な稼働を支える。修理対象となる主要設備には以下のものがある。</p>
+            <ul>
+                <li><b>Feedwater:</b> FW</li>
+                <li><b>Emergency Diesel Generators:</b> EDG / Ges</li>
+                <li><b>Turbines:</b> Turbs / Turbines / TB</li>
+                <li><b>External Transformers:</b> Ext / External (Power Bus Panelの維持に不可欠であり、WNの破壊対象となる)</li>
+                <li><b>Comms Box:</b> Comms (無線通信システムを司る。PMが4名以上の場合、WNの破壊対象となる)</li>
+                <li><b>Pipes:</b> 施設内に点在する配管。破壊されると放射性物質を噴出し、接近したプレイヤーにダメージを与える。</li>
+            </ul>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>装備・特記事項</th></tr>
+                <tr><td>Intern</td><td>0</td><td>D-Keycard</td></tr>
+                <tr><td>Junior Technician</td><td>500</td><td>-</td></tr>
+                <tr><td>Technician</td><td>2,000</td><td>-</td></tr>
+                <tr><td>Senior Technician</td><td>4,000</td><td>-</td></tr>
+                <tr><td>Supervisor</td><td>7,500</td><td>-</td></tr>
+                <tr><td>Head Technician</td><td>25,000</td><td>B-Keycard</td></tr>
+                <tr><td>Plant Operations Manager</td><td>100,000</td><td>A-Keycard / 発電機の停止権限</td></tr>
+                <tr><td>Plant Operations Chief</td><td>600,000</td><td>エグゼクティブアクセス</td></tr>
+            </table>
+
+            <h2 id="tasks">任務遂行方法</h2>
+            <ul>
+                <li><b>機器の修理:</b> レンチを装備して故障箇所をクリックし、ミニゲームを行う。QとEを適切なタイミングで押すことで効率的に修理できる。修理ごとに約150 XPの報酬を得る。</li>
+                <li><b>発電機の給油:</b> ジェリカンを入手し、発電機右側の給油口に合わせて補充する。</li>
+                <li><b>送電網の管理:</b> <a href="Power_Bus_Panel.html">Power Bus Panel</a>を参照。</li>
+                <li><b>原子炉の燃料補給:</b> サーバー内のPM人数が4名以下の場合はReactor Operationsがクレーンを操作可能。通常時はPMがクレーンを操作し、Reactor Operationsが指示に従い燃料棒を交換する。</li>
+            </ul>
+
+            <h2 id="tips">新任PMへのアドバイス</h2>
+            <ul>
+                <li>Coolant Roomの冷却装置は常に稼働させておくこと。</li>
+                <li>発電機は上級者やReactor Operationsの指示を待ってから起動すること。</li>
+                <li>修理場所の特定にはレンチを使い、慣れないうちは<a href="Locations.html">Maps</a>ページを活用すること。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
