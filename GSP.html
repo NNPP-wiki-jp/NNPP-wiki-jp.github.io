@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Ground Service Personnel - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Ground Service Personnel (GSP)</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0; display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 24px;">📝</div>
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+                </div>
+            </div>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Frontline soldiers of the Stratocracy's 3rd and 2nd Noobic Divisions. Assigned to Naramo after WNDF & Bloxian presence."
+                <br><small>- ストラトクラシー第3および第2ヌービック師団の前線兵士。WNDFおよびBloxianの存在を受けてNaramoに配属された。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Ground Service Personnel (GSP)</b>は、連邦軍の基幹となる部隊である。主要なサブユニットには <a href="13th_Armoured_Cavalry_Regiment.html">13th Armoured Cavalry Regiment</a>、<a href="Ground_Service_Field_Medics.html">Ground Service Field Medics</a>、<a href="Special_Operations_Command.html">Special Operations Command</a> が含まれる。</p>
+            <ul>
+                <li><b>Ground Service Field Medics:</b> GSPで50,000 XPに到達することで解放される。</li>
+                <li><b>Local Military Police:</b> GSPで300,000 XPに到達することで解放される。</li>
+                <li><b>Special Operations Command:</b> LMP、GSFM、GSPの全階級を完遂することで解放される。</li>
+            </ul>
+
+            <h2 id="duties">任務とXP獲得方法</h2>
+            <p>GSPはプラント警備の要であり、<a href="West_Noobian_Assault_Force.html">West Noobian</a>の襲撃に対する最前線の防衛部隊として機能する。また、<a href="Logistical_Operations.html">Logistical Operations</a>が市内から物資を調達する際の警備も担当する。</p>
+            <p><b>XP獲得方法:</b></p>
+            <ul>
+                <li><b>待機地点 (Circles):</b> 制御室外、冷却室、メインチェックポイントの各地点で「待機状態」になると30秒ごとに5 XPを獲得できる。</li>
+                <li><b>車両追跡:</b> LOトラックを車両で追跡すると30秒ごとに10 XPを獲得できる。</li>
+                <li><b>戦闘貢献:</b> WNを撃破するごとに30 XP、双眼鏡でWNを発見するごとに30 XPを獲得できる。</li>
+            </ul>
+
+            <h2 id="ranks">階級表（Current Uniform）</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th></tr>
+                <tr><td>2nd (Reserve) Division, Enlisted</td><td>0</td></tr>
+                <tr><td>2nd (Reserve) Division, Senior Inf</td><td>5,000</td></tr>
+                <tr><td>2nd (Reserve) Division, Corporal</td><td>12,000</td></tr>
+                <tr><td>2nd (Reserve) Division, Squad Sergeant</td><td>25,000</td></tr>
+                <tr><td>3rd Division, Infantryman</td><td>40,000</td></tr>
+                <tr><td>3rd Division, Senior Inf.</td><td>60,000</td></tr>
+                <tr><td>3rd Division, Corporal</td><td>100,000</td></tr>
+                <tr><td>3rd Division, Squad Sergeant</td><td>120,000</td></tr>
+                <tr><td>3rd Division, Platoon Sergeant</td><td>200,000</td></tr>
+                <tr><td>3rd Division, Lieutenant</td><td>250,000</td></tr>
+                <tr><td>3rd Division, Captain</td><td>300,000</td></tr>
+                <tr><td>3rd Division, Colonel</td><td>500,000</td></tr>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
