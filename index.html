@@ -59,13 +59,17 @@
                 <p>当サイトは有志によって運営されているファンサイトであり、ゲームの公式運営およびRoblox運営とは一切関係がありません。</p>
             </div>
 
+            <div class="main-visual-container">
+                <img src="nnpp.png" alt="NNPPメインビジュアル" class="main-visual-img">
+            </div>
+
             <h2>NNPPとは？</h2>
             <p>Roblox上で動作する、原子炉の運用や施設内の警備を体験できるロールプレイ・シミュレーターゲームです。プレイヤーは様々な部門に所属し、日々の業務や緊急事態（メルトダウン等）への対処をリアルタイムで楽しみます。</p>
             
             <h2>注目コンテンツ</h2>
             <div class="content-grid">
                 <div class="content-card">
-                    <h3><a href="strategy.html">初心者向け攻略ガイド</a></h3>
+                    <h3><a href="strategy.html">初心者攻略・マニュアル</a></h3>
                     <p>ゲームの始め方、基本操作、各アイテムやツールの使い方を分かりやすく解説しています。</p>
                 </div>
                 <div class="content-card">
@@ -79,39 +83,76 @@
             </div>
 
             <h2>編集に参加される方へ</h2>
-            <p>記事の追加や修正の提案、新しい情報の提供は大歓迎です！記述を始める前に、まずはコミュティルールを一読してください。</p>
+            <p>記事の追加や修正の提案、新しい情報の提供は大歓迎です！記述を始める前に、まずはコミュニティルールを一読してください。</p>
         </main>
     </div>
 
     <script>
-        // Wiki内のページとキーワードのデータベース（ページを増やしたらここに追加します）
+        // 存在するページの一覧と、検索結果に表示する見出し
         const wikiPages = [
-            { url: "index.html", title: "メインページ トップページ", keywords: ["nnpp", "メイン", "トップ", "概要", "ファンwiki"] },
-            { url: "rules.html", title: "コミュニティルール", keywords: ["ルール", "規則", "条例", "禁止事項", "編集法"] },
-            { url: "departments.html", title: "各部門の解説", keywords: ["部門", "警備", "保安", "技術", "security", "engineering"] },
-            { url: "strategy.html", title: "初心者攻略・マニュアル", keywords: ["初心者", "攻略", "マニュアル", "操作", "基本", "起動"] },
-            { url: "bbs-general.html", title: "雑談掲示板", keywords: ["雑談", "コミュニティ", "掲示板", "bbs", "会話"] },
-            { url: "bbs-qa.html", title: "質問掲示板", keywords: ["質問", "ヘルプ", "qa", "疑問"] },
-            { url: "bbs-group.html", title: "グループ宣伝掲示板", keywords: ["グループ", "宣伝", "募集", "連隊", "クラン"] }
+            { url: "index.html", title: "メインページ" },
+            { url: "rules.html", title: "コミュニティルール" },
+            { url: "departments.html", title: "各部門の解説" },
+            { url: "strategy.html", title: "初心者攻略・マニュアル" },
+            { url: "bbs-general.html", title: "雑談掲示板" },
+            { url: "bbs-qa.html", title: "質問掲示板" },
+            { url: "bbs-group.html", title: "グループ宣伝掲示板" }
         ];
 
-        function performSearch(event) {
-            event.preventDefault(); // 画面の更新を阻止
-            const input = document.getElementById("search-input").value.trim().toLowerCase();
-            if (!input) return;
+        async function performSearch(event) {
+            event.preventDefault();
+            const keyword = document.getElementById("search-input").value.trim().toLowerCase();
+            if (!keyword) return;
 
-            // 部分一致でページを検索
-            const matchedPage = wikiPages.find(page => 
-                page.title.toLowerCase().includes(input) || 
-                page.keywords.some(keyword => keyword.includes(input))
-            );
+            // メインコンテンツのエリアを検索結果表示用に書き換える
+            const mainContent = document.querySelector(".main-content");
+            mainContent.innerHTML = `
+                <h1 class="page-title">「${keyword}」の検索結果</h1>
+                <p class="lead-text">Wiki内からキーワードに一致するページを探しています...</p>
+                <ul id="search-results-list" style="list-style: none; padding: 0;"></ul>
+            `;
 
-            if (matchedPage) {
-                // 見つかったらそのページにジャンプ
-                window.location.href = matchedPage.url;
+            const resultsList = document.getElementById("search-results-list");
+            let hitCount = 0;
+
+            // 各HTMLファイルの中身を自動で読み込んで文字が入っているか調べる
+            for (const page of wikiPages) {
+                try {
+                    const response = await fetch(page.url);
+                    if (!response.ok) continue;
+                    
+                    const text = await response.text();
+                    
+                    // HTMLタグを除外して、純粋な本文テキストだけにする
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    const contentText = doc.querySelector('.main-content')?.textContent.toLowerCase() || "";
+
+                    // キーワードが含まれているか、またはタイトルに含まれているか
+                    if (contentText.includes(keyword) || page.title.toLowerCase().includes(keyword)) {
+                        hitCount++;
+                        
+                        // 検索結果にリンクを追加
+                        const li = document.createElement("li");
+                        li.style.marginBottom = "15px";
+                        li.style.padding = "10px";
+                        li.style.borderBottom = "1px solid #eaecf0";
+                        li.innerHTML = `
+                            <a href="${page.url}" style="font-size: 1.1rem; color: #0645ad; text-decoration: none; font-weight: bold;">${page.title}</a>
+                            <div style="font-size: 0.85rem; color: #54595d; margin-top: 2px;">URL: ${page.url}</div>
+                        `;
+                        resultsList.appendChild(li);
+                    }
+                } catch (e) {
+                    console.error("検索エラー:", e);
+                }
+            }
+
+            // 1件も見つからなかった場合
+            if (hitCount === 0) {
+                resultsList.innerHTML = `<p style="color: #54595d;">該当するページが見つかりませんでした。別のキーワードを試してください。</p>`;
             } else {
-                // 見つからなかった場合
-                alert("該当するページが見つかりませんでした。");
+                document.querySelector(".lead-text").textContent = `${hitCount} 件のページが見つかりました。`;
             }
         }
     </script>
