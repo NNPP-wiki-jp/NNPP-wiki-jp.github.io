@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Security - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Wikipedia風テーブルスタイル */
+        .wikitable {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 15px 0;
+            background-color: #f8f9fa;
+        }
+        .wikitable th, .wikitable td {
+            border: 1px solid #a2a9b1;
+            padding: 8px;
+            font-size: 0.9em;
+        }
+        .wikitable th { background-color: #eaecf0; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Plant Security</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "DoE Security Forces (SECFOR) is responsible for checkpoint operations and interior security of the Naramo Power Plant."
+                <div style="font-size: 0.8em; margin-top: 5px;">— Game Description</div>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Plant Security</b>は、NNPPにおける初期役割の一つである。この役割を進めるめることで、30,000 XPで<a href="TRT.html">Tactical Response Team</a>、50,000 XPで<a href="GSP.html">Ground Service Personnel</a>が解放される。Senior Guard以上になると、民間人の施設立ち入りを許可する権限が付与される。</p>
+
+            <h2 id="ranks">階級</h2>
+            <table class="wikitable">
+                <tr>
+                    <th>階級名</th>
+                    <th>必要XP</th>
+                    <th>装備</th>
+                </tr>
+                <tr><td>Junior Watchman</td><td>0</td><td>Weston SMG, M19, Ammo Box, Security Car</td></tr>
+                <tr><td>Watchman</td><td>3,000</td><td>CMP-44</td></tr>
+                <tr><td>Probationary Guard</td><td>5,000</td><td>CMP-44</td></tr>
+                <tr><td>Junior Guard</td><td>7,000</td><td>CMP-44</td></tr>
+                <tr><td>Guard</td><td>10,000</td><td>T-42 Matchbox</td></tr>
+                <tr><td>Senior Guard</td><td>12,000</td><td>D-19 STAR, PAT-1</td></tr>
+                <tr><td>Shift Assistant</td><td>25,000</td><td>DX-21</td></tr>
+                <tr><td>Shift Lead</td><td>50,000</td><td>C-11, Falkenkruez</td></tr>
+                <tr><td>Security Sergeant</td><td>75,000</td><td>M-24, Security Car</td></tr>
+                <tr><td>Security First Sergeant</td><td>100,000</td><td>PN-1P Transport</td></tr>
+                <tr><td>Security Lieutenant</td><td>150,000</td><td>Security Car (Reinforced)</td></tr>
+                <tr><td>Security Captain</td><td>200,000</td><td>-</td></tr>
+                <tr><td>Security Commander</td><td>300,000</td><td>Keycards (A-Card)</td></tr>
+                <tr><td><a href="Director_of_Security.html">Director of Security Forces</a></td><td>600,000</td><td>Executive Radio</td></tr>
+            </table>
+
+            <h2 id="tasks">任務内容</h2>
+            <p>主な任務は、West Noobianによる原子炉破壊を阻止することである。マップ上の指定ポイント（チェックポイント、制御室、発電機、冷却室）で待機することで、30秒ごとに5 XPを獲得できる。</p>
+            <ul>
+                <li><b>敵の識別：</b> 暗い服、赤いネームタグ、ライフルの携行が特徴。撃破時に30 XPを獲得。</li>
+                <li><b>民間人対応：</b> 無許可の民間人を排除・制圧する（XP獲得はなし）。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
