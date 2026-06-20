@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Military Police - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+        .misconception-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; margin: 15px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Local Military Police (LMP)</h1>
+
+            <blockquote>
+                "Naramo District MPs stationed under the auspices of the Civil Service, LMPs are responsible for civilian policing and arrests."
+                <br><small>— Game Description</small>
+            </blockquote>
+
+            <p><b>Local Military Police (LMP)</b>は、民間の治安維持を目的とした軍事警察ユニットである。Noobic Military Police (NMP) よりも権限が制限されており、手配されていないプレイヤーを逮捕することはできない。獲得条件は、<a href="GSP.html">Ground Service Personnel</a>で300,000 XPに達するか、ゲームパスの購入が必要である。</p>
+
+            <h2 id="duties">主な任務</h2>
+            <ol>
+                <li>指名手配者の逮捕</li>
+                <li>NMPの支援</li>
+                <li>施設の重要エリアの防衛</li>
+                <li>施設内外の法と秩序の維持</li>
+            </ol>
+
+            <h2 id="ranks">階級表（Current Uniform）</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>外見上の特徴</th></tr>
+                <tr><td>Police Trainee</td><td>0</td><td>デフォルト</td></tr>
+                <tr><td>Junior Police Officer</td><td>3,000</td><td>-</td></tr>
+                <tr><td>Police Officer</td><td>10,000</td><td>-</td></tr>
+                <tr><td>Senior Police Officer</td><td>25,000</td><td>PASGT LMP Green</td></tr>
+                <tr><td>LMP Supervisor</td><td>50,000</td><td>PASGT LMP CAMO</td></tr>
+                <tr><td>Duty Sergeant</td><td>100,000</td><td>LMP Patrol Jeep</td></tr>
+                <tr><td>LMP Lieutenant</td><td>200,000</td><td>ラジオ、バイザー等</td></tr>
+                <tr><td>LMP Shift Commander</td><td>300,000</td><td>Model 17</td></tr>
+            </table>
+
+            <h2 id="items">装備・車両</h2>
+            <p><b>ツール:</b> D-19, DX-21, A-Card, Taser, Handcuffs, Metal Detector, Authorize, Lantern。</p>
+            <p><b>車両:</b> Police Cruiser, Sheriff Cruiser, LMP Cruiser, LMP LLUV, LMP Patrol Jeep。</p>
+
+            <h2 id="abilities">特殊能力</h2>
+            <p>手錠を装備中に「P」キーを押すことで、近くの指名手配者をスキャンし、赤点として表示できる。なお、Plant Directorによって解雇される可能性があるが、彼らが手配されている場合は逮捕が可能である。</p>
+
+            <div class="misconception-box">
+                <b>よくある誤解:</b> LMPは「West Noobian」をスタン（Taser）することはできない。また、LMPは駅に留まったり逮捕することではXPを獲得できない（Reactor Operationsの電源注文完了時やシフト終了時に獲得可能）。
+            </div>
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
