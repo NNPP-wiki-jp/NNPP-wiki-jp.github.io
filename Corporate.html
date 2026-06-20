@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Corporate - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Corporate</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Maintains surveillance across the plant, operates public tours, and carries authority to lockdown the plant."
+                <br><small>- プラント全域の監視、一般向けツアーの運営を行い、プラントのロックダウン権限を有する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Corporate</b>は、<a href="Plant_Director.html">Plant Director</a>の補佐を行う部門である。施設の維持管理の監督、ロックダウンの実施、方針の策定、一般市民へのツアー運営などが主な業務である。</p>
+
+            <h2 id="capabilities">権限・能力</h2>
+            <ul>
+                <li>レベル3 <a href="lockdowns.html">ロックダウン</a>の開始</li>
+                <li>貨物列車の要請</li>
+                <li>企業会議への出席（会議のクールダウンをスキップ可能）</li>
+                <li><a href="Cameras.html">カメラ</a>の監視</li>
+                <li>民間人に対するツアーの許可</li>
+            </ul>
+
+            <h2 id="requirements">解放条件</h2>
+            <p><a href="Shift_Manager.html">Shift Manager</a>にて30,000 XPに到達、またはゲームパスを800 Robuxで購入。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>主な解禁要素</th></tr>
+                <tr><td>Unpaid Intern</td><td>0</td><td>BrikTek Gladiator</td></tr>
+                <tr><td>Paid-With-Experience Intern</td><td>10,000</td><td>-</td></tr>
+                <tr><td>Slightly-Paid Intern</td><td>20,000</td><td>-</td></tr>
+                <tr><td>Junior Associate</td><td>30,000</td><td>-</td></tr>
+                <tr><td>Associate</td><td>50,000</td><td>Leroy Large Yellow Bus</td></tr>
+                <tr><td>Personal Secretary</td><td>60,000</td><td>-</td></tr>
+                <tr><td>Secretary</td><td>70,000</td><td>-</td></tr>
+                <tr><td>Assistant to the Regional Manager</td><td>75,000</td><td>-</td></tr>
+                <tr><td>Regional Manager to the Assistant Manager</td><td>80,000</td><td>-</td></tr>
+                <tr><td>Assistant Manager</td><td>100,000</td><td>-</td></tr>
+                <tr><td>Manager</td><td>150,000</td><td>BrikTek Gladiator Red</td></tr>
+                <tr><td>Senior Management</td><td>200,000</td><td>-</td></tr>
+                <tr><td>Board of Directors</td><td>250,000</td><td>BrikTek Gladiator Silver</td></tr>
+                <tr><td>Department of Energy Executive</td><td>600,000</td><td>BrikTek Gladiator Blue / カスタマイズの制限解除</td></tr>
+            </table>
+
+            <h2 id="trivia">豆知識</h2>
+            <ul>
+                <li>Corporateは「知識の共有」を掲げているが、批判的な言動をとった者は給与減額や調査の対象になるという噂がある。</li>
+                <li>企業方針は「L.I.V.E」。</li>
+                <li>「Regional Manager to the Assistant Manager」は、ナラモで最も長い階級名である。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
