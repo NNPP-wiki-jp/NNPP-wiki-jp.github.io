@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Director of Security Forces - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Director of Security Forces</h1>
+
+          <div style="
+    background-color: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    border-left: 10px solid #36c;
+    padding: 10px 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+">
+    <div style="font-size: 0.9em; line-height: 1.5;">
+        このページは加筆が望まれています。<br>
+        内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+    </div>
+</div>
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "The Director of Security Forces is responsible for keeping the plant secure. They direct and manage all security forces around the plant to accomplish this."
+                <br><small>- 警備隊長はプラントの安全維持を担当する。その目的達成のため、プラント周辺の全警備部隊を指揮・管理する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Director of Security Forces</b>は、<a href="Plant_Security.html">Plant Security</a>チームの<a href="Category_Plant_Executives.html">Plant Executive</a>である。600,000 XPに到達することで解放され、プラントの警備部隊を組織的に統率するための能力が付与される。</p>
+
+            <h2 id="abilities">能力</h2>
+            <p>警備部隊の調整役として、以下の能力を行使できる。</p>
+            <ul>
+                <li><b>Patrol Orders (パトロール命令):</b> 警備隊員を指定の地点へ誘導する。命令に従った隊員は追加の経験値を得る。</li>
+                <li><b>Team Announcement (チーム全体アナウンス):</b> Plant Securityチームのメンバー全員に対してメッセージを送信する。</li>
+            </ul>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <p><i>警備隊長の服装</i></p>
+            <div style="border: 1px solid #ccc; padding: 10px; margin-top: 10px; background: #eee;">[画像：1.png]</div>
+
+            <h2 id="references">参照</h2>
+            <ol>
+                <li>https://i.imgur.com/6uPS9ke.png</li>
+            </ol>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
