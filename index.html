@@ -21,37 +21,10 @@
     </header>
 
     <div class="container">
-        <nav class="side-nav">
-            <div class="nav-section">
-                <div class="nav-title">案内</div>
-                <ul>
-                    <li><a href="index.html">メインページ</a></li>
-                    <li><a href="rules.html">コミュニティルール</a></li>
-                    <li><a href="departments.html">各部門の解説</a></li>
-                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
-                </ul>
-            </div>
-            <div class="nav-section">
-                <div class="nav-title">各種掲示板</div>
-                <ul>
-                    <li><a href="bbs-general.html">雑談掲示板</a></li>
-                    <li><a href="bbs-qa.html">質問掲示板</a></li>
-                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
-                </ul>
-            </div>
-            <div class="nav-section">
-                <div class="nav-title">最近編集・作成された記事</div>
-                <ul>
-                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
-                    <li><a href="departments.html">各部門の解説</a></li>
-                    <li><a href="rules.html">コミュニティルール</a></li>
-                </ul>
-            </div>
-        </nav>
+        <nav class="side-nav" id="sidebar"></nav>
 
         <main class="main-content">
             <h1 class="page-title">NNPP非公式Wikiへようこそ</h1>
-            
             <p class="lead-text">このサイトは、Robloxの原子力発電所シミュレーター「NNPP」のプレイヤー有志による非公式ファンWikiです。どなたでも自由に情報を閲覧・編集の参考にしていただけます。</p>
             
             <div class="wiki-notice">
@@ -59,8 +32,11 @@
                 <p>当サイトは有志によって運営されているファンサイトであり、ゲームの公式運営およびRoblox運営とは一切関係がありません。</p>
             </div>
 
-            <div class="main-visual-container">
-                <img src="nnpp.png" alt="NNPPメインビジュアル" class="main-visual-img">
+            <div class="main-visual-frame">
+                <div class="main-visual-container">
+                    <img src="nnpp.png" alt="NNPPメインビジュアル" class="main-visual-img">
+                </div>
+                <p class="main-visual-caption">施設警備を担当する保安・警備部門（Security Department）の職員。</p>
             </div>
 
             <h2>NNPPとは？</h2>
@@ -88,7 +64,13 @@
     </div>
 
     <script>
-        // 存在するページの一覧と、検索結果に表示する見出し
+        // 🔴 共通サイドバーを読み込む処理
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+
         const wikiPages = [
             { url: "index.html", title: "メインページ" },
             { url: "rules.html", title: "コミュニティルール" },
@@ -104,7 +86,6 @@
             const keyword = document.getElementById("search-input").value.trim().toLowerCase();
             if (!keyword) return;
 
-            // メインコンテンツのエリアを検索結果表示用に書き換える
             const mainContent = document.querySelector(".main-content");
             mainContent.innerHTML = `
                 <h1 class="page-title">「${keyword}」の検索結果</h1>
@@ -115,24 +96,17 @@
             const resultsList = document.getElementById("search-results-list");
             let hitCount = 0;
 
-            // 各HTMLファイルの中身を自動で読み込んで文字が入っているか調べる
             for (const page of wikiPages) {
                 try {
                     const response = await fetch(page.url);
                     if (!response.ok) continue;
-                    
                     const text = await response.text();
-                    
-                    // HTMLタグを除外して、純粋な本文テキストだけにする
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
                     const contentText = doc.querySelector('.main-content')?.textContent.toLowerCase() || "";
 
-                    // キーワードが含まれているか、またはタイトルに含まれているか
                     if (contentText.includes(keyword) || page.title.toLowerCase().includes(keyword)) {
                         hitCount++;
-                        
-                        // 検索結果にリンクを追加
                         const li = document.createElement("li");
                         li.style.marginBottom = "15px";
                         li.style.padding = "10px";
@@ -148,7 +122,6 @@
                 }
             }
 
-            // 1件も見つからなかった場合
             if (hitCount === 0) {
                 resultsList.innerHTML = `<p style="color: #54595d;">該当するページが見つかりませんでした。別のキーワードを試してください。</p>`;
             } else {
