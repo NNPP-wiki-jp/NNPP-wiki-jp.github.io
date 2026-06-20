@@ -149,7 +149,7 @@ li {
     margin-bottom: 4px;
 }
 
-/* 通知ボックス */
+/* 免責事項ボックス */
 .wiki-notice {
     background-color: #ffffff;
     border: 1px solid #a2a9b1;
@@ -163,6 +163,23 @@ li {
     font-weight: bold;
     color: #d33;
     margin-bottom: 3px;
+}
+
+/* メイン画像エリアのスタイリング */
+.main-visual-container {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    background-color: #f8f9fa;
+    border: 1px solid #a2a9b1;
+    padding: 8px;
+}
+
+.main-visual-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* グリッドレイアウト */
