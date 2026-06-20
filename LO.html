@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Logistical Operations (LO) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Logistical Operations (LO)</h1>
+                </div>
+            </div>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Keeps the plant working like clockwork. Deliver supplies from the factory to the plant in armoured transports."
+                <br><small>- 工場からプラントへ物資を運び、プラントの時計仕掛けのような稼働を支える。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Logistical Operations (LO)</b>は、車両を駆使してプラント内外へ物資を配送する部門である。原子炉燃料棒、ディーゼル燃料、Bloxy Colaなどの供給を担い、プラントの稼働を維持するための重要な役割を果たす。</p>
+
+            <h2 id="requirements">解放条件</h2>
+            <ul>
+                <li><a href="Plant_Maintenance.html">Plant Maintenance</a>で8,000 XPに到達</li>
+                <li>または、ゲームパスを200 Robuxで購入</li>
+            </ul>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>特記事項</th></tr>
+                <tr><td>Intern</td><td>0</td><td>デフォルト装備</td></tr>
+                <tr><td>Driver</td><td>1,000</td><td>-</td></tr>
+                <tr><td>Supplier</td><td>3,000</td><td>-</td></tr>
+                <tr><td>Experienced</td><td>7,500</td><td>-</td></tr>
+                <tr><td>Manager</td><td>10,000</td><td>B-Keycard</td></tr>
+                <tr><td>Assistant Supply Officer</td><td>50,000</td><td>A-Keycard</td></tr>
+                <tr><td>Chief Supply Officer</td><td>600,000</td><td>専用の外装（50万XPで解禁）</td></tr>
+            </table>
+
+            <h2 id="tasks">任務遂行方法</h2>
+            
+            <h3>核燃料棒 (Nuclear Fuel Rods)</h3>
+            <ol>
+                <li>「M41 DOE Nuclear」トラックをスポーンさせ、市内工場へ向かう。</li>
+                <li>工場内の黄色い枠内に停車し、壁の赤いボタンを押して燃料棒を積み込む。</li>
+                <li>プラントへ戻り、左側のトンネルを通過して原子炉室へ向かう。</li>
+                <li>トラックをクレーン下へ停め、燃料棒をクレーンにフックする。</li>
+            </ol>
+
+            <h3>供給物資 (Supply Crates)</h3>
+            <p>工場の第二エリアまたはLOバイパスの貨物列車から集積する。</p>
+            <ol>
+                <li>対象の車両（M41 DOE SupplyやHTVを推奨）でコンベアへ向かう。</li>
+                <li>コンベア/列車上の木箱をクリックして取得し、トラック内の透明な枠に配置する。</li>
+                <li>プラントの空コンベアエリアで木箱をクリックして荷下ろしを行う。</li>
+            </ol>
+
+            <h3>Bloxy Cola & 燃料</h3>
+            <ol>
+                <li>「DOE Supply Tug」をスポーンさせる。</li>
+                <li>スポーン地点付近のコンベアから、アイテムを回収してTugに積み込む。</li>
+                <li>プラント内の所定の棚に補充する。</li>
+            </ol>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
