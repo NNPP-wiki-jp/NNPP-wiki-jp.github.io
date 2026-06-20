@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Shift Manager (SM) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Shift Manager (SM)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Leads Reactor Operators and oversees all plant systems to ensure power orders are completed."
+                <br><small>- 原子炉オペレーターを率い、電力供給指令が確実に完了するようプラントの全システムを監視する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Shift Manager (SM)</b>は、<a href="Reactor_Ops.html">Reactor Operations (RO)</a>と連携し、原子炉の管理と電力供給指令の遂行を指揮する。プラント運営における重要なリーダー職である。</p>
+            <p>サーバー内に同時に存在できるのは1名のみで、加入には待機列が存在する。任期は最大2シフト（1800秒）で、終了後はROチームへ戻り、次のプレイヤーへ交代する。</p>
+            <p>なお「Fri-Yay」アップデート以降、シフト中にSMが離脱してもシフトは継続され、次期SMへ交代が可能となった。</p>
+
+            <h2 id="requirements">解放条件</h2>
+            <p><a href="Reactor_Ops.html">Reactor Operations</a>にて30,000 XPに到達することで解放される。</p>
+
+            <h2 id="abilities">権限・能力</h2>
+            <ul>
+                <li>ROメンバーの解任（解任されたメンバーはPlant Maintenanceチームへ強制転換される）</li>
+                <li>優秀なROメンバーへのボーナス支給（500 XP）</li>
+                <li>装備：A-Card、レンチ、ランタン、クリップボード</li>
+            </ul>
+
+            <h2 id="ranks">階級表</h2>
+            <p>※SMの服装は階級に関わらず変更されない。</p>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th></tr>
+                <tr><td>Junior Manager</td><td>0</td></tr>
+                <tr><td>Experienced Manager</td><td>5,000</td></tr>
+                <tr><td>Veteran Manager</td><td>15,000</td></tr>
+                <tr><td>Master Manager</td><td>30,000</td></tr>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
