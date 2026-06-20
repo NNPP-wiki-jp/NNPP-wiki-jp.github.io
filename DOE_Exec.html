@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Department of Energy Executive (DOEE) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Department of Energy Executive (DOEE)</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0;">
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+                </div>
+            </div>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Department of Energy Executive (DOEE)</b>は、<a href="Corporate.html">Corporate</a>チームにおける最高職位（Plant Executive）である。600,000 XPに到達することで解放され、プラントの防衛や運営を補助するための特別な権限を行使できる。サーバー内で同時に存在できるのは1名のみである。</p>
+
+            <h2 id="abilities">権限・能力</h2>
+            <p>通常のCorporate能力に加え、プラント防衛のための強力な「Act（法案/令）」を発動できる。一つのActを発動すると、他のActには20分間のクールダウンが発生する。</p>
+            
+            <ul>
+                <li><b>Exigent Circumstances Act:</b> 非戦闘員のDoEメンバーにCMP-44を支給する。レイダーとDoEの比率に応じてクールダウンが動的に変動する。</li>
+                <li><b>Enhanced Security Act:</b> <a href="Plant_Security.html">Plant Security</a>に強力な対戦車兵器とSV-1のスポーン権限を付与する。（クールダウン：20分）</li>
+                <li><b>Reinforced Supplies Act:</b> <a href="Logistical_Operations.html">Logistical Operations</a>に対し、装甲強化されたHTVの使用を許可する。（クールダウン：20分）</li>
+                <li><b>Team Announcement:</b> Corporateチーム内のみに表示されるアナウンスを作成可能。</li>
+            </ul>
+
+            <h2 id="exclusive">専用装備・車両</h2>
+            <ul>
+                <li>BrikTek Gladiator（ブルーバリアント）への独占アクセス権。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
