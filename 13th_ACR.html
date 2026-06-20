@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>13th Armoured Cavalry Regiment - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">13th Armoured Cavalry Regiment</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0; display: flex; align-items: center; gap: 15px;">
+                <div style="font-size: 24px;">📝</div>
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+                </div>
+            </div>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Drawn from the finest of the 3ND's scouts and infantry, 13ACR serves as a screening and recon unit against the invaders."
+                <br><small>- 第3ヌービック師団の精鋭偵察兵および歩兵から選抜された13ACRは、侵略者に対する遮蔽および偵察部隊として機能する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>13th Armoured Cavalry Regiment</b>は、Noobic Stratocracyの装甲部隊である。かつて存在したNoobic Armored Corps (NAC) の代替としてゲームパス購入によりアンロック可能となったユニットであり、その導入に関してはコミュニティ内で議論を呼んだ。</p>
+
+            <h2 id="duties">任務</h2>
+            <p>早期警戒および迎撃部隊としての役割を担う。主な任務は、<a href="Bloxian_Commonwealth.html">Bloxian Commonwealth</a>による装甲兵器の脅威に対抗することである。NACがNaramo Nuclear Plantの作戦から撤退した後、DOEにとっての装甲戦力不足を補うために導入された。</p>
+
+            <h2 id="ranks">階級</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th></tr>
+                <tr><td>Junior Trooper</td><td>0</td></tr>
+                <tr><td>Trooper</td><td>10,000</td></tr>
+                <tr><td>Cavalry Scout</td><td>25,000</td></tr>
+                <tr><td>Senior Cavalry Scout</td><td>50,000</td></tr>
+                <tr><td>Troop Sergeant</td><td>100,000</td></tr>
+                <tr><td>Platoon Sergeant</td><td>150,000</td></tr>
+                <tr><td>Cavalry Lieutenant</td><td>300,000</td></tr>
+            </table>
+
+            <h2 id="equipment">装備と車両</h2>
+            <p>有料派閥として、Jerico SMG、T-29 Springbolt、VT-2A1 Medium Tankなどの高火力・高機動な装備が支給される。最新のアップデートにより、VT-6 Main Battle Tankも運用可能となった。</p>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
