@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ANRO - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Advanced Noobic Reactor Operations (ANRO)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "The Advanced Noobic Reactor Operations is a group of Reactor Operations who are trained to delay Naramo's impending nuclear winter."
+                <br><small>- ナラモに迫る核の冬を遅らせるために訓練された、原子炉オペレーターの精鋭グループ。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Advanced Noobic Reactor Operations (ANRO)</b>は、エネルギー省（Department of Energy）の契約下で、高度な原子炉管理を専門とするグループである。一般のオペレーターとは異なる専用のユニフォームを着用している。現在のChief Nuclear Officer（オーナー）はdoop931である。</p>
+            <p>加入にはオリエンテーションの受講および試験の合格が必要である。ANROはポイントシステムを採用しており、イベント、資格取得、シフトへの参加などで付与される。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>区分</th><th>階級名</th><th>要件</th></tr>
+                <tr><td>LR</td><td>Junior Reactor Operator</td><td>ANROオリエンテーション合格</td></tr>
+                <tr><td>LR</td><td>Reactor Operator</td><td>タービン・ソロ資格、25ポイント、シフト2回参加</td></tr>
+                <tr><td>LR</td><td>Senior Reactor Operator</td><td>緊急・グリッド資格、75ポイント、シフト10回参加</td></tr>
+                <tr><td>LR</td><td>Shift Technical Advisor</td><td>スーパーバイザー資格、125ポイント、シフト15回参加</td></tr>
+                <tr><td>MR</td><td>Shift Supervisor</td><td>MR申請・試用期間合格、175ポイント、シフト20回参加</td></tr>
+                <tr><td>MR</td><td>Control Room Supervisor</td><td>SU2週間・部門職1週間保持、MRO指名、250ポイント</td></tr>
+                <tr><td>MR</td><td>Field Operation Inspector</td><td>他部門での士官職保持、MRO指名</td></tr>
+                <tr><td>HR</td><td>Command Staff</td><td>HR申請合格、指名制</td></tr>
+                <tr><td>HR</td><td>Section Chief</td><td>SLによる指名</td></tr>
+                <tr><td>SL</td><td>Deputy Director of Operations</td><td>CNOまたはDoOによる指名</td></tr>
+                <tr><td>SL</td><td>Director of Operations</td><td>CNOによる指名</td></tr>
+                <tr><td>SL</td><td>Chief Nuclear Officer</td><td>前任者からの継承</td></tr>
+            </table>
+
+            <h2 id="departments">部門</h2>
+            <h3>Training and Qualification (TQUAL)</h3>
+            <p>ANROの訓練部門。試用期間を終えたインストラクターは、独立してトレーニングや資格付与セッションを開催できる。「Instructor Management」「Documentation Management」「Operations Management」の3部門で構成され、スタッフや資料の管理を行う。</p>
+            <ul>
+                <li>サブ部門：NIRU</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
