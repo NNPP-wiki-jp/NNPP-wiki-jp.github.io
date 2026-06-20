@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Plant Director (PD) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Plant Director (PD)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Plant Directors serve as the face of the Power Plant, and are in-charge of all operations within NNPP."
+                <br><small>- プラントの顔であり、NNPP内の全オペレーションを統括する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Plant Director (PD)</b>は、エネルギー省 (DoE) の最終チームである。サーバー内で1名のみに制限されており、一般プレイヤーの中では最高権限を持つ存在として扱われる。スポーン地点は管理複合施設 (Administrative Complex) である。</p>
+
+            <h2 id="abilities">権限・能力</h2>
+            <ul>
+                <li>レベル2 <a href="lockdowns.html">ロックダウン</a>の開始</li>
+                <li><a href="cameras.html">カメラ</a>スキャンの実行</li>
+                <li>DoEおよびGSP職員の解雇（5分間）</li>
+                <li>企業会議の招集および<a href="Plant_Policies.html">プラント方針</a>の投票</li>
+                <li>ナラモ内でのアナウンス機能</li>
+            </ul>
+            <p>※PDによる解雇は、SMによるものと異なり、対象をすべてのDoEおよびNSチームから除名し、民間人 (Civilian) にする効果がある。なお、<a href="Noobic_Military_Police.html">NMP</a>職員には解雇に対する完全な免責が与えられている。</p>
+
+            <h2 id="requirements">解放条件</h2>
+            <p><a href="Corporate.html">Corporate</a>にて6,000 XPに到達することで解放される。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>要件</th></tr>
+                <tr><td>Executive Director</td><td>PD昇格に必要なチーム全てのXPを、次ランク到達値まで保有している</td></tr>
+                <tr><td>Director</td><td>ゲームパス購入者、または昇格条件を満たしていない場合</td></tr>
+            </table>
+
+            <h2 id="equipment">装備</h2>
+            <ul>
+                <li>Q-card、Model 17、懐中電灯、クリップボード</li>
+            </ul>
+
+            <h2 id="tips">アドバイス</h2>
+            <ul>
+                <li><b>Bloxy Colaの禁止は厳禁：</b> これを行うとDoEやGSPスタッフによる暴動を誘発する可能性がある。Bloxy Colaはメルトダウン時のROチームの生存・原子炉救済にも役立つ。</li>
+                <li>アナウンス機能は、過度に使用すると周囲に不快感を与える可能性があるため、最小限の使用に留めること。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
