@@ -67,7 +67,7 @@ body {
 
 /* 左側ナビゲーション */
 .side-nav {
-    width: 180px;
+    width: 190px;
     background-color: #f8f9fa;
     padding: 20px 10px 20px 20px;
     flex-shrink: 0;
@@ -149,7 +149,7 @@ li {
     margin-bottom: 4px;
 }
 
-/* 免責事項ボックス */
+/* 通知ボックス */
 .wiki-notice {
     background-color: #ffffff;
     border: 1px solid #a2a9b1;
@@ -165,7 +165,7 @@ li {
     margin-bottom: 3px;
 }
 
-/* グリッドレイアウト（注目コンテンツ） */
+/* グリッドレイアウト */
 .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -200,15 +200,15 @@ li {
     margin-bottom: 0;
 }
 
-/* 📱 スマートフォン対応用設定（画面幅が768px以下のとき） */
+/* スマートフォン対応（画面幅が768px以下のとき） */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* 縦並びに変更 */
+        flex-direction: column;
     }
 
     .side-nav {
         width: 100%;
-        order: 2; /* メイン記事の下に配置 */
+        order: 2;
         border-top: 1px solid #a2a9b1;
         padding: 20px;
         background-color: #f8f9fa;
@@ -216,13 +216,13 @@ li {
 
     .main-content {
         width: 100%;
-        border-left: none; /* 横の境界線を消す */
+        border-left: none;
         padding: 20px;
-        order: 1; /* メイン記事を上に配置 */
+        order: 1;
     }
 
     .search-box input {
-        width: 140px; /* スマホ用に検索バーを少し狭く */
+        width: 140px;
     }
     
     .page-title {
