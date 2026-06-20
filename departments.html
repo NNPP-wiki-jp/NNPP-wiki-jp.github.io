@@ -1,134 +1,75 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>陣営・部門一覧 - NNPP非公式Wiki</title>
-    <style>
-        /* Wikipedia風ベーススタイル */
-        body {
-            font-family: sans-serif;
-            line-height: 1.5;
-            color: #202122;
-            background-color: #f6f6f6;
-            margin: 0;
-            display: flex;
-        }
-
-        /* サイドバー */
-        #sidebar {
-            width: 160px;
-            padding: 10px;
-            font-size: 0.85em;
-            background: #f6f6f6;
-        }
-
-        /* メインコンテンツ */
-        .main-content {
-            flex-grow: 1;
-            background: #fff;
-            border-left: 1px solid #a2a9b1;
-            padding: 20px 40px;
-            max-width: 800px;
-        }
-
-        .page-title {
-            font-family: 'Linux Libertine', Georgia, Times, serif;
-            font-size: 26px;
-            border-bottom: 1px solid #a2a9b1;
-            margin-bottom: 0.5em;
-            padding-bottom: 0.2em;
-        }
-
-        h2 {
-            font-size: 20px;
-            border-bottom: 1px solid #a2a9b1;
-            margin-top: 1.5em;
-            padding-bottom: 0.2em;
-        }
-
-        h3 {
-            font-size: 16px;
-            margin-top: 1.2em;
-        }
-
-        ul { margin: 0.3em 0; padding-left: 2em; }
-        a { color: #0645ad; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        .role-req { color: #ba0000; font-weight: bold; font-size: 0.85em; }
-        .dept-list { margin-bottom: 20px; }
-    </style>
-</head>
-<body>
-
-    <nav id="sidebar">
-        <strong>目次</strong>
-        <ul>
-            <li><a href="#defense">Plant Defense</a></li>
-            <li><a href="#energy">Department of Energy</a></li>
-            <li><a href="#external">External</a></li>
-        </ul>
-    </nav>
-
-    <main class="main-content">
-        <h1 class="page-title">陣営・部門一覧</h1>
-
-        <p>Naramo Nuclear Plant (NNPP) における全役割の一覧である。一部の陣営は入隊に試験を必要とするが、それ以外の役割は誰でも選択が可能である。</p>
-
-        <h2 id="defense">1. Plant Defense</h2>
-        <div class="dept-list">
-            <h3>専門職（試験必須）</h3>
-            <ul>
-                <li><a href="#">Noobic Military Police (NMP)</a> <span class="role-req">[試験必須]</span></li>
-            </ul>
-            <h3>Plant Security Team</h3>
-            <ul>
-                <li>Plant Security</li>
-                <li>Director of Security Forces</li>
-                <li>Tactical Response Team</li>
-                <li>Personal Security Detachment</li>
-                <li>Ground Service Personnel</li>
-                <li>Special Operation Command</li>
-                <li>13th Armoured Cavalry Regiment</li>
-                <li>Local Military Police</li>
-            </ul>
+<header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
         </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
 
-        <h2 id="energy">2. Department of Energy</h2>
-        <div class="dept-list">
-            <h3>専門職（試験必須）</h3>
-            <ul>
-                <li><a href="#">Noobic Engineering Service (NES)</a> <span class="role-req">[試験必須]</span></li>
-                <li><a href="#">Advanced Noobic Reactor Operations (ANRO)</a> <span class="role-req">[試験必須]</span></li>
-            </ul>
-            <h3>Department of Energy</h3>
-            <ul>
-                <li>Plant Maintenance</li>
-                <li>Plant Operations Chief</li>
-                <li>Logistical Operations</li>
-                <li>Chief Supply Officer</li>
-                <li>Reactor Operations</li>
-                <li>Shift Manager</li>
-                <li>Corporate</li>
-                <li>Department of Energy Executive</li>
-                <li>Plant Director</li>
-            </ul>
-        </div>
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
 
-        <h2 id="external">3. External</h2>
-        <div class="dept-list">
-            <h3>Hostiles</h3>
-            <ul>
-                <li>West Noobian Assault Force</li>
-                <li>Federal Maritime Defense Force</li>
-                <li>Federal Ranger Regiment</li>
-                <li>Bloxian Commonwealth</li>
-                <li>1st Support & Foreign Aid</li>
-                <li>Civilians</li>
-                <li>Incarcerated</li>
-            </ul>
-        </div>
-    </main>
+        <main class="main-content">
+            <h1 class="page-title">陣営・部門一覧</h1>
 
-</body>
-</html>
+            <p class="lead-text">Naramo Nuclear Plant (NNPP) における全役割の一覧である。一部の陣営は入隊に試験を必要とするが、それ以外の役割は誰でも選択が可能である。</p>
+
+            <h2 id="defense">1. Plant Defense</h2>
+            <div class="dept-list">
+                <h3>専門職（試験必須）</h3>
+                <ul>
+                    <li><a href="#">Noobic Military Police (NMP)</a> <span class="role-req">[試験必須]</span></li>
+                </ul>
+                <h3>Plant Security Team</h3>
+                <ul>
+                    <li>Plant Security</li>
+                    <li>Director of Security Forces</li>
+                    <li>Tactical Response Team</li>
+                    <li>Personal Security Detachment</li>
+                    <li>Ground Service Personnel</li>
+                    <li>Special Operation Command</li>
+                    <li>13th Armoured Cavalry Regiment</li>
+                    <li>Local Military Police</li>
+                </ul>
+            </div>
+
+            <h2 id="energy">2. Department of Energy</h2>
+            <div class="dept-list">
+                <h3>専門職（試験必須）</h3>
+                <ul>
+                    <li><a href="#">Noobic Engineering Service (NES)</a> <span class="role-req">[試験必須]</span></li>
+                    <li><a href="#">Advanced Noobic Reactor Operations (ANRO)</a> <span class="role-req">[試験必須]</span></li>
+                </ul>
+                <h3>Department of Energy</h3>
+                <ul>
+                    <li>Plant Maintenance</li>
+                    <li>Plant Operations Chief</li>
+                    <li>Logistical Operations</li>
+                    <li>Chief Supply Officer</li>
+                    <li>Reactor Operations</li>
+                    <li>Shift Manager</li>
+                    <li>Corporate</li>
+                    <li>Department of Energy Executive</li>
+                    <li>Plant Director</li>
+                </ul>
+            </div>
+
+            <h2 id="external">3. External</h2>
+            <div class="dept-list">
+                <h3>Hostiles</h3>
+                <ul>
+                    <li>West Noobian Assault Force</li>
+                    <li>Federal Maritime Defense Force</li>
+                    <li>Federal Ranger Regiment</li>
+                    <li>Bloxian Commonwealth</li>
+                    <li>1st Support & Foreign Aid</li>
+                    <li>Civilians</li>
+                    <li>Incarcerated</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
