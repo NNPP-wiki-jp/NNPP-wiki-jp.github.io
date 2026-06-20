@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雑談掲示板 - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav">
+            <div class="nav-section">
+                <div class="nav-title">案内</div>
+                <ul>
+                    <li><a href="index.html">メインページ</a></li>
+                    <li><a href="rules.html">コミュニティルール</a></li>
+                    <li><a href="departments.html">各部門の解説</a></li>
+                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <div class="nav-title">各種掲示板</div>
+                <ul>
+                    <li><a href="bbs-general.html">雑談掲示板</a></li>
+                    <li><a href="bbs-qa.html">質問掲示板</a></li>
+                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <h1 class="page-title">雑談掲示板</h1>
+            <p class="lead-text">NNPPに関する雑談、ゲーム内の出来事などにご利用ください。</p>
+
+            <div class="wiki-notice" style="border-left-color: #3366cc;">
+                <div class="notice-title" style="color: #3366cc;">掲示板ルール</div>
+                <p>他人への誹謗中傷、荒らし行為、公式運営の迷惑になる投稿は禁止です。楽しく利用しましょう。</p>
+            </div>
+
+            <div class="bbs-form-container">
+                <form id="bbs-form" onsubmit="postMessage(event)">
+                    <div class="form-group">
+                        <label for="bbs-name">名前</label>
+                        <input type="text" id="bbs-name" placeholder="名無しさん" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="bbs-text">本文</label>
+                        <textarea id="bbs-text" rows="4" placeholder="書き込み内容を入力してください" required></textarea>
+                    </div>
+                    <button type="submit" class="bbs-submit-btn" id="submit-btn">投稿する</button>
+                </form>
+            </div>
+
+            <h2>コメント一覧</h2>
+            <div id="bbs-comments-area">
+                <p style="color: #54595d;">読み込み中...</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 🔴 ここにステップ2でコピーした「ウェブアプリのURL」を貼り付けます
+        const GAS_URL = "ここにデプロイしたウェブアプリのURLを貼り付け";
+
+        window.onload = function() {
+            loadComments();
+        };
+
+        // スプレッドシートからコメントを読み込む
+        async function loadComments() {
+            const commentsArea = document.getElementById("bbs-comments-area");
+            try {
+                const response = await fetch(GAS_URL);
+                const comments = await response.json();
+
+                commentsArea.innerHTML = "";
+
+                if (comments.length === 0) {
+                    commentsArea.innerHTML = "<p style='color: #54595d;'>投稿はまだありません。</p>";
+                    return;
+                }
+
+                // 最新の書き込みが上に来るように逆順で表示
+                comments.reverse().forEach(comment => {
+                    const commentDiv = document.createElement("div");
+                    commentDiv.className = "bbs-comment-card";
+                    commentDiv.innerHTML = `
+                        <div class="bbs-comment-meta">
+                            <span class="bbs-comment-name">${escapeHTML(comment.name || "名無しさん")}</span>
+                            <span class="bbs-comment-date">${comment.date}</span>
+                        </div>
+                        <div class="bbs-comment-text">${escapeHTML(comment.text).replace(/\n/g, '<br>')}</div>
+                    `;
+                    commentsArea.appendChild(commentDiv);
+                });
+            } catch (error) {
+                console.error("読み込みエラー:", error);
+                commentsArea.innerHTML = "<p style='color: #d33;'>コメントの読み込みに失敗しました。</p>";
+            }
+        }
+
+        // スプレッドシートへ書き込む
+        async function postMessage(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById("bbs-name");
+            const textInput = document.getElementById("bbs-text");
+            const submitBtn = document.getElementById("submit-btn");
+
+            const name = nameInput.value.trim() || "名無しさん";
+            const text = textInput.value.trim();
+
+            if (!text) return;
+
+            // 連投防止のためにボタンを無効化
+            submitBtn.disabled = true;
+            submitBtn.textContent = "送信中...";
+
+            try {
+                await fetch(GAS_URL, {
+                    method: "POST",
+                    mode: "no-cors", // GitHub Pagesからのクロスドメイン通信用
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, text })
+                });
+
+                // 送信完了したらフォームをクリアして再読み込み
+                textInput.value = "";
+                // no-corsモードは即時反映を確約できないため、1秒だけ待ってからリロード
+                setTimeout(loadComments, 1000);
+            } catch (error) {
+                console.error("送信エラー:", error);
+                alert("送信に失敗しました。");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "投稿する";
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+            }[tag] || tag));
+        }
+    </script>
+</body>
+</html>
