@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Bloxian Commonwealth (BFO) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Bloxian Commonwealth (BFO)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Supporting its puppet state of West Noobia, the Bloxian Commonwealth serves as the spearhead of the assault into Naramo."
+                <br><small>- 傀儡国家である西ヌービアを支援し、ナラモへの強襲の先鋒を務める。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Bloxian Commonwealth (BFO)</b>は、ゲームパス（2,500 Robux）で参加可能なチームである。西ヌービアを傀儡国家として利用し、ナラモの資源獲得を狙っている。精鋭兵を「軍事オブザーバー」として派遣しており、非常に強力な火力を有する。</p>
+            <p>BFO XP 100万および西ヌービア XP 30万に到達することで、隠しチームである「1st Support and Foreign Aid」が解放される。</p>
+
+            <h2 id="duties">任務</h2>
+            <p><a href="West_Noobian_Assault_Force.html">西ヌービア (WN)</a>と協力し、プラントの機能停止を目的として戦闘を行う。FRRを装備している間はカメラスキャンでマークされないという特性を持つ。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>要件</th><th>主な解禁要素</th></tr>
+                <tr><td>Support Operative</td><td>ゲームパス</td><td>BR-18A2, M80</td></tr>
+                <tr><td>Support Specialist</td><td>25,000 XP</td><td>PMV Scout, BR-18C</td></tr>
+                <tr><td>Fireteam Leader</td><td>50,000 XP</td><td>AMR APC</td></tr>
+                <tr><td>Squad Leader</td><td>100,000 XP</td><td>-</td></tr>
+                <tr><td>Field Advisor</td><td>150,000 XP</td><td>-</td></tr>
+                <tr><td>Military Attache</td><td>300,000 XP</td><td>XM64A1</td></tr>
+            </table>
+
+            <h2 id="equipment">装備・車両</h2>
+            <p>専用の高性能武器に加え、西ヌービアの武器（BR-10, BR-18, B63等）を初期からXP制限なしで使用可能。多種多様な車両を保有しており、 <a href="raid.html">レイド において圧倒的な優位性を持つ。</p>
+            <p>※ただし、Model 17、M53 CCS、M52 APC "Garbage" は使用不可。</p>
+
+            <h2 id="trivia">豆知識</h2>
+            <ul>
+                <li>BFO内で、使用車両（RM-5, XM-3, RM-3）の性能比較について三つの派閥（論争）が存在する。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
