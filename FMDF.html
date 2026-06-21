@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Federal Maritime Defense Force (FMDF) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Federal Maritime Defense Force (FMDF)</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0;">
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求めされています。
+                </div>
+            </div>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "FMDF MEU Marines serves as the frontline force during the invasion of Naramo, operating as part of an expeditionary force."
+                <br><small>- 遠征部隊の一部として運用され、ナラモ侵攻において前線部隊として機能するFMDF MEU海兵隊。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Federal Maritime Defense Force (FMDF)</b>は、海洋戦をベースにした<a href="WNAF.html">西ヌービア (WNAF)</a>のサブチームである。ゲームパス（275 Robux）を購入することで参加可能であり、ゲームパス専用の戦闘員チームとしては最も安価に設定されている。</p>
+
+            <h2 id="benefits">特典・車両スポナー</h2>
+            <p>FMDFに参加すると、新しい青いユニフォームが支給されるほか、2つの車両スポナーへのアクセス権が与えられる。</p>
+            <ul>
+                <li><b>第1スポナー（クールダウン：1分）:</b> WNAF標準のM41 UtilityやM52 APCに加え、LVT-A1 (WN)、M41 Anti-Air (FMDF)、M52A2 APCをスポーン可能。</li>
+                <li><b>第2スポナー（クールダウン：5分）:</b> LVT-A1 (WN) を直接スポーン可能。</li>
+            </ul>
+
+            <h2 id="classes">クラスユニフォーム（旧仕様）</h2>
+            <p>※現在は仕様が変更されている可能性があるが、以前はランクではなく選択したクラス（兵科）によってユニフォームが変化していた。</p>
+            <table class="wikitable">
+                <tr><th>クラス</th><th>特徴・当時の分類</th></tr>
+                <tr><td>Rifleman</td><td>標準ユニフォーム</td></tr>
+                <tr><td>Heavy</td><td>重装兵ユニフォーム</td></tr>
+                <tr><td>Scout</td><td>斥候兵ユニフォーム</td></tr>
+                <tr><td>Anti-Tank</td><td>対戦車兵ユニフォーム</td></tr>
+                <tr><td>Heavy Anti-Tank</td><td>重対戦車兵ユニフォーム</td></tr>
+                <tr><td>Ranged</td><td>遠距離兵ユニフォーム</td></tr>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
