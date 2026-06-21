@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Chief Supply Officer (CSO) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Chief Supply Officer (CSO)</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0;">
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+                </div>
+            </div>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "The Chief Supply Officer is responsible for managing and directing all logistical efforts. Their task is to make sure the power plant is fully supplied at all times."
+                <br><small>- ロジスティクス業務全般の管理・指揮を担う。プラントに常に十分な物資が供給されている状態を維持する責任がある。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Chief Supply Officer (CSO)</b>は、<a href="LO.html">Logistical Operations (LO)</a>部門を統括する職位である。到達には600,000 XPが必要であり、サーバー内で1名のみに制限されている。</p>
+            <p>通常のLOの能力に加え、ロジスティクスチームに対して具体的な指示を出し、業務の優先順位を設定する権限を持つ。優先対象の物資を配送したプレイヤーには、30%のXPボーナスが付与される。</p>
+
+            <h2 id="abilities">権限・能力</h2>
+            <ul>
+                <li><b>Broadcast:</b> 全てのLO労働者に対し、グローバルメッセージを送信できる。</li>
+                <li><b>Prioritize task:</b> 以下のタスクを優先設定し、達成時のXPを30%増加させる。
+                    <ul>
+                        <li>施設内部の再備蓄</li>
+                        <li>物資の配送</li>
+                        <li>原子炉燃料棒の配送</li>
+                    </ul>
+                </li>
+                <li><b>Executive Radio:</b> 専用の無線機器を使用し、「Rally」「Redirect」「Resupply」「Proximity danger」などのマーカーを設置できる。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
