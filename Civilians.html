@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Civilians - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Civilians</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Civilians of the nearby town, able to tour the plant when management of the plant allow."
+                <br><small>- 近隣の町の市民。プラント管理者の許可があれば施設を見学できる。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Civilians</b>は、市の中心部（市庁舎前や公園付近）にスポーンする最も基本的なチームである。主に市内やプラント周辺を自由に探索することが可能。</p>
+            <p>施設内へ立ち入るには、<a href="Plant_Security.html">Plant Security</a>または<a href="NMP.html">Local Military Police (NMP)</a>による認可（Authorization）が必要となる。許可なく侵入した場合、職員から攻撃を受ける可能性がある。なお、認可を受けるとインベントリ内の武器はすべて消去される。</p>
+
+            <h2 id="duties">任務・行動</h2>
+            <p>明確な任務はなく、街を散策したり他者と交流したりすることが主な目的である。また、DX-21武器パスを所有している場合はDX-21を使用できるが、使用すると指名手配（Wanted）状態になる。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>外装</th></tr>
+                <tr><td>Civilian</td><td>0</td><td>自身のRobloxアバター</td></tr>
+            </table>
+
+            <h2 id="equipment">装備</h2>
+            <p>初期装備は特になし。ただし、DX-21を付与されるゲームパスを所有している場合はDX-21が付与される。</p>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
