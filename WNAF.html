@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>West Noobian Assault Force (WNAF) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">West Noobian Assault Force (WNAF)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "After a destructive Naval landing off the coast of East Noobia, WNSDF now begins attacks on Naramo and its Nuclear Plant."
+                <br><small>- 東ヌービア沿岸への破壊的な敵前上陸を経て、WNSDFはナラモとその原子力発電所への攻撃を開始する。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>West Noobian Assault Force (WNAF)</b>は、ナラモ、東ヌービア、および<a href="GSP.html">Ground Service Personnel</a>と敵対関係にある西ヌービア軍の師団である。他チームと比較して武器の解放に必要なXPが少なめだが、車両の解放にはより多くのXPを必要とする。このチームのXPは「1st Foreign Aid Detachment」の解放条件にも関わっている。</p>
+
+            <h2 id="duties">任務・行動指針</h2>
+            <p>主な任務はメイン施設への攻撃、および<a href="LO.html">Logistical Operations</a>への妨害活動である。これによりプラントの燃料を枯渇させたり、制御室（Control Room）を占拠・確保して原子炉のメルトダウンを引き起こしたりすることが可能。</p>
+            <p>本部（WNAF HQ）にある地面の赤ボックスから車両をスポーンさせ、LOバイパス、検問所、地雷原、地下鉄などの様々なルートからプラントへ侵入できる。施設内では敵 combatants の排除、発電機の停止、Feedwaterの破壊などを行い、最終的にメルトダウンを起こして最大の混乱を招くことが目標となる。</p>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>主な解禁要素</th></tr>
+                <tr><td>Conscript</td><td>0 XP</td><td>T-42 Matchbox, T-29 Springbolt, BR-10, B63, M19, PMV</td></tr>
+                <tr><td>Operative</td><td>10,000 XP</td><td>BR-18</td></tr>
+                <tr><td>Senior Operative</td><td>20,000 XP</td><td>BR-7, PMV (T)</td></tr>
+                <tr><td>Field Sergeant</td><td>30,000 XP</td><td>M41 Utility</td></tr>
+                <tr><td>Master Sergeant</td><td>50,000 XP</td><td>C-16 GPMG</td></tr>
+                <tr><td>Warrant Officer</td><td>100,000 XP</td><td>M52 APC "Garbage"</td></tr>
+                <tr><td>Lieutenant</td><td>150,000 XP</td><td>-</td></tr>
+                <tr><td>Captain</td><td>200,000 XP</td><td>T-3, M53 CCS</td></tr>
+                <tr><td>Detachment Commander</td><td>300,000 XP</td><td>Model 17</td></tr>
+            </table>
+
+            <h2 id="equipment">装備</h2>
+            <p>BR-18, M-19, Model-17, B63 LMG, Falkenkreuz, R72, Super Bazooka, T-29 Springbolt, BR-7, C-16 GPMG, BR-10, T-42 Matchbox, Weston SMG, T-3, 双眼鏡（Scout/Ranged 用）など。詳細なスペックは<a href="Weapon_stats.html">Weapon stats</a>および<a href="Vehicles.html">Vehicles</a>のページを参照。</p>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
