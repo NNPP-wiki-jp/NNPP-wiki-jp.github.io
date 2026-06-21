@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Incarcerated (刑務所/収監) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Incarcerated (収監)</h1>
+
+            <h2 id="overview">概要</h2>
+            <p>プレイヤーが指名手配（<b>Wanted</b>）状態になり、<a href="LMP.html">LMP</a>または<a href="NMP.html">NMP</a>に逮捕されると、刑務所に収監（<b>Incarcerated</b>）される。また、民間人スポーン付近にある交番（<b>Policebox</b>）を利用して自首するか、指名手配中にゲームを抜けて再参加することでも収監されるが、自首した場合は刑期が<b>50%短縮</b>される。</p>
+
+            <h3>警告（Warning）の対象となる行為</h3>
+            <ul>
+                <li>認可（Authorized）済み、あるいは非武装の民間人（Civilian）を殺害する</li>
+                <li>民間人として銃器（DX-21）を使用し他者を殺害する</li>
+                <li>民間人としてM40無反動砲を使用する</li>
+                <li>民間人として運転が許可されていない車両を窃盗する</li>
+                <li>NMPメンバーからゲーム内ルール違反として手動で警告を受ける</li>
+            </ul>
+            <p>※民間人が無認可でプラントに侵入した場合は、警告（Warning）の対象にはならない（ただし職員から攻撃を受ける）。</p>
+            <p>一度「犯罪」を行うとMPから警告を受け、2回目の犯罪で指名手配（Wanted）状態になる。指名手配時の基本刑期は2分間で、警告が増えるごとに刑期が加算され、最大で30分まで延びる。</p>
+
+            <h2 id="punishment">罪と罰（刑期表）</h2>
+            <table class="wikitable">
+                <tr><th>刑期</th><th>条件</th></tr>
+                <tr><td>1:00</td><td>警告1回の状態で<b>自首（Surrendering）</b>した場合</td></tr>
+                <tr><td>2:00</td><td>警告1回の状態で<b>手錠（Handcuffs）で逮捕</b>された場合</td></tr>
+                <tr><td>7:30</td><td>自首した場合の最大刑期</td></tr>
+                <tr><td>15:00</td><td>逮捕された場合の最大刑期</td></tr>
+            </table>
+
+            <h2 id="after-arrest">逮捕後の流れ</h2>
+            <p>逮捕、あるいは自首が成立すると、自動的にプラント内の「Zone D」にある刑務所にテレポートされ、刑期が満了するまで待つ必要がある。出所後は自動的に民間人（Civilian）チームに戻される。</p>
+
+            <h2 id="ranks">階級</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要XP</th><th>外見</th></tr>
+                <tr><td>Prisoner</td><td>0</td><td>プレイヤー自身のデフォルトアバター</td></tr>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
