@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>1st Support & Foreign Aid (1SFA) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">1st Support & Foreign Aid (1SFA)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "Despite the name, 1SFA serves as a black operations unit of Bloxian-trained East Noobians to infiltrate and destroy the plants."
+                <br><small>- その名とは裏腹に、1SFAはブロキアによって訓練された東ヌービア人による非公認作戦（ブラック・オペレーション）部隊であり、プラントへの潜入と破壊を目的とする。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>1st Support & Foreign Aid (1SFA)</b>は、<a href="Bloxian.html">Bloxian Commonwealth (BFO)</a>の隠しサブチームである。解放には、BFO（Bloxian Foreign Oversight）で<b>1,000,000 XP</b>、および<a href="WNAF.html">西ヌービア軍 (WNAF)</a>で<b>300,000 XP</b>に到達する必要がある極めて高度なエンドコンテンツ用チームである。</p>
+            <p>このチームを有効化しているプレイヤーは、リーダーボード上のユーザー名の横に「？」マークが表示される仕様になっている。</p>
+
+            <h2 id="appearance">外見と特徴</h2>
+            <p>通常のブロキア兵とは大きく異なり、ヌービア人に似た黄色の肌トーンを持つ。また、プレイヤーが装着しているRobloxアクセサリーがそのまま表示されるのが特徴である。さらに、弾帯（バンダリア）ベスト、ベルトに装着されたガスマスク、追加のポーチなどが専用装飾として付属する。</p>
+            <p>使用する制服は「5NSO（第5ヌービア特殊作戦群）」および「GSP（グランドサービスパーソネル）」のものであり、敵地への潜入や変装を目的とした部隊であることを示唆している。</p>
+
+            <h2 id="duties">任務</h2>
+            <p>BFOやWNAFと同様に、ナラモ原子力発電所の機能停止・破壊が最終目標となる。また、BFOのサブチーム扱いであるため、強力な車両である<b>XM64</b>や<b>XM64A1</b>をスポーンさせる権限も引き継いでいる。</p>
+
+            <h2 id="equipment">専用装備</h2>
+            <p>※BFOと共通のクラス固有武器は除外し、1SFAの代表的な固有装備のみを掲載。</p>
+            <ul>
+                <li><b>BR-177S:</b> BR-18Cにサプレッサーを装着したカスタムモデル。威力（ヘッドショット23 / ボディ15）や発射速度は通常版と同じだが、銃声が消音化されている。</li>
+                <li><b>Model 17:</b> サブ武器として携行できる強力なハンドガン。連射速度は遅めだが、一発の威力が非常に高い（ヘッドショット53 / ボディ35）。</li>
+                <li><b>Advanced Hacking Device:</b> 高度ハッキングデバイス。施設内のセキュリティ突破に使用する。</li>
+            </ul>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <tr><th>階級名</th><th>必要要件</th><th>外見の変化</th></tr>
+                <tr><td>Operator</td><td>BFO: 1M XP & WNAF: 300k XP</td><td>バンダリアベスト、ベルトのガスマスク、追加ポーチ、5NSO/GSPの衣装が解禁</td></tr>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
