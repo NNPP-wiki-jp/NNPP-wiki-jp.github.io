@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Noobic Stratocracy (NS) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Noobic Stratocracy (NS)</h1>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #a2a9b1; border-left: 10px solid #36c; padding: 10px 15px; margin: 20px 0;">
+                <div style="font-size: 0.9em; line-height: 1.5;">
+                    このページは加筆が望まれています。<br>
+                    内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。
+                </div>
+            </div>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Noobic Stratocracy (NS)</b>は、ナラモ市（Naramo City）およびナラモ原子力発電所が位置する国家であり、ゲームの舞台や世界観（ロア）の中心となる存在である。</p>
+            <p>2025年11月以前、NSはRoblox上のMilSim（ミリタリーシミュレーター）グループであり、ナラモのゲーム自体を所有していた。当時、ほとんどのチームはグループ内の特定派閥に限定されており、入隊には試験や申請、あるいは膨大なXPが必要だった。</p>
+            <p>しかし2025年11月、開発方針の不一致から、8NEC（Civil Service Personnel）の上層部とNSの間で「分離（The Split）」と呼ばれる合意が行われた。8NEC側はナラモを一般向けの公開ゲームに移行させたかったのに対し、NS側はグループ専用のレイドマップとして維持することを望んだためである。最終的に、8NECがNSに300万Robuxと全てのレイドマップおよびアセットを提供し、引き換えにNSはナラモのゲーム化権と今後の開発・設定アセットへのアクセス権を譲渡した。</p>
+            <p>この分離により、当時運用されていた多くの旧チームはアクセス不可になるか、大規模なリニューアルを経て一般公開、あるいは特定の役職専用チームへと置き換わることとなった。</p>
+
+            <h2 id="teams">新旧部隊・チーム対応表</h2>
+            <table class="wikitable">
+                <thead>
+                    <tr>
+                        <th>元のチーム（旧NS）</th>
+                        <th>概要</th>
+                        <th>現在の置き換え・移行先</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Noobic Armored Corps</td>
+                        <td>戦車や重装備を保有するNS専用チーム。</td>
+                        <td><a href="13th_Armoured_Cavalry_Regiment.html">13th Armoured Cavalry Regiment</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ground Service Medical Corps</td>
+                        <td>救急車や回復装備を持つNS専用の医療チーム。</td>
+                        <td><a href="Ground_Service_Field_Medics.html">Ground Service Field Medics</a></td>
+                    </tr>
+                    <tr>
+                        <td>5th Noobic Special Operations</td>
+                        <td>無反動砲（M40）搭載ジープなどの専用装備を持つ、選りすぐりの戦闘員で構成された精鋭部隊。</td>
+                        <td><a href="Special_Operations_Command.html">Special Operations Command</a></td>
+                    </tr>
+                    <tr>
+                        <td>Stratocratic Military Police</td>
+                        <td>訓練や戦場での規律を監視する憲兵隊。用途に合わせて複数の部門が存在した。</td>
+                        <td><a href="Noobic_Military_Police.html">Noobic Military Police (NMP)</a></td>
+                    </tr>
+                    <tr>
+                        <td>1st, 2nd, &amp; 3rd Noobic Divisions</td>
+                        <td>NS地上軍の最大派閥。NS所属メンバーと一般（予備役）プレイヤーの混成。</td>
+                        <td><a href="GSP.html">Ground Service Personnel (GSP)</a></td>
+                    </tr>
+                    <tr>
+                        <td>Noobic Naval Aerial Corps</td>
+                        <td>現在は削除されたヘリコプターやLVTを装備していた専用航空・海軍部門。</td>
+                        <td>置き換えなし（QAテスター専用チーム「<a href="Naval_Service_Personnel.html">Naval Service Personnel</a>」へ移行）</td>
+                    </tr>
+                    <tr>
+                        <td>2nd Noobic Intelligence Agency</td>
+                        <td>作戦の安全確保や国内外の情報収集を担当した専用軍事情報機関。</td>
+                        <td>置き換えなし（モデレーター＆開発者専用チーム「<a href="2nd_Noobic_Intelligence_Agency.html">2nd Noobic Intelligence Agency</a>」へ移行）</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
