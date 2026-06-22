@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NNPP非公式Wiki</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="fabicoon.webp" type="image/webp">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
 </head>
 <body>
 
@@ -65,13 +65,15 @@
     </div>
 
     <script>
-        // 🔴 共通サイドバーを読み込む処理
+        // 共通サイドバーを読み込む処理
         fetch('sidebar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
-            });
+            })
+            .catch(err => console.error("サイドバーの読み込みに失敗しました。ローカルサーバーで実行しているか確認してください:", err));
 
+        // 検索対象のページリスト
         const wikiPages = [
             { url: "index.html", title: "メインページ" },
             { url: "rules.html", title: "コミュニティルール" },
@@ -82,17 +84,56 @@
             { url: "bbs-group.html", title: "グループ宣伝掲示板" }
         ];
 
+        // 元のメインコンテンツ（トップページ）のHTMLを保存する変数
+        let originalContent = "";
+
         async function performSearch(event) {
             event.preventDefault();
-            const keyword = document.getElementById("search-input").value.trim().toLowerCase();
+            
+            const searchInput = document.getElementById("search-input");
+            const keyword = searchInput.value.trim().toLowerCase();
             if (!keyword) return;
 
             const mainContent = document.querySelector(".main-content");
+            
+            // 初回検索時のみ、元のトップページ表示をバックアップ
+            if (!originalContent) {
+                originalContent = mainContent.innerHTML;
+            }
+
+            // 🔴 レイアウト構造のみFandom風に変更（色は元のサイトに合わせる）
             mainContent.innerHTML = `
-                <h1 class="page-title">「${keyword}」の検索結果</h1>
-                <p class="lead-text">Wiki内からキーワードに一致するページを探しています...</p>
-                <ul id="search-results-list" style="list-style: none; padding: 0;"></ul>
+                <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
+                
+                <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
+
+                <div class="fandom-search-container" style="display: flex; gap: 25px; margin-top: 15px;">
+                    
+                    <aside class="fandom-search-menu" style="width: 180px; flex-shrink: 0;">
+                        <ul style="list-style: none; padding: 0; margin: 0; border-left: 2px solid #eaecf0;">
+                            <li style="padding: 10px 15px; font-weight: bold; border-left: 2px solid #367ba2; margin-left: -2px;">Articles</li>
+                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Posts</li>
+                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Photos and Videos</li>
+                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Blogs</li>
+                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">People</li>
+                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Everything</li>
+                        </ul>
+                    </aside>
+
+                    <div class="fandom-search-main" style="flex-grow: 1;">
+                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
+                        <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
+                    </div>
+
+                </div>
             `;
+
+            // 「トップページに戻る」ボタンの処理
+            document.getElementById("btn-restore-wiki").addEventListener("click", () => {
+                mainContent.innerHTML = originalContent;
+                searchInput.value = ""; 
+                originalContent = "";   
+            });
 
             const resultsList = document.getElementById("search-results-list");
             let hitCount = 0;
@@ -101,32 +142,53 @@
                 try {
                     const response = await fetch(page.url);
                     if (!response.ok) continue;
+                    
                     const text = await response.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
-                    const contentText = doc.querySelector('.main-content')?.textContent.toLowerCase() || "";
+                    
+                    const contentText = doc.querySelector('.main-content')?.textContent || "";
+                    const contentTextLower = contentText.toLowerCase();
 
-                    if (contentText.includes(keyword) || page.title.toLowerCase().includes(keyword)) {
+                    if (contentTextLower.includes(keyword) || page.title.toLowerCase().includes(keyword)) {
                         hitCount++;
+
+                        // 本文からキーワード周辺の文章（スニペット）を切り抜く
+                        let snippet = "";
+                        const index = contentTextLower.indexOf(keyword);
+                        if (index !== -1) {
+                            const start = Math.max(0, index - 20);
+                            const end = Math.min(contentText.length, index + 60);
+                            snippet = contentText.substring(start, end).replace(/\s+/g, ' ').trim();
+                            snippet = `... ${snippet} ...`;
+                        } else {
+                            snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
+                        }
+
+                        // 各結果の見た目（色はstyle.cssのaタグやpタグに準拠）
                         const li = document.createElement("li");
-                        li.style.marginBottom = "15px";
-                        li.style.padding = "10px";
+                        li.style.marginBottom = "25px";
+                        li.style.paddingBottom = "15px";
                         li.style.borderBottom = "1px solid #eaecf0";
                         li.innerHTML = `
-                            <a href="${page.url}" style="font-size: 1.1rem; color: #0645ad; text-decoration: none; font-weight: bold;">${page.title}</a>
-                            <div style="font-size: 0.85rem; color: #54595d; margin-top: 2px;">URL: ${page.url}</div>
+                            <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
+                            <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
+                            <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
                         `;
                         resultsList.appendChild(li);
                     }
                 } catch (e) {
-                    console.error("検索エラー:", e);
+                    console.error(`${page.url} の解析中にエラーが発生しました:`, e);
                 }
             }
 
+            // 件数表示の更新
+            const statusText = document.getElementById("search-status");
             if (hitCount === 0) {
-                resultsList.innerHTML = `<p style="color: #54595d;">該当するページが見つかりませんでした。別のキーワードを試してください。</p>`;
+                statusText.textContent = "";
+                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。別のキーワードを試してください。</p>`;
             } else {
-                document.querySelector(".lead-text").textContent = `${hitCount} 件のページが見つかりました。`;
+                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
             }
         }
     </script>
