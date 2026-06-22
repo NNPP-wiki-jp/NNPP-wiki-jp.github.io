@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Naval Service Personnel (NSP) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .wikitable { border-collapse: collapse; width: 100%; margin: 15px 0; background-color: #f8f9fa; }
+        .wikitable th, .wikitable td { border: 1px solid #a2a9b1; padding: 8px; font-size: 0.9em; }
+        .wikitable th { background-color: #eaecf0; }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+        </div>
+        <div class="search-box"><input type="text" placeholder="検索..."></div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Naval Service Personnel (NSP)</h1>
+
+            <blockquote style="border-left: 5px solid #ccc; padding-left: 15px; font-style: italic; color: #555;">
+                "A detachment of the 1st Naval Fleet is stationed at the port's naval installation, supported by the Naval Aerial Corps and a small Marine contingent."
+                <br><small>- 第1海軍艦隊の分遣隊が港の海軍施設に駐留しており、海軍航空隊と小規模な海兵隊部隊によって支援されている。</small>
+            </blockquote>
+
+            <h2 id="overview">概要</h2>
+            <p><b>Naval Service Personnel (NSP)</b>は、「East Noobian Marines」としても知られるNoobic Stratocracyの海軍・海兵隊チームである。西ヌービアの<a href="FMDF.html">Federal Maritime Defense Force (FMDF)</a>とはほぼ対極に位置する存在と言える。</p>
+            <p>かつては第1ヌービア艦隊（1st Noobic Fleet）の乗組員がアクセスできたが、現在はその特権が廃止され、ナラモの<b>品質保証（Quality Assurance: QA）チームのメンバーのみ</b>に制限されている。</p>
+
+            <h2 id="duties">任務・特徴</h2>
+            <p>主な任務はプラントへの侵入経路（進入点）の警備、および<a href="GSP.html">Ground Service Personnel (GSP)</a>や<a href="Plant_Security.html">Plant Security</a>と協力した施設全体の防御支援である。</p>
+            <ul>
+                <li><b>チョークポイント防衛:</b> 装備されている水陸両用戦車<b>LVT（Landing Vehicles: Tracked）</b>は通常の車載機関銃（C-18等）の攻撃を無効化できるため、狭い通路や開けたエリアの防衛において極めて高い能力を発揮する。</li>
+                <li><b>弱点と制限:</b> NSPが保有するLVT-A1やLVTはロケット弾に対して非常に脆弱であり、一撃で破壊される可能性がある。また、GSPと比較すると武器のバリエーションがやや少なく、シチュエーションに応じた戦術の柔軟性という点では制限を受ける。</li>
+            </ul>
+
+            <h2 id="ranks">階級表</h2>
+            <table class="wikitable">
+                <thead>
+                    <tr>
+                        <th>階級名</th>
+                        <th>要件・条件</th>
+                        <th>解禁要素・装備</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Guest</b><br><small>(2026年5月以降)</small></td>
+                        <td>Quality Assurance（QA）テスターであること</td>
+                        <td>LVT-A1, LVT, LLUV (T) (2ND), LLUV, M41 Utility (2ND), MTV-2</td>
+                    </tr>
+                    <tr>
+                        <td><b>Enlistee</b><br><small>(旧仕様)</small></td>
+                        <td>Noobic Stratocracyの基本訓練（Basic Training）に合格し、通信（comms）に参加</td>
+                        <td>LVT-A2, LVT、およびGSPが獲得できるすべての装備</td>
+                    </tr>
+                    <tr>
+                        <td><b>Crewman</b><br><small>(旧仕様)</small></td>
+                        <td>第1ヌービア艦隊（1st Noobic Fleet）での初期海上訓練を修了</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><b>Able Crewman</b><br><small>(旧仕様)</small></td>
+                        <td>第1ヌービア艦隊でのアクティブな活動</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><b>Senior Crewman</b><br><small>(旧仕様)</small></td>
+                        <td>第1ヌービア艦隊でのアクティブな活動</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html').then(r => r.text()).then(d => document.getElementById('sidebar').innerHTML = d);
+    </script>
+</body>
+</html>
