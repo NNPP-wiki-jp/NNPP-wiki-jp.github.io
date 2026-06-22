@@ -101,30 +101,17 @@
                 originalContent = mainContent.innerHTML;
             }
 
-            // 🔴 レイアウト構造のみFandom風に変更（色は元のサイトに合わせる）
+            // メニューなし、すっきり横幅いっぱいの検索画面レイアウト
             mainContent.innerHTML = `
                 <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
                 
                 <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
 
-                <div class="fandom-search-container" style="display: flex; gap: 25px; margin-top: 15px;">
-                    
-                    <aside class="fandom-search-menu" style="width: 180px; flex-shrink: 0;">
-                        <ul style="list-style: none; padding: 0; margin: 0; border-left: 2px solid #eaecf0;">
-                            <li style="padding: 10px 15px; font-weight: bold; border-left: 2px solid #367ba2; margin-left: -2px;">Articles</li>
-                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Posts</li>
-                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Photos and Videos</li>
-                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Blogs</li>
-                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">People</li>
-                            <li style="padding: 10px 15px; opacity: 0.5; cursor: not-allowed;">Everything</li>
-                        </ul>
-                    </aside>
-
-                    <div class="fandom-search-main" style="flex-grow: 1;">
+                <div class="fandom-search-container" style="margin-top: 15px;">
+                    <div class="fandom-search-main" style="width: 100%;">
                         <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
                         <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
                     </div>
-
                 </div>
             `;
 
@@ -147,25 +134,42 @@
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
                     
+                    // 1. 本文テキストの取得
                     const contentText = doc.querySelector('.main-content')?.textContent || "";
-                    const contentTextLower = contentText.toLowerCase();
+                    
+                    // 2. 実際のHTMLの<title>内テキストを取得（「NNPP非公式Wiki」などの判定用）
+                    const htmlTitle = doc.title || "";
 
-                    if (contentTextLower.includes(keyword) || page.title.toLowerCase().includes(keyword)) {
+                    // 3. ページ内の画像要素（img）から情報・関連キーワードを生成
+                    let imageContext = "";
+                    const images = doc.querySelectorAll('.main-content img');
+                    images.forEach(img => {
+                        imageContext += ` ${img.alt} ${img.src} photos photo image`;
+                    });
+
+                    // すべての検索対象テキストをドッキングして小文字化
+                    const targetTextLower = `${contentText} ${page.title} ${htmlTitle} ${imageContext}`.toLowerCase();
+
+                    // 判定
+                    if (targetTextLower.includes(keyword)) {
                         hitCount++;
 
-                        // 本文からキーワード周辺の文章（スニペット）を切り抜く
+                        // キーワード周辺の文章（スニペット）を切り抜く
                         let snippet = "";
+                        const contentTextLower = contentText.toLowerCase();
                         const index = contentTextLower.indexOf(keyword);
+                        
                         if (index !== -1) {
                             const start = Math.max(0, index - 20);
                             const end = Math.min(contentText.length, index + 60);
                             snippet = contentText.substring(start, end).replace(/\s+/g, ' ').trim();
                             snippet = `... ${snippet} ...`;
                         } else {
+                            // 本文にキーワードがない（タイトルや写真属性でヒットした）場合は冒頭部分を出す
                             snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
                         }
 
-                        // 各結果の見た目（色はstyle.cssのaタグやpタグに準拠）
+                        // 結果一覧の生成
                         const li = document.createElement("li");
                         li.style.marginBottom = "25px";
                         li.style.paddingBottom = "15px";
@@ -182,7 +186,7 @@
                 }
             }
 
-            // 件数表示の更新
+            // 検索件数の結果アナウンス
             const statusText = document.getElementById("search-status");
             if (hitCount === 0) {
                 statusText.textContent = "";
