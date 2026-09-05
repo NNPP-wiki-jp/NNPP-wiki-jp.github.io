@@ -61,6 +61,13 @@
 
             <h2>編集に参加される方へ</h2>
             <p>記事の追加や修正の提案、新しい情報の提供は大歓迎です！記述を始める前に、まずはコミュニティルールを一読してください。</p>
+            
+            <div class="edit-section" style="margin-top: 30px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
+                <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/index.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                    ✏️ GitHubでこのページを編集する
+                </a>
+            </div>
         </main>
     </div>
 
@@ -119,7 +126,7 @@
             document.getElementById("btn-restore-wiki").addEventListener("click", () => {
                 mainContent.innerHTML = originalContent;
                 searchInput.value = ""; 
-                originalContent = "";   
+                originalContent = "";    
             });
 
             const resultsList = document.getElementById("search-results-list");
