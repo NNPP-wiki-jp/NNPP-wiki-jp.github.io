@@ -3,91 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M41 DOE Supply - Naramo Wiki</title>
+    <title>M41 DOE Supply - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: #202122;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #fff;
-            padding: 10px 20px;
-            border-bottom: 1px solid #a2a9b1;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo-area .wiki-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #000;
-            text-decoration: none;
-        }
-        .logo-area .wiki-subtitle {
-            font-size: 0.8rem;
-            color: #54595d;
-            margin-left: 8px;
-        }
-        .top-search-box input {
-            padding: 6px 12px;
-            font-size: 0.9rem;
-            border: 1px solid #a2a9b1;
-            border-radius: 2px;
-            width: 220px;
-        }
-        .layout-container {
-            display: flex;
-            max-width: 1280px;
-            margin: 20px auto;
-            background: #fff;
-            border: 1px solid #a2a9b1;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .side-nav {
-            width: 220px;
-            flex-shrink: 0;
-            background-color: #f6f6f6;
-            border-right: 1px solid #a2a9b1;
-            padding: 20px 15px;
-            box-sizing: border-box;
-            font-size: 0.9rem;
-        }
-        .main-content {
-            flex-grow: 1;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-        h1 {
-            border-bottom: 1px solid #a2a9b1;
-            padding-bottom: 5px;
-            font-size: 2em;
-            margin-top: 0;
-        }
-        h2 {
-            border-bottom: 1px solid #eaecf0;
-            padding-bottom: 4px;
-            font-size: 1.5em;
-            margin-top: 1.5em;
-        }
-        h3 {
-            font-size: 1.2em;
-            margin-top: 1.2em;
-        }
-        .notice {
-            background-color: #fcfcfc;
-            border: 1px solid #c8ccd1;
-            border-left: 4px solid #36c;
-            padding: 10px 15px;
-            margin: 15px 0;
-            font-size: 0.95em;
-        }
+        /* 追加の固有スタイル（必要に応じてstyle.cssと併用） */
         .infobox {
             float: right;
             width: 300px;
@@ -156,9 +76,13 @@
         .toc a:hover {
             text-decoration: underline;
         }
-        ul {
-            margin: 10px 0;
-            padding-left: 20px;
+        .wiki-notice {
+            background-color: #fcfcfc;
+            border: 1px solid #c8ccd1;
+            border-left: 4px solid #36c;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
         }
     </style>
 </head>
@@ -166,34 +90,29 @@
 
     <header class="top-bar">
         <div class="logo-area">
-            <a href="#" class="wiki-title">Naramo Wiki</a>
+            <span class="wiki-title">NNPP非公式Wiki</span>
             <span class="wiki-subtitle">The Free Encyclopedia</span>
         </div>
-        <div class="top-search-box">
-            <input type="text" placeholder="検索..." autocomplete="off">
+        <div class="search-box">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off">
+            </form>
         </div>
     </header>
 
-    <div class="layout-container">
-        <nav class="side-nav">
-            <p><strong>ナビゲーション</strong></p>
-            <ul>
-                <li><a href="#">メインページ</a></li>
-                <li><a href="#">車両一覧</a></li>
-                <li><a href="#">最近の更新</a></li>
-            </ul>
-        </nav>
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
 
         <main class="main-content">
-            <h1>M41 DOE Supply</h1>
+            <h1 class="page-title">M41 DOE Supply</h1>
             
-            <div class="notice">
-                M41 DOE Supply は現在編集中です。<br>
-                この記事はスタブです。知識を共有して Naramo Wiki の発展にご協力ください！<br>
-                <small>詳細については、この記事のノートページを参照してください。</small>
+            <div class="wiki-notice">
+                <div class="notice-title">編集ステータス / スタブ</div>
+                <p>M41 DOE Supply は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！<br>
+                詳細については、この記事のノートページを参照してください。</p>
             </div>
 
-            <!-- Infobox -->
+            <!-- インフォボックス -->
             <div class="infobox">
                 <div class="infobox-title">M41 DOE Supply</div>
                 <div class="infobox-image">
@@ -236,7 +155,7 @@
                 </table>
             </div>
 
-            <!-- TOC -->
+            <!-- 目次 -->
             <div class="toc">
                 <div class="toc-title">目次</div>
                 <ol>
@@ -285,7 +204,131 @@
 
             <h2 id="gallery">ギャラリー</h2>
             <p>WIP</p>
+
+            <!-- 編集セクション -->
+            <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
+                <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/m41-doe-supply.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                    GitHubでこのページを編集する
+                </a>
+            </div>
         </main>
     </div>
+
+    <script>
+        // 共通サイドバーを読み込む処理
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            })
+            .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
+
+        // 検索対象のページリスト
+        const wikiPages = [
+            { url: "index.html", title: "メインページ" },
+            { url: "rules.html", title: "コミュニティルール" },
+            { url: "departments.html", title: "各部門の解説" },
+            { url: "strategy.html", title: "初心者攻略・マニュアル" },
+            { url: "bbs-general.html", title: "雑談掲示板" },
+            { url: "bbs-qa.html", title: "質問掲示板" },
+            { url: "bbs-group.html", title: "グループ宣伝掲示板" },
+            { url: "mechanics.html", title: "ゲームメカニクス" },
+            { url: "map.html", title: "マップ・拠点位置" },
+            { url: "vehicles.html", title: "ビークル" },
+            { url: "weapons.html", title: "武器・装備" },
+            { url: "gamepasses.html", title: "ゲームパス" },
+            { url: "badges.html", title: "バッジ" },
+            { url: "m41-doe-supply.html", title: "M41 DOE Supply" }
+        ];
+
+        let originalContent = "";
+
+        async function performSearch(event) {
+            event.preventDefault();
+            const searchInput = document.getElementById("search-input");
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) return;
+
+            const mainContent = document.querySelector(".main-content");
+            if (!originalContent) {
+                originalContent = mainContent.innerHTML;
+            }
+
+            mainContent.innerHTML = `
+                <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
+                <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
+                <div class="fandom-search-container" style="margin-top: 15px;">
+                    <div class="fandom-search-main" style="width: 100%;">
+                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
+                        <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("btn-restore-wiki").addEventListener("click", () => {
+                mainContent.innerHTML = originalContent;
+                searchInput.value = ""; 
+                originalContent = "";    
+            });
+
+            const resultsList = document.getElementById("search-results-list");
+            let hitCount = 0;
+
+            for (const page of wikiPages) {
+                try {
+                    const response = await fetch(page.url);
+                    if (!response.ok) continue;
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    
+                    const contentText = doc.querySelector('.main-content')?.textContent || "";
+                    const htmlTitle = doc.title || "";
+
+                    let imageContext = "";
+                    doc.querySelectorAll('.main-content img').forEach(img => {
+                        imageContext += ` ${img.alt} ${img.src} photos photo image`;
+                    });
+
+                    const targetTextLower = `${contentText} ${page.title} ${htmlTitle} ${imageContext}`.toLowerCase();
+
+                    if (targetTextLower.includes(keyword)) {
+                        hitCount++;
+                        let snippet = "";
+                        const index = contentText.toLowerCase().indexOf(keyword);
+                        if (index !== -1) {
+                            const start = Math.max(0, index - 20);
+                            const end = Math.min(contentText.length, index + 60);
+                            snippet = `... ${contentText.substring(start, end).replace(/\s+/g, ' ').trim()} ...`;
+                        } else {
+                            snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
+                        }
+
+                        const li = document.createElement("li");
+                        li.style.marginBottom = "25px";
+                        li.style.paddingBottom = "15px";
+                        li.style.borderBottom = "1px solid #eaecf0";
+                        li.innerHTML = `
+                            <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
+                            <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
+                            <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
+                        `;
+                        resultsList.appendChild(li);
+                    }
+                } else (e) => {
+                    console.error(`${page.url} の解析エラー:`, e);
+                }
+            }
+
+            const statusText = document.getElementById("search-status");
+            if (hitCount === 0) {
+                statusText.textContent = "";
+                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
+            } else {
+                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
+            }
+        }
+    </script>
 </body>
 </html>
