@@ -180,6 +180,11 @@
     "content": "コミュニティルール - NNPP非公式Wiki NNPP非公式Wiki コミュニティルール 利用規約とコミュニティルール 当Wikiの利用にあたっては、以下のルールを遵守すること。違反が確認された場合は編集権限の制限等の措置を講じる場合がある。 客観的な記述: 個人の主観や偏見に基づいた内容ではなく、ゲーム内の事実や検証結果に基づいた情報を記述すること。 荒らし行為の禁止: 意図的なページの改ざん、情報の削除、不正確な情報の流布、攻撃的な表現の使用は禁止である。 著作権の尊重: ゲームの素材等は適切に使用すること。権利関係に抵触する素材の無断転載は行わない。 プライバシー保護: 他プレイヤーの個人情報を特定、あるいは開示する行為は厳禁。 編集者募集 当Wikiでは、情報の更新に協力する編集者を募集しています。 応募方法 以下のフォームより、簡単な自己紹介、および連絡先としてメールアドレスまたはGitHubアカウントを送信してください。 編集者応募フォームはこちら 応募要件 NNPPのプレイヤーであり、ゲーム内容を十分に理解していること。 コミュニティルールを遵守し、中立的な立場での執筆が可能であること。"
   },
   {
+    "url": "search.js",
+    "title": "search.js",
+    "content": "let searchIndex = [];\n\n// ページ読み込み時に自動生成された search.json を取得\nfetch('search.json')\n    .then(response => response.json())\n    .then(data => {\n        searchIndex = data;\n    })\n    .catch(err => console.error('検索インデックスの読み込みに失敗しました:', err));\n\nfunction autoSearch(keyword) {\n    const popup = document.getElementById(\"search-results-popup\");\n    const query = keyword.trim().toLowerCase();\n\n    if (!query) {\n        popup.style.display = \"none\";\n        popup.innerHTML = \"\";\n        return;\n    }\n\n    // タイトルや本文にキーワードが含まれているものを抽出\n    const matches = searchIndex.filter(page => \n        page.title.toLowerCase().includes(query) || page.content.toLowerCase().includes(query)\n    );\n\n    if (matches.length === 0) {\n        popup.style.display = \"block\";\n        popup.innerHTML = `<div style=\"padding: 10px; font-size: 0.9rem; color: #54595d;\">一致するページはありません</div>`;\n        return;\n    }\n\n    let html = \"<ul style='list-style: none; margin: 0; padding: 0;'>\";\n    matches.forEach(page => {\n        html += `<li style='border-bottom: 1px solid #eaecf0; background: #fff;'>\n            <a href=\"${page.url}\" style='display: block; padding: 8px 10px; text-decoration: none; color: #0645ad; font-size: 0.9rem;'>\n                <strong>${page.title}</strong>\n            </a>\n        </li>`;\n    });\n    html += \"</ul>\";\n\n    popup.innerHTML = html;\n    popup.style.display = \"block\";\n}\n\nfunction performSearch(event) {\n    event.preventDefault();\n}\n"
+  },
+  {
     "url": "sidebar.html",
     "title": "sidebar.html",
     "content": "Wiki内検索 案内 メインページ コミュニティルール 各部門の解説 初心者攻略・マニュアル 各種掲示板 雑談掲示板 質問掲示板 グループ宣伝掲示板 最近編集・作成された記事 初心者攻略・マニュアル 各部門の解説 コミュニティルール"
