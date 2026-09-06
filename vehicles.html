@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
     <style>
-        /* レイアウト・Wiki風デザイン調整用 */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
@@ -16,7 +15,6 @@
             margin: 0;
             padding: 0;
         }
-        /* トップバー */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -51,7 +49,6 @@
             border-color: #36c;
             box-shadow: inset 0 0 0 1px #36c;
         }
-        /* 全体コンテナ（サイドバー＋メイン） */
         .layout-container {
             display: flex;
             max-width: 1280px;
@@ -60,7 +57,6 @@
             border: 1px solid #a2a9b1;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        /* サイドバー */
         .side-nav {
             width: 220px;
             flex-shrink: 0;
@@ -70,7 +66,6 @@
             box-sizing: border-box;
             font-size: 0.9rem;
         }
-        /* メインコンテンツエリア */
         .main-content {
             flex-grow: 1;
             padding: 40px;
@@ -100,7 +95,7 @@
             margin: 15px 0;
             font-size: 0.95em;
         }
-        /* ギャラリー（画像風ボックス） */
+        /* ギャラリースタイル */
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -130,6 +125,11 @@
             word-break: break-all;
             padding: 4px;
             box-sizing: border-box;
+        }
+        .gallery-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         .gallery-caption {
             font-size: 0.9em;
@@ -163,11 +163,11 @@
             <span class="wiki-subtitle">The Free Encyclopedia</span>
         </div>
         <div class="top-search-box">
-            <input type="text" id="searchInput" placeholder="車両名や説明を検索..." oninput="filterContent()" autocomplete="off">
+            <input type="text" id="searchInput" placeholder="車両名やファイル名を検索..." oninput="filterContent()" autocomplete="off">
         </div>
     </header>
 
-    <!-- レイアウトコンテナ (サイドバー + メイン) -->
+    <!-- レイアウトコンテナ -->
     <div class="layout-container">
         <!-- 共通サイドバー読込用 -->
         <nav class="side-nav" id="sidebar"></nav>
@@ -185,55 +185,115 @@
             <h2>一般車両</h2>
             <p>すべてのチームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Streetwagon.png</div><div class="gallery-caption"><a href="#">Streetwagon</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SedanRemodel.jpg</div><div class="gallery-caption"><a href="#">Sedan</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS Streetwagon.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Streetwagon.png" alt="Streetwagon"></div>
+                    <div class="gallery-caption"><a href="vehicle-streetwagon.html">Streetwagon</a></div>
+                </div>
+                <div class="gallery-item" data-img="SedanRemodel.jpg">
+                    <div class="gallery-thumb"><img src="SedanRemodel.jpg" alt="Sedan"></div>
+                    <div class="gallery-caption"><a href="vehicle-sedan.html">Sedan</a></div>
+                </div>
             </div>
 
             <h2>発電所メンテナンス</h2>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">PMcarRemodel.jpg</div><div class="gallery-caption"><a href="#">Maintenance Pickup Truck</a></div></div>
+                <div class="gallery-item" data-img="PMcarRemodel.jpg">
+                    <div class="gallery-thumb"><img src="PMcarRemodel.jpg" alt="Maintenance Pickup Truck"></div>
+                    <div class="gallery-caption"><a href="vehicle-maintenance-pickup.html">Maintenance Pickup Truck</a></div>
+                </div>
             </div>
 
             <h2>物資車両</h2>
             <p>Logistical Operations（ロジスティカル・オペレーションズ）チームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 DOE Supply.png</div><div class="gallery-caption"><a href="#">M41 DOE Supply</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 DOE Nuclear.png</div><div class="gallery-caption"><a href="#">M41 DOE Nuclear</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 Cargo Weaponised.png</div><div class="gallery-caption"><a href="#">M41 Cargo (Weaponised)</a><br><small>（要10,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO HTV.png</div><div class="gallery-caption"><a href="#">HTV</a><br><small>（要10,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS DOE Supply LLUV.png</div><div class="gallery-caption"><a href="#">DOE Supply LLUV</a><br><small>（要3,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS DOE Supply Tug.png</div><div class="gallery-caption"><a href="#">DOE Supply Tug</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 DOE Supply.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 DOE Supply.png" alt="M41 DOE Supply"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-doe-supply.html">M41 DOE Supply</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 DOE Nuclear.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 DOE Nuclear.png" alt="M41 DOE Nuclear"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-doe-nuclear.html">M41 DOE Nuclear</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 Cargo Weaponised.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Cargo Weaponised.png" alt="M41 Cargo (Weaponised)"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-cargo-weaponised.html">M41 Cargo (Weaponised)</a><br><small>（要10,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO HTV.png">
+                    <div class="gallery-thumb"><img src="NARAMO HTV.png" alt="HTV"></div>
+                    <div class="gallery-caption"><a href="vehicle-htv.html">HTV</a><br><small>（要10,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS DOE Supply LLUV.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS DOE Supply LLUV.png" alt="DOE Supply LLUV"></div>
+                    <div class="gallery-caption"><a href="vehicle-doe-supply-lluv.html">DOE Supply LLUV</a><br><small>（要3,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS DOE Supply Tug.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS DOE Supply Tug.png" alt="DOE Supply Tug"></div>
+                    <div class="gallery-caption"><a href="vehicle-doe-supply-tug.html">DOE Supply Tug</a></div>
+                </div>
             </div>
 
             <h3>強化物資令（Reinforced Supplies）限定</h3>
             <p>これらの車両は、Department of Energy Executive（エネルギー省幹部）のエグゼクティブアクトによってのみスポーン可能です。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">HTV Reinforced Cargo.jpg</div><div class="gallery-caption"><a href="#">HTV (Reinforced) Cargo</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">HTV Reinforced Nuclear.jpg</div><div class="gallery-caption"><a href="#">HTV (Reinforced) Nuclear</a></div></div>
+                <div class="gallery-item" data-img="HTV Reinforced Cargo.jpg">
+                    <div class="gallery-thumb"><img src="HTV Reinforced Cargo.jpg" alt="HTV (Reinforced) Cargo"></div>
+                    <div class="gallery-caption"><a href="vehicle-htv-reinforced-cargo.html">HTV (Reinforced) Cargo</a></div>
+                </div>
+                <div class="gallery-item" data-img="HTV Reinforced Nuclear.jpg">
+                    <div class="gallery-thumb"><img src="HTV Reinforced Nuclear.jpg" alt="HTV (Reinforced) Nuclear"></div>
+                    <div class="gallery-caption"><a href="vehicle-htv-reinforced-nuclear.html">HTV (Reinforced) Nuclear</a></div>
+                </div>
             </div>
 
             <h3>CSOエグゼクティブアクト限定</h3>
             <p>これらの車両は、Chief Supply Officer（最高物資責任者）のエグゼクティブアクトによってのみスポーン可能です。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">LLCV(1).png</div><div class="gallery-caption"><a href="#">LLCV</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">239th HTV.png</div><div class="gallery-caption"><a href="#">239th HTV</a></div></div>
+                <div class="gallery-item" data-img="LLCV(1).png">
+                    <div class="gallery-thumb"><img src="LLCV(1).png" alt="LLCV"></div>
+                    <div class="gallery-caption"><a href="vehicle-llcv.html">LLCV</a></div>
+                </div>
+                <div class="gallery-item" data-img="239th HTV.png">
+                    <div class="gallery-thumb"><img src="239th HTV.png" alt="239th HTV"></div>
+                    <div class="gallery-caption"><a href="vehicle-239th-htv.html">239th HTV</a></div>
+                </div>
             </div>
 
             <h2>警備車両</h2>
             <p>Plant Security（プラント警備）およびTactical Response Team（戦術対応チーム）がスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Security Car.png</div><div class="gallery-caption"><a href="#">Security Car</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PS Super.png</div><div class="gallery-caption"><a href="#">Security Car (Supervisor)</a><br><small>（要75,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Security.png</div><div class="gallery-caption"><a href="#">PN-1P Security Transport</a><br><small>（要100,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Security Car (Reinforced)</div><div class="gallery-caption"><a href="#">Security Car (Reinforced)</a><br><small>（要150,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PSnewTrafficCar.jpg</div><div class="gallery-caption"><a href="#">Traffic Enforcement Car</a><br><small>（要50,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Retired-security-sedan001.png</div><div class="gallery-caption"><a href="#">Retired Security Sedan</a><br><small>（要300,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS Security Car.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Security Car.png" alt="Security Car"></div>
+                    <div class="gallery-caption"><a href="vehicle-security-car.html">Security Car</a></div>
+                </div>
+                <div class="gallery-item" data-img="PS Super.png">
+                    <div class="gallery-thumb"><img src="PS Super.png" alt="Security Car (Supervisor)"></div>
+                    <div class="gallery-caption"><a href="vehicle-security-car-supervisor.html">Security Car (Supervisor)</a><br><small>（要75,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="Security.png">
+                    <div class="gallery-thumb"><img src="Security.png" alt="PN-1P Security Transport"></div>
+                    <div class="gallery-caption"><a href="vehicle-pn1p-security-transport.html">PN-1P Security Transport</a><br><small>（要100,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="Security Car (Reinforced)">
+                    <div class="gallery-thumb"><img src="default.png" alt="Security Car (Reinforced)"></div>
+                    <div class="gallery-caption"><a href="vehicle-security-car-reinforced.html">Security Car (Reinforced)</a><br><small>（要150,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="PSnewTrafficCar.jpg">
+                    <div class="gallery-thumb"><img src="PSnewTrafficCar.jpg" alt="Traffic Enforcement Car"></div>
+                    <div class="gallery-caption"><a href="vehicle-traffic-enforcement-car.html">Traffic Enforcement Car</a><br><small>（要50,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="Retired-security-sedan001.png">
+                    <div class="gallery-thumb"><img src="Retired-security-sedan001.png" alt="Retired Security Sedan"></div>
+                    <div class="gallery-caption"><a href="vehicle-retired-security-sedan.html">Retired Security Sedan</a><br><small>（要300,000 XP）</small></div>
+                </div>
             </div>
 
             <h3>拡張警備令（Enhanced Security Act）限定（元NFSFのAPC）</h3>
             <p>これらの車両は、Department of Energy Executive（エネルギー省幹部）のエグゼクティブアクトによってのみスポーン可能です。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS SV-1 NFSF.png</div><div class="gallery-caption"><a href="#">SV-1 NFSF</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS SV-1 NFSF.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS SV-1 NFSF.png" alt="SV-1 NFSF"></div>
+                    <div class="gallery-caption"><a href="vehicle-sv1-nfsf.html">SV-1 NFSF</a></div>
+                </div>
             </div>
             <ul>
                 <li>この車両はゲームに再追加されましたが、NFSF陣営はNNPPから離脱したため、NFSF所属メンバーがスポーンすることはできなくなっています。</li>
@@ -241,94 +301,214 @@
 
             <h2>戦術対応チーム（TRT）</h2>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO ICV-1 APC Security.png</div><div class="gallery-caption"><a href="#">ICV-1 APC Security</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO Tactical Response LLMV.png</div><div class="gallery-caption"><a href="#">Tactical Response LLMV</a></div></div>
+                <div class="gallery-item" data-img="NARAMO ICV-1 APC Security.png">
+                    <div class="gallery-thumb"><img src="NARAMO ICV-1 APC Security.png" alt="ICV-1 APC Security"></div>
+                    <div class="gallery-caption"><a href="vehicle-icv1-apc-security.html">ICV-1 APC Security</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO Tactical Response LLMV.png">
+                    <div class="gallery-thumb"><img src="NARAMO Tactical Response LLMV.png" alt="Tactical Response LLMV"></div>
+                    <div class="gallery-caption"><a href="vehicle-tactical-response-llmv.html">Tactical Response LLMV</a></div>
+                </div>
             </div>
 
             <h3>要人警護部隊（PSD）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">PSD Cruiser2.jpg</div><div class="gallery-caption"><a href="#">PSD Cruiser</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Dev PSD Vehicle.webp</div><div class="gallery-caption"><a href="#">PSD TOW Jeep</a><br><small>（開発者限定）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PSD Limo.webp</div><div class="gallery-caption"><a href="#">Armoured Limo</a></div></div>
+                <div class="gallery-item" data-img="PSD Cruiser2.jpg">
+                    <div class="gallery-thumb"><img src="PSD Cruiser2.jpg" alt="PSD Cruiser"></div>
+                    <div class="gallery-caption"><a href="vehicle-psd-cruiser.html">PSD Cruiser</a></div>
+                </div>
+                <div class="gallery-item" data-img="Dev PSD Vehicle.webp">
+                    <div class="gallery-thumb"><img src="Dev PSD Vehicle.webp" alt="PSD TOW Jeep"></div>
+                    <div class="gallery-caption"><a href="vehicle-psd-tow-jeep.html">PSD TOW Jeep</a><br><small>（開発者限定）</small></div>
+                </div>
+                <div class="gallery-item" data-img="PSD Limo.webp">
+                    <div class="gallery-thumb"><img src="PSD Limo.webp" alt="Armoured Limo"></div>
+                    <div class="gallery-caption"><a href="vehicle-armoured-limo.html">Armoured Limo</a></div>
+                </div>
             </div>
 
             <h2>企業車両</h2>
             <p>Corporate（企業）およびPlant Director（プラント所長）チームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS BrikTek Gladiator.png</div><div class="gallery-caption"><a href="#">BrikTek Gladiator</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Leroy Large Yellow Bus.png</div><div class="gallery-caption"><a href="#">Leroy Large Yellow Bus</a><br><small>（要50,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">BrikTek Gladiator Red</div><div class="gallery-caption"><a href="#">BrikTek Gladiator Red</a><br><small>（要150,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">BrikTek Gladiator Silver</div><div class="gallery-caption"><a href="#">BrikTek Gladiator Silver</a><br><small>（要250,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">BrikTek Gladiator Blue</div><div class="gallery-caption"><a href="#">BrikTek Gladiator Blue</a><br><small>（要600,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS BrikTek Gladiator.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS BrikTek Gladiator.png" alt="BrikTek Gladiator"></div>
+                    <div class="gallery-caption"><a href="vehicle-briktek-gladiator.html">BrikTek Gladiator</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS Leroy Large Yellow Bus.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Leroy Large Yellow Bus.png" alt="Leroy Large Yellow Bus"></div>
+                    <div class="gallery-caption"><a href="vehicle-leroy-yellow-bus.html">Leroy Large Yellow Bus</a><br><small>（要50,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="BrikTek Gladiator Red">
+                    <div class="gallery-thumb"><img src="default.png" alt="BrikTek Gladiator Red"></div>
+                    <div class="gallery-caption"><a href="vehicle-briktek-gladiator-red.html">BrikTek Gladiator Red</a><br><small>（要150,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="BrikTek Gladiator Silver">
+                    <div class="gallery-thumb"><img src="default.png" alt="BrikTek Gladiator Silver"></div>
+                    <div class="gallery-caption"><a href="vehicle-briktek-gladiator-silver.html">BrikTek Gladiator Silver</a><br><small>（要250,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="BrikTek Gladiator Blue">
+                    <div class="gallery-thumb"><img src="default.png" alt="BrikTek Gladiator Blue"></div>
+                    <div class="gallery-caption"><a href="vehicle-briktek-gladiator-blue.html">BrikTek Gladiator Blue</a><br><small>（要600,000 XP）</small></div>
+                </div>
             </div>
 
             <h2>連邦軍車両</h2>
             <p>Ground Service Personnel（地上勤務員）、第13機甲騎兵連隊、地上勤務野戦衛生兵、Naval Service Personnel（海軍勤務員）、特殊作戦軍などのチームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 Utility 2ND.png</div><div class="gallery-caption"><a href="#">M41 Utility (2ND)</a><br><small>（要2,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS MTV-2.png</div><div class="gallery-caption"><a href="#">MTV-2</a><br><small>（要5,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS MTV Cannon.png</div><div class="gallery-caption"><a href="#">MTV Cannon</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS VT-1.png</div><div class="gallery-caption"><a href="#">VT-1</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">GSPnewCar.jpg</div><div class="gallery-caption"><a href="#">LLUVA2</a><br><small>（要100,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">GSPremodelCar2.jpg</div><div class="gallery-caption"><a href="#">LLUV</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">MyPhotoGotDeletedLol.jpg</div><div class="gallery-caption"><a href="#">LLUV (T) (2ND)</a><br><small>（要5,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 Utility 2ND.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Utility 2ND.png" alt="M41 Utility (2ND)"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-utility-2nd.html">M41 Utility (2ND)</a><br><small>（要2,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS MTV-2.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS MTV-2.png" alt="MTV-2"></div>
+                    <div class="gallery-caption"><a href="vehicle-mtv2.html">MTV-2</a><br><small>（要5,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS MTV Cannon.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS MTV Cannon.png" alt="MTV Cannon"></div>
+                    <div class="gallery-caption"><a href="vehicle-mtv-cannon.html">MTV Cannon</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS VT-1.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS VT-1.png" alt="VT-1"></div>
+                    <div class="gallery-caption"><a href="vehicle-vt1.html">VT-1</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="GSPnewCar.jpg">
+                    <div class="gallery-thumb"><img src="GSPnewCar.jpg" alt="LLUVA2"></div>
+                    <div class="gallery-caption"><a href="vehicle-lluva2.html">LLUVA2</a><br><small>（要100,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="GSPremodelCar2.jpg">
+                    <div class="gallery-thumb"><img src="GSPremodelCar2.jpg" alt="LLUV"></div>
+                    <div class="gallery-caption"><a href="vehicle-lluv.html">LLUV</a></div>
+                </div>
+                <div class="gallery-item" data-img="MyPhotoGotDeletedLol.jpg">
+                    <div class="gallery-thumb"><img src="MyPhotoGotDeletedLol.jpg" alt="LLUV (T) (2ND)"></div>
+                    <div class="gallery-caption"><a href="vehicle-lluv-t-2nd.html">LLUV (T) (2ND)</a><br><small>（要5,000 XP）</small></div>
+                </div>
             </div>
 
             <h3>【戦闘ドクトリン限定】突撃部隊（Shock Troops）</h3>
             <p>これらの車両は、3rd Division Commander（第3師団長）の戦闘ドクトリンによってのみスポーン可能です。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">SV-1L.webp</div><div class="gallery-caption"><a href="#">SV-1L</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Uparmored MTV-2.png</div><div class="gallery-caption"><a href="#">Uparmored MTV-2</a></div></div>
+                <div class="gallery-item" data-img="SV-1L.webp">
+                    <div class="gallery-thumb"><img src="SV-1L.webp" alt="SV-1L"></div>
+                    <div class="gallery-caption"><a href="vehicle-sv1l.html">SV-1L</a></div>
+                </div>
+                <div class="gallery-item" data-img="Uparmored MTV-2.png">
+                    <div class="gallery-thumb"><img src="Uparmored MTV-2.png" alt="Uparmored MTV-2"></div>
+                    <div class="gallery-caption"><a href="vehicle-uparmored-mtv2.html">Uparmored MTV-2</a></div>
+                </div>
             </div>
 
             <h3>【戦闘ドクトリン限定】機甲陣地（Armored Wall）</h3>
             <p>これらの車両は、3rd Division Commander（第3師団長）の戦闘ドクトリンによってのみスポーン可能です。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">9.png</div><div class="gallery-caption"><a href="#">VT-6</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">10.png</div><div class="gallery-caption"><a href="#">HAT-2</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">111.png</div><div class="gallery-caption"><a href="#">HAC-2</a></div></div>
+                <div class="gallery-item" data-img="9.png">
+                    <div class="gallery-thumb"><img src="9.png" alt="VT-6"></div>
+                    <div class="gallery-caption"><a href="vehicle-vt6.html">VT-6</a></div>
+                </div>
+                <div class="gallery-item" data-img="10.png">
+                    <div class="gallery-thumb"><img src="10.png" alt="HAT-2"></div>
+                    <div class="gallery-caption"><a href="vehicle-hat2.html">HAT-2</a></div>
+                </div>
+                <div class="gallery-item" data-img="111.png">
+                    <div class="gallery-thumb"><img src="111.png" alt="HAC-2"></div>
+                    <div class="gallery-caption"><a href="vehicle-hac2.html">HAC-2</a></div>
+                </div>
             </div>
 
             <h3>第13機甲騎兵連隊</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS VT-2A1.png</div><div class="gallery-caption"><a href="#">VT-2A1</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">VT-2E3 ACAV Teaser.png</div><div class="gallery-caption"><a href="#">VT-2E3 ACAV</a><br><small>（要300,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS VT-6.png</div><div class="gallery-caption"><a href="#">VT-6</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS ICV-1 APC.png</div><div class="gallery-caption"><a href="#">ICV-1 APC</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS RCV-1.png</div><div class="gallery-caption"><a href="#">RCV-1</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Recon Jeep.png</div><div class="gallery-caption"><a href="#">Recon Jeep</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS VT-2A1.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS VT-2A1.png" alt="VT-2A1"></div>
+                    <div class="gallery-caption"><a href="vehicle-vt2a1.html">VT-2A1</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="VT-2E3 ACAV Teaser.png">
+                    <div class="gallery-thumb"><img src="VT-2E3 ACAV Teaser.png" alt="VT-2E3 ACAV"></div>
+                    <div class="gallery-caption"><a href="vehicle-vt2e3-acav.html">VT-2E3 ACAV</a><br><small>（要300,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS VT-6.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS VT-6.png" alt="VT-6"></div>
+                    <div class="gallery-caption"><a href="vehicle-vt6-2.html">VT-6</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS ICV-1 APC.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS ICV-1 APC.png" alt="ICV-1 APC"></div>
+                    <div class="gallery-caption"><a href="vehicle-icv1-apc.html">ICV-1 APC</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS RCV-1.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS RCV-1.png" alt="RCV-1"></div>
+                    <div class="gallery-caption"><a href="vehicle-rcv1.html">RCV-1</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS Recon Jeep.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Recon Jeep.png" alt="Recon Jeep"></div>
+                    <div class="gallery-caption"><a href="vehicle-recon-jeep.html">Recon Jeep</a></div>
+                </div>
             </div>
 
             <h3>第4ヌービック支援大隊</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">VT-5E1.png</div><div class="gallery-caption"><a href="#">VT-5E1</a></div></div>
+                <div class="gallery-item" data-img="VT-5E1.png">
+                    <div class="gallery-thumb"><img src="VT-5E1.png" alt="VT-5E1"></div>
+                    <div class="gallery-caption"><a href="vehicle-vt5e1.html">VT-5E1</a></div>
+                </div>
             </div>
 
             <h3>地上勤務野戦衛生兵</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS LLMV.png</div><div class="gallery-caption"><a href="#">LLMV</a><br><small>（要25,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">MTV-M Teaser.png</div><div class="gallery-caption"><a href="#">MTV-M</a><br><small>（要300,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS LLMV.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS LLMV.png" alt="LLMV"></div>
+                    <div class="gallery-caption"><a href="vehicle-llmv.html">LLMV</a><br><small>（要25,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="MTV-M Teaser.png">
+                    <div class="gallery-thumb"><img src="MTV-M Teaser.png" alt="MTV-M"></div>
+                    <div class="gallery-caption"><a href="vehicle-mtvm.html">MTV-M</a><br><small>（要300,000 XP）</small></div>
+                </div>
             </div>
 
             <h3>海軍勤務員</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NH-34-Helicopter.png</div><div class="gallery-caption"><a href="#">NH-34</a><br><small>（削除済み・NNAC限定）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS LVT.png</div><div class="gallery-caption"><a href="#">LVT</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS LVT-A1.png</div><div class="gallery-caption"><a href="#">LVT-A1</a></div></div>
+                <div class="gallery-item" data-img="NH-34-Helicopter.png">
+                    <div class="gallery-thumb"><img src="NH-34-Helicopter.png" alt="NH-34"></div>
+                    <div class="gallery-caption"><a href="vehicle-nh34.html">NH-34</a><br><small>（削除済み・NNAC限定）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS LVT.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS LVT.png" alt="LVT"></div>
+                    <div class="gallery-caption"><a href="vehicle-lvt.html">LVT</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS LVT-A1.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS LVT-A1.png" alt="LVT-A1"></div>
+                    <div class="gallery-caption"><a href="vehicle-lvta1.html">LVT-A1</a></div>
+                </div>
             </div>
 
             <h3>第5ヌービック特殊作戦（入手不可）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS 5NSO JEEP.png</div><div class="gallery-caption"><a href="#">5NSO JEEP</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS 5NSO AT JEEP.png</div><div class="gallery-caption"><a href="#">5NSO AT JEEP</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS 5NSO JEEP.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS 5NSO JEEP.png" alt="5NSO JEEP"></div>
+                    <div class="gallery-caption"><a href="vehicle-5nso-jeep.html">5NSO JEEP</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS 5NSO AT JEEP.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS 5NSO AT JEEP.png" alt="5NSO AT JEEP"></div>
+                    <div class="gallery-caption"><a href="vehicle-5nso-at-jeep.html">5NSO AT JEEP</a></div>
+                </div>
             </div>
 
             <h3>特殊作戦軍</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">Image_(75).png</div><div class="gallery-caption"><a href="#">SOC JEEP</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Image_(76).png</div><div class="gallery-caption"><a href="#">SOC LSUV</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Image_(74).png</div><div class="gallery-caption"><a href="#">SOC LSUV (G)</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SOC_AT_JEEP.webp</div><div class="gallery-caption"><a href="#">SOC AT JEEP</a></div></div>
+                <div class="gallery-item" data-img="Image_(75).png">
+                    <div class="gallery-thumb"><img src="Image_(75).png" alt="SOC JEEP"></div>
+                    <div class="gallery-caption"><a href="vehicle-soc-jeep.html">SOC JEEP</a></div>
+                </div>
+                <div class="gallery-item" data-img="Image_(76).png">
+                    <div class="gallery-thumb"><img src="Image_(76).png" alt="SOC LSUV"></div>
+                    <div class="gallery-caption"><a href="vehicle-soc-lsuv.html">SOC LSUV</a></div>
+                </div>
+                <div class="gallery-item" data-img="Image_(74).png">
+                    <div class="gallery-thumb"><img src="Image_(74).png" alt="SOC LSUV (G)"></div>
+                    <div class="gallery-caption"><a href="vehicle-soc-lsuv-g.html">SOC LSUV (G)</a></div>
+                </div>
+                <div class="gallery-item" data-img="SOC_AT_JEEP.webp">
+                    <div class="gallery-thumb"><img src="SOC_AT_JEEP.webp" alt="SOC AT JEEP"></div>
+                    <div class="gallery-caption"><a href="vehicle-soc-at-jeep.html">SOC AT JEEP</a></div>
+                </div>
             </div>
 
             <h2>警察車両</h2>
@@ -337,84 +517,213 @@
             <h3>現地憲兵（LMP）</h3>
             <p><small>LMPのスポーナーには以下も追加されます：Security Car, LLUV, LLUV (T) (2ND)</small></p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Police Cruiser.png</div><div class="gallery-caption"><a href="#">Police Cruiser</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Sheriff Cruiser.png</div><div class="gallery-caption"><a href="#">Sheriff Cruiser</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS LMP Cruiser.png</div><div class="gallery-caption"><a href="#">LMP Cruiser</a><br><small>（要10,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LMP Jeep Teaser.png</div><div class="gallery-caption"><a href="#">LMP Jeep</a><br><small>（要100,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LMPremodelCar1.jpg</div><div class="gallery-caption"><a href="#">LMP LLUV</a><br><small>（要50,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS Police Cruiser.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Police Cruiser.png" alt="Police Cruiser"></div>
+                    <div class="gallery-caption"><a href="vehicle-police-cruiser.html">Police Cruiser</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS Sheriff Cruiser.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Sheriff Cruiser.png" alt="Sheriff Cruiser"></div>
+                    <div class="gallery-caption"><a href="vehicle-sheriff-cruiser.html">Sheriff Cruiser</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS LMP Cruiser.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS LMP Cruiser.png" alt="LMP Cruiser"></div>
+                    <div class="gallery-caption"><a href="vehicle-lmp-cruiser.html">LMP Cruiser</a><br><small>（要10,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="LMP Jeep Teaser.png">
+                    <div class="gallery-thumb"><img src="LMP Jeep Teaser.png" alt="LMP Jeep"></div>
+                    <div class="gallery-caption"><a href="vehicle-lmp-jeep.html">LMP Jeep</a><br><small>（要100,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="LMPremodelCar1.jpg">
+                    <div class="gallery-thumb"><img src="LMPremodelCar1.jpg" alt="LMP LLUV"></div>
+                    <div class="gallery-caption"><a href="vehicle-lmp-lluv.html">LMP LLUV</a><br><small>（要50,000 XP）</small></div>
+                </div>
             </div>
 
             <h3>ヌービック憲兵（NMP）</h3>
             <p><small>NMPのスポーナーには以下も追加されます：MTV-2</small></p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS SV-1L MPSRT.png</div><div class="gallery-caption"><a href="#">SV-1L MPSRT</a><br><small>（NMP中尉）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Screenshot 2026-04-05.png</div><div class="gallery-caption"><a href="#">RH-X (NMP)</a><br><small>（開発者）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NMP3.png</div><div class="gallery-caption"><a href="#">MP Cruiser</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NMP2.png</div><div class="gallery-caption"><a href="#">MP LLUV</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NMP.png</div><div class="gallery-caption"><a href="#">MP LSUV</a><br><small>（要NMP伍長階級）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS SV-1L MPSRT.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS SV-1L MPSRT.png" alt="SV-1L MPSRT"></div>
+                    <div class="gallery-caption"><a href="vehicle-sv1l-mpsrt.html">SV-1L MPSRT</a><br><small>（NMP中尉）</small></div>
+                </div>
+                <div class="gallery-item" data-img="Screenshot 2026-04-05.png">
+                    <div class="gallery-thumb"><img src="Screenshot 2026-04-05.png" alt="RH-X (NMP)"></div>
+                    <div class="gallery-caption"><a href="vehicle-rhx-nmp.html">RH-X (NMP)</a><br><small>（開発者）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NMP3.png">
+                    <div class="gallery-thumb"><img src="NMP3.png" alt="MP Cruiser"></div>
+                    <div class="gallery-caption"><a href="vehicle-mp-cruiser.html">MP Cruiser</a></div>
+                </div>
+                <div class="gallery-item" data-img="NMP2.png">
+                    <div class="gallery-thumb"><img src="NMP2.png" alt="MP LLUV"></div>
+                    <div class="gallery-caption"><a href="vehicle-mp-lluv.html">MP LLUV</a></div>
+                </div>
+                <div class="gallery-item" data-img="NMP.png">
+                    <div class="gallery-thumb"><img src="NMP.png" alt="MP LSUV"></div>
+                    <div class="gallery-caption"><a href="vehicle-mp-lsuv.html">MP LSUV</a><br><small>（要NMP伍長階級）</small></div>
+                </div>
             </div>
 
             <h2>西ヌービア車両</h2>
             <p>West Noobian Assault Force（西ヌービア突撃軍）、Federal Ranger Regiment（連邦レンジャー連隊）、Federal Maritime Defense Force（連邦海上防衛隊）チームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 Utility.png</div><div class="gallery-caption"><a href="#">M41 Utility</a><br><small>（要30,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M52 APC.png</div><div class="gallery-caption"><a href="#">M52 APC</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO M52 APC Garbage.png</div><div class="gallery-caption"><a href="#">M52 APC "Garbage"</a><br><small>（要100,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO M53 CCS.png</div><div class="gallery-caption"><a href="#">M53 CCS</a><br><small>（要200,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M52 IFV.png</div><div class="gallery-caption"><a href="#">M52 IFV</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS LVT Support WN.png</div><div class="gallery-caption"><a href="#">LVT Support (WN)</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS RM-2-U2.png</div><div class="gallery-caption"><a href="#">RM-2-U2</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RL-6.png</div><div class="gallery-caption"><a href="#">RL-6</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PMVA1.jpg</div><div class="gallery-caption"><a href="#">PMVA1 (T)</a><br><small>（要50,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PMV.jpg</div><div class="gallery-caption"><a href="#">PMV</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PMVT.jpg</div><div class="gallery-caption"><a href="#">PMV (T)</a><br><small>（要20,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 Utility.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Utility.png" alt="M41 Utility"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-utility.html">M41 Utility</a><br><small>（要30,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M52 APC.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M52 APC.png" alt="M52 APC"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52-apc.html">M52 APC</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO M52 APC Garbage.png">
+                    <div class="gallery-thumb"><img src="NARAMO M52 APC Garbage.png" alt="M52 APC 'Garbage'"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52-apc-garbage.html">M52 APC "Garbage"</a><br><small>（要100,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO M53 CCS.png">
+                    <div class="gallery-thumb"><img src="NARAMO M53 CCS.png" alt="M53 CCS"></div>
+                    <div class="gallery-caption"><a href="vehicle-m53-ccs.html">M53 CCS</a><br><small>（要200,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M52 IFV.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M52 IFV.png" alt="M52 IFV"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52-ifv.html">M52 IFV</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS LVT Support WN.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS LVT Support WN.png" alt="LVT Support (WN)"></div>
+                    <div class="gallery-caption"><a href="vehicle-lvt-support-wn.html">LVT Support (WN)</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS RM-2-U2.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS RM-2-U2.png" alt="RM-2-U2"></div>
+                    <div class="gallery-caption"><a href="vehicle-rm2-u2.html">RM-2-U2</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="RL-6.png">
+                    <div class="gallery-thumb"><img src="RL-6.png" alt="RL-6"></div>
+                    <div class="gallery-caption"><a href="vehicle-rl6.html">RL-6</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="PMVA1.jpg">
+                    <div class="gallery-thumb"><img src="PMVA1.jpg" alt="PMVA1 (T)"></div>
+                    <div class="gallery-caption"><a href="vehicle-pmva1-t.html">PMVA1 (T)</a><br><small>（要50,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="PMV.jpg">
+                    <div class="gallery-thumb"><img src="PMV.jpg" alt="PMV"></div>
+                    <div class="gallery-caption"><a href="vehicle-pmv.html">PMV</a></div>
+                </div>
+                <div class="gallery-item" data-img="PMVT.jpg">
+                    <div class="gallery-thumb"><img src="PMVT.jpg" alt="PMV (T)"></div>
+                    <div class="gallery-caption"><a href="vehicle-pmv-t.html">PMV (T)</a><br><small>（要20,000 XP）</small></div>
+                </div>
             </div>
 
             <h3>【戦闘ドクトリン限定】機甲突撃（Armored Assault）</h3>
             <p>WN Major General（西ヌービア少将）が「機甲突撃」ドクトリンを有効にした時のみスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS RH-2.png</div><div class="gallery-caption"><a href="#">RH-2</a><br><small>（1回限り）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS WN VT-6.png</div><div class="gallery-caption"><a href="#">WN VT-6</a><br><small>（1回限り）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 Cannon.png</div><div class="gallery-caption"><a href="#">M41 Cannon</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS RH-2.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS RH-2.png" alt="RH-2"></div>
+                    <div class="gallery-caption"><a href="vehicle-rh2.html">RH-2</a><br><small>（1回限り）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS WN VT-6.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS WN VT-6.png" alt="WN VT-6"></div>
+                    <div class="gallery-caption"><a href="vehicle-wn-vt6.html">WN VT-6</a><br><small>（1回限り）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 Cannon.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Cannon.png" alt="M41 Cannon"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-cannon.html">M41 Cannon</a></div>
+                </div>
             </div>
 
             <h3>連邦レンジャー連隊</h3>
             <p><small>FRRのスポーナーには以下も追加されます：Sedan</small></p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Captured Security Car.png</div><div class="gallery-caption"><a href="#">Captured Security Car</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS Captured LLMV.png</div><div class="gallery-caption"><a href="#">Captured LLMV</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">PMV (G).png</div><div class="gallery-caption"><a href="#">PMV (G)</a></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS Captured Security Car.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Captured Security Car.png" alt="Captured Security Car"></div>
+                    <div class="gallery-caption"><a href="vehicle-captured-security-car.html">Captured Security Car</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS Captured LLMV.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS Captured LLMV.png" alt="Captured LLMV"></div>
+                    <div class="gallery-caption"><a href="vehicle-captured-llmv.html">Captured LLMV</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="PMV (G).png">
+                    <div class="gallery-thumb"><img src="PMV (G).png" alt="PMV (G)"></div>
+                    <div class="gallery-caption"><a href="vehicle-pmv-g.html">PMV (G)</a></div>
+                </div>
             </div>
 
             <h3>連邦海上防衛隊</h3>
             <p><small>FMDFのスポーナーには以下も追加されます：M41 Utility, M52 APC</small></p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 Anti Air.png</div><div class="gallery-caption"><a href="#">M41 Anti Air</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS LVT-A1 WN.png</div><div class="gallery-caption"><a href="#">LVT-A1 (WN)</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO M52A2 APC.png</div><div class="gallery-caption"><a href="#">M52A2 APC</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M52R1 VADS.jpg</div><div class="gallery-caption"><a href="#">M52R1 VADS</a><br><small>（要300,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LVT-A2.webp</div><div class="gallery-caption"><a href="#">LVT-A2</a><br><small>（要ポートコントロール）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 Anti Air.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Anti Air.png" alt="M41 Anti Air"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-anti-air.html">M41 Anti Air</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS LVT-A1 WN.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS LVT-A1 WN.png" alt="LVT-A1 (WN)"></div>
+                    <div class="gallery-caption"><a href="vehicle-lvta1-wn.html">LVT-A1 (WN)</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO M52A2 APC.png">
+                    <div class="gallery-thumb"><img src="NARAMO M52A2 APC.png" alt="M52A2 APC"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52a2-apc.html">M52A2 APC</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="M52R1 VADS.jpg">
+                    <div class="gallery-thumb"><img src="M52R1 VADS.jpg" alt="M52R1 VADS"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52r1-vads.html">M52R1 VADS</a><br><small>（要300,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="LVT-A2.webp">
+                    <div class="gallery-thumb"><img src="LVT-A2.webp" alt="LVT-A2"></div>
+                    <div class="gallery-caption"><a href="vehicle-lvta2.html">LVT-A2</a><br><small>（要ポートコントロール）</small></div>
+                </div>
             </div>
 
             <h2>ブロクシア車両</h2>
             <p>Bloxian Commonwealth（ブロクシア連邦）チームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M41 Cargo Bloxian.png</div><div class="gallery-caption"><a href="#">M41 Cargo Bloxian</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M52 APC Bloxian.png</div><div class="gallery-caption"><a href="#">M52 APC Bloxian</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS M52 AMR APC Bloxian.png</div><div class="gallery-caption"><a href="#">M52 AMR APC Bloxian</a><br><small>（要50,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMOTOPS XM64.png</div><div class="gallery-caption"><a href="#">XM64</a><br><small>（クールダウン）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO XM64A1.png</div><div class="gallery-caption"><a href="#">XM64A1</a><br><small>（要300,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">XRM-5-5 MEZIYA.png</div><div class="gallery-caption"><a href="#">XRM-5-5 MEZIYA</a><br><small>（要100,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NARAMO XM-3-U7 EAP.png</div><div class="gallery-caption"><a href="#">XM-3-U7 EAP</a><br><small>（レイド）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RL-7 Lynx.png</div><div class="gallery-caption"><a href="#">RL-7 Lynx</a><br><small>（要1SFA）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">BFOcar.jpg</div><div class="gallery-caption"><a href="#">PMVA1 (T) Bloxian</a><br><small>（要50,000 XP）</small></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">BFOt.jpg</div><div class="gallery-caption"><a href="#">PMV Scout</a><br><small>（要25,000 XP）</small></div></div>
+                <div class="gallery-item" data-img="NARAMOTOPS M41 Cargo Bloxian.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Cargo Bloxian.png" alt="M41 Cargo Bloxian"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-cargo-bloxian.html">M41 Cargo Bloxian</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M52 APC Bloxian.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M52 APC Bloxian.png" alt="M52 APC Bloxian"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52-apc-bloxian.html">M52 APC Bloxian</a></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS M52 AMR APC Bloxian.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M52 AMR APC Bloxian.png" alt="M52 AMR APC Bloxian"></div>
+                    <div class="gallery-caption"><a href="vehicle-m52-amr-apc-bloxian.html">M52 AMR APC Bloxian</a><br><small>（要50,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMOTOPS XM64.png">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS XM64.png" alt="XM64"></div>
+                    <div class="gallery-caption"><a href="vehicle-xm64.html">XM64</a><br><small>（クールダウン）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO XM64A1.png">
+                    <div class="gallery-thumb"><img src="NARAMO XM64A1.png" alt="XM64A1"></div>
+                    <div class="gallery-caption"><a href="vehicle-xm64a1.html">XM64A1</a><br><small>（要300,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="XRM-5-5 MEZIYA.png">
+                    <div class="gallery-thumb"><img src="XRM-5-5 MEZIYA.png" alt="XRM-5-5 MEZIYA"></div>
+                    <div class="gallery-caption"><a href="vehicle-xrm55-meziya.html">XRM-5-5 MEZIYA</a><br><small>（要100,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="NARAMO XM-3-U7 EAP.png">
+                    <div class="gallery-thumb"><img src="NARAMO XM-3-U7 EAP.png" alt="XM-3-U7 EAP"></div>
+                    <div class="gallery-caption"><a href="vehicle-xm3-u7-eap.html">XM-3-U7 EAP</a><br><small>（レイド）</small></div>
+                </div>
+                <div class="gallery-item" data-img="RL-7 Lynx.png">
+                    <div class="gallery-thumb"><img src="RL-7 Lynx.png" alt="RL-7 Lynx"></div>
+                    <div class="gallery-caption"><a href="vehicle-rl7-lynx.html">RL-7 Lynx</a><br><small>（要1SFA）</small></div>
+                </div>
+                <div class="gallery-item" data-img="BFOcar.jpg">
+                    <div class="gallery-thumb"><img src="BFOcar.jpg" alt="PMVA1 (T) Bloxian"></div>
+                    <div class="gallery-caption"><a href="vehicle-pmva1-t-bloxian.html">PMVA1 (T) Bloxian</a><br><small>（要50,000 XP）</small></div>
+                </div>
+                <div class="gallery-item" data-img="BFOt.jpg">
+                    <div class="gallery-thumb"><img src="BFOt.jpg" alt="PMV Scout"></div>
+                    <div class="gallery-caption"><a href="vehicle-pmv-scout.html">PMV Scout</a><br><small>（要25,000 XP）</small></div>
+                </div>
             </div>
 
             <h2>その他の車両</h2>
             <p>上記のカテゴリに属さないチームがスポーンおよび操作できる車両。</p>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">M40 Recoilless Rifle.png</div><div class="gallery-caption"><a href="#">M40 Recoilless Rifle</a></div></div>
+                <div class="gallery-item" data-img="M40 Recoilless Rifle.png">
+                    <div class="gallery-thumb"><img src="M40 Recoilless Rifle.png" alt="M40 Recoilless Rifle"></div>
+                    <div class="gallery-caption"><a href="vehicle-m40-recoilless-rifle.html">M40 Recoilless Rifle</a></div>
+                </div>
             </div>
 
             <h2>削除された車両</h2>
@@ -422,24 +731,42 @@
 
             <h3>第13機甲騎兵連隊</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">ARV-5.png</div><div class="gallery-caption"><a href="#">ARV-5</a></div></div>
+                <div class="gallery-item" data-img="ARV-5.png">
+                    <div class="gallery-thumb"><img src="ARV-5.png" alt="ARV-5"></div>
+                    <div class="gallery-caption"><a href="vehicle-arv5.html">ARV-5</a></div>
+                </div>
             </div>
 
             <h3>第6ヌービック野戦特科大隊（NACサブディビジョン）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">M41 Artillery.png</div><div class="gallery-caption"><a href="#">M41 Artillery</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">HAC-2.png</div><div class="gallery-caption"><a href="#">HAC-2</a></div></div>
+                <div class="gallery-item" data-img="M41 Artillery.png">
+                    <div class="gallery-thumb"><img src="M41 Artillery.png" alt="M41 Artillery"></div>
+                    <div class="gallery-caption"><a href="vehicle-m41-artillery.html">M41 Artillery</a></div>
+                </div>
+                <div class="gallery-item" data-img="HAC-2.png">
+                    <div class="gallery-thumb"><img src="HAC-2.png" alt="HAC-2"></div>
+                    <div class="gallery-caption"><a href="vehicle-hac2-deleted.html">HAC-2</a></div>
+                </div>
             </div>
 
             <h3>第1機甲師団</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">Model 1.png</div><div class="gallery-caption"><a href="#">Model 1</a></div></div>
+                <div class="gallery-item" data-img="Model 1.png">
+                    <div class="gallery-thumb"><img src="Model 1.png" alt="Model 1"></div>
+                    <div class="gallery-caption"><a href="vehicle-model1.html">Model 1</a></div>
+                </div>
             </div>
 
             <h3>ブロクシア連邦</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">RM-5 Greinour.png</div><div class="gallery-caption"><a href="#">RM-5 Greinour</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RM-3-U6 Marauder.png</div><div class="gallery-caption"><a href="#">RM-3-U6 Marauder</a></div></div>
+                <div class="gallery-item" data-img="RM-5 Greinour.png">
+                    <div class="gallery-thumb"><img src="RM-5 Greinour.png" alt="RM-5 Greinour"></div>
+                    <div class="gallery-caption"><a href="vehicle-rm5-greinour.html">RM-5 Greinour</a></div>
+                </div>
+                <div class="gallery-item" data-img="RM-3-U6 Marauder.png">
+                    <div class="gallery-thumb"><img src="RM-3-U6 Marauder.png" alt="RM-3-U6 Marauder"></div>
+                    <div class="gallery-caption"><a href="vehicle-rm3-u6-marauder.html">RM-3-U6 Marauder</a></div>
+                </div>
             </div>
 
             <h2>開発者車両</h2>
@@ -447,62 +774,62 @@
 
             <h3>一般市民（Civilian）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">C18 Stationary HMG.png</div><div class="gallery-caption">C18 Stationary HMG</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M63 Rocket Launcher.png</div><div class="gallery-caption">M63 Rocket Launcher</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SIB Marked.png</div><div class="gallery-caption">SIB Marked</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">VT-2A1 Silent Grace.png</div><div class="gallery-caption">VT-2A1 Silent Grace</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">AC Mark-1.png</div><div class="gallery-caption">AC Mark-1</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">ARV-42.png</div><div class="gallery-caption">ARV-42</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">DOE Battle Tug.png</div><div class="gallery-caption">DOE Battle Tug</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">HAT-2.png</div><div class="gallery-caption">HAT-2</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">ICV-1.png</div><div class="gallery-caption">ICV-1</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LATX-2.png</div><div class="gallery-caption">LATX-2</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LLUV 2ND.png</div><div class="gallery-caption">LLUV (2ND)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LLUV T.png</div><div class="gallery-caption">LLUV (T)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LRV-2.png</div><div class="gallery-caption">LRV-2</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LRV-2 Quaza.png</div><div class="gallery-caption">LRV-2 Quaza</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LRV-2 Tall.png</div><div class="gallery-caption">LRV-2 Tall</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LVT Christmas.png</div><div class="gallery-caption">LVT Christmas</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">LVT Support.png</div><div class="gallery-caption">LVT Support</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M41 Cargo.png</div><div class="gallery-caption">M41 Cargo</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M41 Cargo 2ND.png</div><div class="gallery-caption">M41 Cargo (2ND)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">NFSF Security Car.png</div><div class="gallery-caption">NFSF Security Car</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SV-1.png</div><div class="gallery-caption"><a href="#">SV-1</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SV-1 Security.png</div><div class="gallery-caption">SV-1 Security</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SV-1L.png</div><div class="gallery-caption">SV-1L</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SV-1L Police.png</div><div class="gallery-caption">SV-1L Police</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">SV-1X.png</div><div class="gallery-caption">SV-1X</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">THE LORAX.png</div><div class="gallery-caption">THE LORAX</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">VT-5E1.png</div><div class="gallery-caption">VT-5</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">VT-5v2 Roadrunner.png</div><div class="gallery-caption">VT-5v2 Roadrunner</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">War Cart.png</div><div class="gallery-caption">War Cart</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">XHAT-3.png</div><div class="gallery-caption">XHAT-3</div></div>
-                <div class="gallery-item"><div class="gallery-caption">UH-60 BLACK HAWK</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">Firetruck.png</div><div class="gallery-caption">FIRE ENGINE</div></div>
+                <div class="gallery-item" data-img="C18 Stationary HMG.png"><div class="gallery-thumb"><img src="C18 Stationary HMG.png" alt="C18 Stationary HMG"></div><div class="gallery-caption"><a href="vehicle-c18-hmg.html">C18 Stationary HMG</a></div></div>
+                <div class="gallery-item" data-img="M63 Rocket Launcher.png"><div class="gallery-thumb"><img src="M63 Rocket Launcher.png" alt="M63 Rocket Launcher"></div><div class="gallery-caption"><a href="vehicle-m63-rocket.html">M63 Rocket Launcher</a></div></div>
+                <div class="gallery-item" data-img="SIB Marked.png"><div class="gallery-thumb"><img src="SIB Marked.png" alt="SIB Marked"></div><div class="gallery-caption"><a href="vehicle-sib-marked.html">SIB Marked</a></div></div>
+                <div class="gallery-item" data-img="VT-2A1 Silent Grace.png"><div class="gallery-thumb"><img src="VT-2A1 Silent Grace.png" alt="VT-2A1 Silent Grace"></div><div class="gallery-caption"><a href="vehicle-vt2a1-silent-grace.html">VT-2A1 Silent Grace</a></div></div>
+                <div class="gallery-item" data-img="AC Mark-1.png"><div class="gallery-thumb"><img src="AC Mark-1.png" alt="AC Mark-1"></div><div class="gallery-caption"><a href="vehicle-ac-mark1.html">AC Mark-1</a></div></div>
+                <div class="gallery-item" data-img="ARV-42.png"><div class="gallery-thumb"><img src="ARV-42.png" alt="ARV-42"></div><div class="gallery-caption"><a href="vehicle-arv42.html">ARV-42</a></div></div>
+                <div class="gallery-item" data-img="DOE Battle Tug.png"><div class="gallery-thumb"><img src="DOE Battle Tug.png" alt="DOE Battle Tug"></div><div class="gallery-caption"><a href="vehicle-doe-battle-tug.html">DOE Battle Tug</a></div></div>
+                <div class="gallery-item" data-img="HAT-2.png"><div class="gallery-thumb"><img src="HAT-2.png" alt="HAT-2"></div><div class="gallery-caption"><a href="vehicle-hat2-dev.html">HAT-2</a></div></div>
+                <div class="gallery-item" data-img="ICV-1.png"><div class="gallery-thumb"><img src="ICV-1.png" alt="ICV-1"></div><div class="gallery-caption"><a href="vehicle-icv1.html">ICV-1</a></div></div>
+                <div class="gallery-item" data-img="LATX-2.png"><div class="gallery-thumb"><img src="LATX-2.png" alt="LATX-2"></div><div class="gallery-caption"><a href="vehicle-latx2.html">LATX-2</a></div></div>
+                <div class="gallery-item" data-img="LLUV 2ND.png"><div class="gallery-thumb"><img src="LLUV 2ND.png" alt="LLUV (2ND)"></div><div class="gallery-caption"><a href="vehicle-lluv-2nd.html">LLUV (2ND)</a></div></div>
+                <div class="gallery-item" data-img="LLUV T.png"><div class="gallery-thumb"><img src="LLUV T.png" alt="LLUV (T)"></div><div class="gallery-caption"><a href="vehicle-lluv-t.html">LLUV (T)</a></div></div>
+                <div class="gallery-item" data-img="LRV-2.png"><div class="gallery-thumb"><img src="LRV-2.png" alt="LRV-2"></div><div class="gallery-caption"><a href="vehicle-lrv2.html">LRV-2</a></div></div>
+                <div class="gallery-item" data-img="LRV-2 Quaza.png"><div class="gallery-thumb"><img src="LRV-2 Quaza.png" alt="LRV-2 Quaza"></div><div class="gallery-caption"><a href="vehicle-lrv2-quaza.html">LRV-2 Quaza</a></div></div>
+                <div class="gallery-item" data-img="LRV-2 Tall.png"><div class="gallery-thumb"><img src="LRV-2 Tall.png" alt="LRV-2 Tall"></div><div class="gallery-caption"><a href="vehicle-lrv2-tall.html">LRV-2 Tall</a></div></div>
+                <div class="gallery-item" data-img="LVT Christmas.png"><div class="gallery-thumb"><img src="LVT Christmas.png" alt="LVT Christmas"></div><div class="gallery-caption"><a href="vehicle-lvt-christmas.html">LVT Christmas</a></div></div>
+                <div class="gallery-item" data-img="LVT Support.png"><div class="gallery-thumb"><img src="LVT Support.png" alt="LVT Support"></div><div class="gallery-caption"><a href="vehicle-lvt-support.html">LVT Support</a></div></div>
+                <div class="gallery-item" data-img="M41 Cargo.png"><div class="gallery-thumb"><img src="M41 Cargo.png" alt="M41 Cargo"></div><div class="gallery-caption"><a href="vehicle-m41-cargo.html">M41 Cargo</a></div></div>
+                <div class="gallery-item" data-img="M41 Cargo 2ND.png"><div class="gallery-thumb"><img src="M41 Cargo 2ND.png" alt="M41 Cargo (2ND)"></div><div class="gallery-caption"><a href="vehicle-m41-cargo-2nd.html">M41 Cargo (2ND)</a></div></div>
+                <div class="gallery-item" data-img="NFSF Security Car.png"><div class="gallery-thumb"><img src="NFSF Security Car.png" alt="NFSF Security Car"></div><div class="gallery-caption"><a href="vehicle-nfsf-security-car.html">NFSF Security Car</a></div></div>
+                <div class="gallery-item" data-img="SV-1.png"><div class="gallery-thumb"><img src="SV-1.png" alt="SV-1"></div><div class="gallery-caption"><a href="vehicle-sv1.html">SV-1</a></div></div>
+                <div class="gallery-item" data-img="SV-1 Security.png"><div class="gallery-thumb"><img src="SV-1 Security.png" alt="SV-1 Security"></div><div class="gallery-caption"><a href="vehicle-sv1-security.html">SV-1 Security</a></div></div>
+                <div class="gallery-item" data-img="SV-1L.png"><div class="gallery-thumb"><img src="SV-1L.png" alt="SV-1L"></div><div class="gallery-caption"><a href="vehicle-sv1l-dev.html">SV-1L</a></div></div>
+                <div class="gallery-item" data-img="SV-1L Police.png"><div class="gallery-thumb"><img src="SV-1L Police.png" alt="SV-1L Police"></div><div class="gallery-caption"><a href="vehicle-sv1l-police.html">SV-1L Police</a></div></div>
+                <div class="gallery-item" data-img="SV-1X.png"><div class="gallery-thumb"><img src="SV-1X.png" alt="SV-1X"></div><div class="gallery-caption"><a href="vehicle-sv1x.html">SV-1X</a></div></div>
+                <div class="gallery-item" data-img="THE LORAX.png"><div class="gallery-thumb"><img src="THE LORAX.png" alt="THE LORAX"></div><div class="gallery-caption"><a href="vehicle-the-lorax.html">THE LORAX</a></div></div>
+                <div class="gallery-item" data-img="VT-5E1.png"><div class="gallery-thumb"><img src="VT-5E1.png" alt="VT-5"></div><div class="gallery-caption"><a href="vehicle-vt5.html">VT-5</a></div></div>
+                <div class="gallery-item" data-img="VT-5v2 Roadrunner.png"><div class="gallery-thumb"><img src="VT-5v2 Roadrunner.png" alt="VT-5v2 Roadrunner"></div><div class="gallery-caption"><a href="vehicle-vt5v2-roadrunner.html">VT-5v2 Roadrunner</a></div></div>
+                <div class="gallery-item" data-img="War Cart.png"><div class="gallery-thumb"><img src="War Cart.png" alt="War Cart"></div><div class="gallery-caption"><a href="vehicle-war-cart.html">War Cart</a></div></div>
+                <div class="gallery-item" data-img="XHAT-3.png"><div class="gallery-thumb"><img src="XHAT-3.png" alt="XHAT-3"></div><div class="gallery-caption"><a href="vehicle-xhat3.html">XHAT-3</a></div></div>
+                <div class="gallery-item" data-img="UH-60 BLACK HAWK.png"><div class="gallery-thumb"><img src="UH-60 BLACK HAWK.png" alt="UH-60 BLACK HAWK"></div><div class="gallery-caption"><a href="vehicle-uh60-blackhawk.html">UH-60 BLACK HAWK</a></div></div>
+                <div class="gallery-item" data-img="Firetruck.png"><div class="gallery-thumb"><img src="Firetruck.png" alt="FIRE ENGINE"></div><div class="gallery-caption"><a href="vehicle-fire-engine.html">FIRE ENGINE</a></div></div>
             </div>
 
             <h3>西ヌービア（West Noobia）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">LVT WN.png</div><div class="gallery-caption">LVT (WN)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M52 AMR APC.png</div><div class="gallery-caption"><a href="#">M52 AMR APC</a></div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RH-3.png</div><div class="gallery-caption">RH-3</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RL-3.png</div><div class="gallery-caption">RL-3</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RM-3-U4.png</div><div class="gallery-caption">RM-3-U4</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M52R1 VADS (20).jpg</div><div class="gallery-caption"><a href="#">M52R1 VADS (20)</a></div></div>
+                <div class="gallery-item" data-img="LVT WN.png"><div class="gallery-thumb"><img src="LVT WN.png" alt="LVT (WN)"></div><div class="gallery-caption"><a href="vehicle-lvt-wn.html">LVT (WN)</a></div></div>
+                <div class="gallery-item" data-img="M52 AMR APC.png"><div class="gallery-thumb"><img src="M52 AMR APC.png" alt="M52 AMR APC"></div><div class="gallery-caption"><a href="vehicle-m52-amr-apc.html">M52 AMR APC</a></div></div>
+                <div class="gallery-item" data-img="RH-3.png"><div class="gallery-thumb"><img src="RH-3.png" alt="RH-3"></div><div class="gallery-caption"><a href="vehicle-rh3.html">RH-3</a></div></div>
+                <div class="gallery-item" data-img="RL-3.png"><div class="gallery-thumb"><img src="RL-3.png" alt="RL-3"></div><div class="gallery-caption"><a href="vehicle-rl3.html">RL-3</a></div></div>
+                <div class="gallery-item" data-img="RM-3-U4.png"><div class="gallery-thumb"><img src="RM-3-U4.png" alt="RM-3-U4"></div><div class="gallery-caption"><a href="vehicle-rm3-u4.html">RM-3-U4</a></div></div>
+                <div class="gallery-item" data-img="M52R1 VADS (20).jpg"><div class="gallery-thumb"><img src="M52R1 VADS (20).jpg" alt="M52R1 VADS (20)"></div><div class="gallery-caption"><a href="vehicle-m52r1-vads-20.html">M52R1 VADS (20)</a></div></div>
             </div>
 
             <h3>ブロクシア連邦（Bloxian Commonwealth）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">Bloxian LVT Float.png</div><div class="gallery-caption">Bloxian LVT (Float)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">MICV-2.png</div><div class="gallery-caption">MICV-2</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">RH-X.png</div><div class="gallery-caption">RH-X</div></div>
+                <div class="gallery-item" data-img="Bloxian LVT Float.png"><div class="gallery-thumb"><img src="Bloxian LVT Float.png" alt="Bloxian LVT (Float)"></div><div class="gallery-caption"><a href="vehicle-bloxian-lvt-float.html">Bloxian LVT (Float)</a></div></div>
+                <div class="gallery-item" data-img="MICV-2.png"><div class="gallery-thumb"><img src="MICV-2.png" alt="MICV-2"></div><div class="gallery-caption"><a href="vehicle-micv2.html">MICV-2</a></div></div>
+                <div class="gallery-item" data-img="RH-X.png"><div class="gallery-thumb"><img src="RH-X.png" alt="RH-X"></div><div class="gallery-caption"><a href="vehicle-rhx.html">RH-X</a></div></div>
             </div>
 
             <h3>ROBLOX歩兵隊（RIC）</h3>
             <div class="gallery">
-                <div class="gallery-item"><div class="gallery-thumb">Jeep RIC.png</div><div class="gallery-caption">Jeep (RIC)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M113 RIC.png</div><div class="gallery-caption">M113 (RIC)</div></div>
-                <div class="gallery-item"><div class="gallery-thumb">M60A1 RIC.png</div><div class="gallery-caption">M60A1 (RIC)</div></div>
+                <div class="gallery-item" data-img="Jeep RIC.png"><div class="gallery-thumb"><img src="Jeep RIC.png" alt="Jeep (RIC)"></div><div class="gallery-caption"><a href="vehicle-jeep-ric.html">Jeep (RIC)</a></div></div>
+                <div class="gallery-item" data-img="M113 RIC.png"><div class="gallery-thumb"><img src="M113 RIC.png" alt="M113 (RIC)"></div><div class="gallery-caption"><a href="vehicle-m113-ric.html">M113 (RIC)</a></div></div>
+                <div class="gallery-item" data-img="M60A1 RIC.png"><div class="gallery-thumb"><img src="M60A1 RIC.png" alt="M60A1 (RIC)"></div><div class="gallery-caption"><a href="vehicle-m60a1-ric.html">M60A1 (RIC)</a></div></div>
             </div>
         </main>
     </div>
@@ -516,38 +843,34 @@
             })
             .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
 
-        // 2. ページ内リアルタイムフィルタリング検索（ファイルを増やす必要なし）
+        // 2. ページ内リアルタイム検索（ファイル名や車両名を網羅）
         function filterContent() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
             const container = document.getElementById('main-content');
             
-            // ギャラリーアイテムと見出し（h2, h3）を対象にする
             const items = container.querySelectorAll('.gallery-item');
             const headings = container.querySelectorAll('h2, h3');
 
             if (query === "") {
-                // 検索バーが空のときはすべて表示状態に戻す
                 items.forEach(item => item.classList.remove('hidden'));
                 headings.forEach(h => h.classList.remove('section-hidden'));
                 return;
             }
 
-            // 各ギャラリーアイテム（車両）のテキストが一致するか判定
             items.forEach(item => {
                 const text = item.textContent.toLowerCase();
-                if (text.includes(query)) {
+                const dataImg = (item.getAttribute('data-img') || "").toLowerCase();
+                if (text.includes(query) || dataImg.includes(query)) {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
                 }
             });
 
-            // 見出しごとのセクション管理：もしその配下のギャラリーアイテムがすべて非隠しになっていなければ見出しも非表示にする等の制御
             headings.forEach(h => {
                 let nextElem = h.nextElementSibling;
                 let hasVisibleItem = false;
 
-                // 次の見出しに出会うまでの間に表示されているアイテムがあるかチェック
                 while (nextElem && nextElem.tagName !== 'H2' && nextElem.tagName !== 'H3') {
                     if (nextElem.classList && nextElem.classList.contains('gallery')) {
                         const visibleChildren = nextElem.querySelectorAll('.gallery-item:not(.hidden)');
