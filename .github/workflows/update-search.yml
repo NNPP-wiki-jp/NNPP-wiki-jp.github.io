@@ -1,0 +1,29 @@
+name: Generate Search Index
+
+on:
+  push:
+    branches:
+      - main # または master
+
+jobs:
+  build:
+  runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Generate search.json
+        run: node generate-search-index.js
+
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add search.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate search index [skip ci]" && git push)
