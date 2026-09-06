@@ -6,8 +6,6 @@
     <title>NNPP非公式Wiki</title>
     <link rel="stylesheet" href="style.css">
     <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
-    <!-- Lunr.jsの読み込み -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
 </head>
 <body>
 
@@ -102,7 +100,7 @@
             })
             .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
 
-        // 検索対象のページリスト（URLを手動で増やさなくてよくするためにJSON等で管理するか、最低限のリストを用意）
+        // 検索対象のページリスト（ここに追加していくだけで自動で本文まで検索対象になります）
         const wikiPages = [
             { url: "index.html", title: "メインページ" },
             { url: "rules.html", title: "コミュニティルール" },
@@ -120,57 +118,12 @@
         ];
 
         let originalContent = "";
-        let searchIndex = null;
-        let pageDataStore = {};
-
-        // 起動時に全ページをフェッチしてLunr.jsのインデックスを構築
-        async function initSearchIndex() {
-            const documents = [];
-            for (const page of wikiPages) {
-                try {
-                    const response = await fetch(page.url);
-                    if (!response.ok) continue;
-                    const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-                    
-                    const contentText = doc.querySelector('.main-content')?.textContent || "";
-                    const htmlTitle = doc.title || "";
-
-                    pageDataStore[page.url] = {
-                        title: page.title,
-                        content: contentText
-                    };
-
-                    documents.push({
-                        id: page.url,
-                        title: page.title,
-                        body: contentText + " " + htmlTitle
-                    });
-                } catch (e) {
-                    console.error(`${page.url} のインデックス構築エラー:`, e);
-                }
-            }
-
-            searchIndex = lunr(function () {
-                this.ref('id');
-                this.field('title', { boost: 10 });
-                this.field('body');
-
-                documents.forEach(doc => {
-                    this.add(doc);
-                }, this);
-            });
-        }
-
-        // ページ読み込み完了後にインデックス作成を開始
-        initSearchIndex();
 
         async function performSearch(event) {
             event.preventDefault();
             const searchInput = document.getElementById("search-input");
-            const keyword = searchInput.value.trim();
-            if (!keyword || !searchIndex) return;
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) return;
 
             const mainContent = document.querySelector(".main-content");
             if (!originalContent) {
@@ -178,11 +131,11 @@
             }
 
             mainContent.innerHTML = `
-                <h1 class="page-title">「${keyword}」の検索結果</h1>
+                <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
                 <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
                 <div class="fandom-search-container" style="margin-top: 15px;">
                     <div class="fandom-search-main" style="width: 100%;">
-                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">検索中...</p>
+                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
                         <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
                     </div>
                 </div>
@@ -195,52 +148,63 @@
             });
 
             const resultsList = document.getElementById("search-results-list");
-            
-            // Lunr.jsによる検索実行（部分一致やあいまい検索に対応させるためワイルドカードを付与）
-            let results = [];
-            try {
-                results = searchIndex.search(`${keyword}*`);
-            } catch (err) {
-                results = searchIndex.search(keyword);
-            }
+            let hitCount = 0;
 
-            let hitCount = results.length;
+            // 各ページを裏側でフェッチして日本語テキストを丸ごと検索
+            for (const page of wikiPages) {
+                try {
+                    const response = await fetch(page.url);
+                    if (!response.ok) continue;
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    
+                    const contentText = doc.querySelector('.main-content')?.textContent || "";
+                    const htmlTitle = doc.title || "";
 
-            if (hitCount === 0) {
-                document.getElementById("search-status").textContent = "";
-                resultsList.innerHTML = `<p>"${keyword}" に一致するページは見つかりませんでした。</p>`;
-                return;
-            }
+                    let imageContext = "";
+                    doc.querySelectorAll('.main-content img').forEach(img => {
+                        imageContext += ` ${img.alt} ${img.src} photos photo image`;
+                    });
 
-            document.getElementById("search-status").textContent = `"${keyword}" の結果 約 ${hitCount} 件`;
+                    // ページ全体のテキストを小文字化して検索ワードが含まれるかチェック
+                    const targetTextLower = `${contentText} ${page.title} ${htmlTitle} ${imageContext}`.toLowerCase();
 
-            results.forEach(res => {
-                const pageUrl = res.ref;
-                const pageData = pageDataStore[pageUrl];
-                if (!pageData) return;
+                    if (targetTextLower.includes(keyword)) {
+                        hitCount++;
+                        let snippet = "";
+                        const index = contentText.toLowerCase().indexOf(keyword);
+                        if (index !== -1) {
+                            const start = Math.max(0, index - 20);
+                            const end = Math.min(contentText.length, index + 60);
+                            snippet = `... ${contentText.substring(start, end).replace(/\s+/g, ' ').trim()} ...`;
+                        } else {
+                            snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
+                        }
 
-                const contentText = pageData.content;
-                let snippet = "";
-                const index = contentText.toLowerCase().indexOf(keyword.toLowerCase());
-                if (index !== -1) {
-                    const start = Math.max(0, index - 20);
-                    const end = Math.min(contentText.length, index + 60);
-                    snippet = `... ${contentText.substring(start, end).replace(/\s+/g, ' ').trim()} ...`;
-                } else {
-                    snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
+                        const li = document.createElement("li");
+                        li.style.marginBottom = "25px";
+                        li.style.paddingBottom = "15px";
+                        li.style.borderBottom = "1px solid #eaecf0";
+                        li.innerHTML = `
+                            <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
+                            <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
+                            <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
+                        `;
+                        resultsList.appendChild(li);
+                    }
+                } catch (e) {
+                    console.error(`${page.url} の解析エラー:`, e);
                 }
+            }
 
-                const li = document.createElement("li");
-                li.style.marginBottom = "25px";
-                li.style.paddingBottom = "15px";
-                li.style.borderBottom = "1px solid #eaecf0";
-                li.innerHTML = `
-                    <a href="${pageUrl}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${pageData.title}</a>
-                    <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
-                    <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${pageUrl}</div>
-                `;
-                resultsList.appendChild(li);
-            });
+            const statusText = document.getElementById("search-status");
+            if (hitCount === 0) {
+                statusText.textContent = "";
+                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
+            } else {
+                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
+            }
         }
     </script>
 </body>
