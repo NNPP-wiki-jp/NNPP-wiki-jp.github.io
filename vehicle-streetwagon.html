@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streetwagon - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        .toc a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .wiki-notice {
+            background-color: #fcfcfc;
+            border: 1px solid #c8ccd1;
+            border-left: 4px solid #36c;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off">
+            </form>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar">
+            <div class="sidebar-section">
+                <h3>メイン</h3>
+                <ul>
+                    <li><a href="index.html">メインページ</a></li>
+                    <li><a href="rules.html">コミュニティルール</a></li>
+                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
+                </ul>
+                <h3>データベース</h3>
+                <ul>
+                    <li><a href="departments.html">各部門の解説</a></li>
+                    <li><a href="mechanics.html">ゲームメカニクス</a></li>
+                    <li><a href="map.html">マップ・拠点位置</a></li>
+                    <li><a href="vehicles.html">ビークル</a></li>
+                    <li><a href="weapons.html">武器・装備</a></li>
+                    <li><a href="gamepasses.html">ゲームパス</a></li>
+                    <li><a href="badges.html">バッジ</a></li>
+                </ul>
+                <h3>コミュニティ</h3>
+                <ul>
+                    <li><a href="bbs-general.html">雑談掲示板</a></li>
+                    <li><a href="bbs-qa.html">質問掲示板</a></li>
+                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Streetwagon</h1>
+            
+            <div class="wiki-notice">
+                <div class="notice-title">編集ステータス / スタブ</div>
+                <p>Streetwagon は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！</p>
+            </div>
+
+            <!-- インフォボックス -->
+            <div class="infobox">
+                <div class="infobox-title">Streetwagon</div>
+                <div class="infobox-image">
+                    <img src="Streetwagon.png" alt="Streetwagon">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">wait, IS THIS WHAT THE POLICE USE - a random civilian</div>
+                <table>
+                    <tr>
+                        <th>体力</th>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>4 (運転手1 / 助手席3)</td>
+                    </tr>
+                    <tr>
+                        <th>速度</th>
+                        <td>75</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>36</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし</td>
+                    </tr>
+                    <tr>
+                        <th>アクセス</th>
+                        <td>全チーム (All teams)</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>0</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#overview">1 概要</a></li>
+                    <li><a href="#appearance">2 外観</a></li>
+                    <li><a href="#tips">3 Tips</a></li>
+                    <li><a href="#pros-and-cons">4 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">4.1 長所</a></li>
+                            <li><a href="#cons">4.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">5 トリビア</a></li>
+                    <li><a href="#gallery">6 ギャラリー</a></li>
+                </ol>
+            </div>
+
+            <h2 id="overview">概要</h2>
+            <p>Streetwagon（別名：Civilian Station Wagon）は、一般的な輸送や人員移動のために設計された民間車両である。セダンと同じ全体的な構造と性能を共有しており、4人の乗客を収容できる。そのデザインはセキュリティカー（Security Car）に酷似しており、共通のメーカーや車両ラインであることが示唆されている。</p>
+
+            <h2 id="appearance">外観</h2>
+            <p>ボルボやロールスロイスといった多くの実在の自動車に似た雰囲気を持っている。</p>
+            <p>四角い形状をしており、4つの座席を備えている。</p>
+
+            <h2 id="tips">Tips</h2>
+            <ul>
+                <li>市街地やプラントゾーン内での、リスクの低い移動に最適。</li>
+                <li>簡単に破壊されるのを防ぐため、戦闘地域や既知の敵対エリアは避けること。</li>
+                <li>一般市民や、身を隠して潜入しようとするウェスト・ヌービア軍（West Noobian Forces）の目立たない移動手段としても利用できる。</li>
+            </ul>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>市民によって日常の移動手段として一般的に使用されている。</li>
+                <li>DOE従業員や非戦闘員を含む、一般的な人員移動に適している。</li>
+                <li>無反動砲やプラントセキュリティの行動など、ランダムな事件の際に標的にされやすい。</li>
+                <li>FRRのセダンではないことが判別できるため、セダンよりも優れている。</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>装甲が軽く、非常に脆い。</li>
+                <li>車載兵器、対戦車（AT）弾、あるいは激しい衝突からの攻撃に耐えることができない。</li>
+                <li>敵車両によって簡単に側面を取られたり、無力化されたりする。</li>
+            </ul>
+
+            <h2 id="trivia">トリビア</h2>
+            <p>この車には警察仕様（PS version）のSecurity Carが存在し、さらに「Security Car (Reinforced)」「Security Car (Supervisor)」「Captured Security Car」「PN-1P Security Transport（後部が大きくなっているもの）」という4つの派生バージョンが存在する。</p>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <p>WIP</p>
+
+            <!-- 編集セクション -->
+            <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
+                <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/streetwagon.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                    ✏️ GitHubでこのページを編集する
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 検索対象のページリスト
+        const wikiPages = [
+            { 
+                url: "index.html", 
+                title: "メインページ", 
+                content: "NNPP非公式Wikiへようこそ Robloxの原子力発電所シミュレーターNNPPのプレイヤー有志による非公式ファンWikiです ゲームメカニクス 部門紹介 警備部門 技術部門 マップ 拠点位置 ビークル 武器 装備 ゲームパス バッジ 初心者攻略 マニュアル" 
+            },
+            { 
+                url: "rules.html", 
+                title: "コミュニティルール", 
+                content: "コミュニティルール 編集に関するガイドラインやマナーについて記載しています。" 
+            },
+            { 
+                url: "departments.html", 
+                title: "各部門の解説", 
+                content: "部門紹介 全チームと役割 警備部門 技術部門 Plant Maintenance PM など各部門の特徴や加入方法。" 
+            },
+            { 
+                url: "strategy.html", 
+                title: "初心者攻略・マニュアル", 
+                content: "初心者攻略 マニュアル ゲームの始め方 基本操作 アイテム ツールの使い方。" 
+            },
+            { 
+                url: "mechanics.html", 
+                title: "ゲームメカニクス", 
+                content: "原子炉の制御やシステムなど、ゲームの仕組み全般を解説しています。" 
+            },
+            { 
+                url: "map.html", 
+                title: "マップ・拠点位置", 
+                content: "発電所敷地内の構造や各ゾーンの配置に関する詳細です。" 
+            },
+            { 
+                url: "vehicles.html", 
+                title: "ビークル", 
+                content: "移動や警備で使用される各種車両についての解説です。" 
+            },
+            { 
+                url: "m41-doe-supply.html", 
+                title: "M41 DOE Supply", 
+                content: "M41 DOE Supply Logistical Operations LO サプライボックス 輸送 スターター車両 M41 Utility Truck 体力90 速度69 荷台" 
+            },
+            { 
+                url: "maintenance-pickup-truck.html", 
+                title: "Maintenance Pickup Truck", 
+                content: "Maintenance Pickup Truck Plant Maintenance PM 維持管理 プラントメンテナンス 車両 体力16 速度63 ブロキシコーラ ハシゴ Wrenches and Workorders" 
+            },
+            { 
+                url: "streetwagon.html", 
+                title: "Streetwagon", 
+                content: "Streetwagon Civilian Station Wagon セダン 民間車両 全チーム 体力12 速度75 セキュリティカー Security Car ウェスト・ヌービア軍" 
+            }
+        ];
+
+        let originalContent = "";
+
+        function performSearch(event) {
+            event.preventDefault();
+            const searchInput = document.getElementById("search-input");
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) return;
+
+            const mainContent = document.querySelector(".main-content");
+            if (!originalContent) {
+                originalContent = mainContent.innerHTML;
+            }
+
+            mainContent.innerHTML = `
+                <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
+                <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
+                <div class="fandom-search-container" style="margin-top: 15px;">
+                    <div class="fandom-search-main" style="width: 100%;">
+                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
+                        <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("btn-restore-wiki").addEventListener("click", () => {
+                mainContent.innerHTML = originalContent;
+                searchInput.value = ""; 
+                originalContent = "";    
+            });
+
+            const resultsList = document.getElementById("search-results-list");
+            let hitCount = 0;
+
+            for (const page of wikiPages) {
+                const targetTextLower = `${page.title} ${page.content}`.toLowerCase();
+
+                if (targetTextLower.includes(keyword)) {
+                    hitCount++;
+                    let snippet = "";
+                    const index = page.content.toLowerCase().indexOf(keyword);
+                    if (index !== -1) {
+                        const start = Math.max(0, index - 20);
+                        const end = Math.min(page.content.length, index + 60);
+                        snippet = `... ${page.content.substring(start, end)} ...`;
+                    } else {
+                        snippet = page.content.substring(0, 80) + "...";
+                    }
+
+                    const li = document.createElement("li");
+                    li.style.marginBottom = "25px";
+                    li.style.paddingBottom = "15px";
+                    li.style.borderBottom = "1px solid #eaecf0";
+                    li.innerHTML = `
+                        <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
+                        <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
+                        <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
+                    `;
+                    resultsList.appendChild(li);
+                }
+            }
+
+            const statusText = document.getElementById("search-status");
+            if (hitCount === 0) {
+                statusText.textContent = "";
+                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
+            } else {
+                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
+            }
+        }
+    </script>
+</body>
+</html>
