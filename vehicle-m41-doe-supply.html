@@ -101,7 +101,33 @@
     </header>
 
     <div class="container">
-        <nav class="side-nav" id="sidebar"></nav>
+        <!-- サイドバー（直接記述して確実に表示） -->
+        <nav class="side-nav" id="sidebar">
+            <div class="sidebar-section">
+                <h3>メイン</h3>
+                <ul>
+                    <li><a href="index.html">メインページ</a></li>
+                    <li><a href="rules.html">コミュニティルール</a></li>
+                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
+                </ul>
+                <h3>データベース</h3>
+                <ul>
+                    <li><a href="departments.html">各部門の解説</a></li>
+                    <li><a href="mechanics.html">ゲームメカニクス</a></li>
+                    <li><a href="map.html">マップ・拠点位置</a></li>
+                    <li><a href="vehicles.html">ビークル</a></li>
+                    <li><a href="weapons.html">武器・装備</a></li>
+                    <li><a href="gamepasses.html">ゲームパス</a></li>
+                    <li><a href="badges.html">バッジ</a></li>
+                </ul>
+                <h3>コミュニティ</h3>
+                <ul>
+                    <li><a href="bbs-general.html">雑談掲示板</a></li>
+                    <li><a href="bbs-qa.html">質問掲示板</a></li>
+                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
+                </ul>
+            </div>
+        </nav>
 
         <main class="main-content">
             <h1 class="page-title">M41 DOE Supply</h1>
@@ -209,21 +235,13 @@
             <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
                 <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
                 <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/m41-doe-supply.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-                    GitHubでこのページを編集する
+                    ✏️ GitHubでこのページを編集する
                 </a>
             </div>
         </main>
     </div>
 
     <script>
-        // 共通サイドバーを読み込む処理
-        fetch('sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-            })
-            .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
-
         // 検索対象のページリスト
         const wikiPages = [
             { url: "index.html", title: "メインページ" },
@@ -316,7 +334,7 @@
                         `;
                         resultsList.appendChild(li);
                     }
-                } else (e) => {
+                } catch (e) {
                     console.error(`${page.url} の解析エラー:`, e);
                 }
             }
