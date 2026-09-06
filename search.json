@@ -1,61 +1,222 @@
-const fs = require('fs');
-const path = require('path');
-
-// 検索対象から除外するディレクトリやファイル
-const excludeDirs = ['.git', '.github', 'node_modules'];
-const excludeFiles = ['search.json'];
-
-function scanDir(dir, baseDir = dir) {
-    let results = [];
-    const list = fs.readdirSync(dir);
-
-    list.forEach(file => {
-        const filePath = path.join(dir, file);
-        const relativePath = path.relative(baseDir, filePath).replace(/\\/g, '/');
-        const stat = fs.statSync(filePath);
-
-        if (stat.isDirectory()) {
-            if (!excludeDirs.includes(file)) {
-                results = results.concat(scanDir(filePath, baseDir));
-            }
-        } else {
-            // png, jpg, webp 以外のファイルを対象にする
-            const ext = path.extname(file).toLowerCase();
-            if (!['.png', '.jpg', '.jpeg', '.webp'].includes(ext) && !excludeFiles.includes(relativePath)) {
-                try {
-                    const content = fs.readFileSync(filePath, 'utf8');
-                    
-                    // HTMLのタイトルと本文テキストを簡易抽出
-                    let title = relativePath;
-                    let textContent = content;
-
-                    if (ext === '.html') {
-                        const titleMatch = content.match(/<title>(.*?)<\/title>/i);
-                        if (titleMatch) title = titleMatch[1];
-
-                        // タグを除去してテキストだけにする
-                        textContent = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-                                             .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
-                                             .replace(/<[^>]+>/g, ' ')
-                                             .replace(/\s+/g, ' ')
-                                             .trim();
-                    }
-
-                    results.push({
-                        url: relativePath,
-                        title: title,
-                        content: textContent
-                    });
-                } catch (e) {
-                    // バイナリファイルなどで読み込めない場合はスキップ
-                }
-            }
-        }
-    });
-
-    return results;
-}
-
-const searchData = scanDir('.');
-fs.writeFileSync('search.json', JSON.stringify(searchData, null, 2));
-console.log('search.json generated successfully!');
+[
+  {
+    "url": "13th_ACR.html",
+    "title": "13th Armoured Cavalry Regiment - NNPP非公式Wiki",
+    "content": "13th Armoured Cavalry Regiment - NNPP非公式Wiki NNPP非公式Wiki 13th Armoured Cavalry Regiment 📝 このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"Drawn from the finest of the 3ND's scouts and infantry, 13ACR serves as a screening and recon unit against the invaders.\" - 第3ヌービック師団の精鋭偵察兵および歩兵から選抜された13ACRは、侵略者に対する遮蔽および偵察部隊として機能する。 概要 13th Armoured Cavalry Regiment は、Noobic Stratocracyの装甲部隊である。かつて存在したNoobic Armored Corps (NAC) の代替としてゲームパス購入によりアンロック可能となったユニットであり、その導入に関してはコミュニティ内で議論を呼んだ。 任務 早期警戒および迎撃部隊としての役割を担う。主な任務は、 Bloxian Commonwealth による装甲兵器の脅威に対抗することである。NACがNaramo Nuclear Plantの作戦から撤退した後、DOEにとっての装甲戦力不足を補うために導入された。 階級 階級名 必要XP Junior Trooper 0 Trooper 10,000 Cavalry Scout 25,000 Senior Cavalry Scout 50,000 Troop Sergeant 100,000 Platoon Sergeant 150,000 Cavalry Lieutenant 300,000 装備と車両 有料チームとして、Jerico SMG、T-29 Springbolt、VT-2A1 Medium Tankなどの高火力・高機動な装備が支給される。最新のアップデートにより、VT-6 Main Battle Tankも運用可能となった。"
+  },
+  {
+    "url": "1st_Support.html",
+    "title": "1st Support & Foreign Aid (1SFA) - NNPP非公式Wiki",
+    "content": "1st Support & Foreign Aid (1SFA) - NNPP非公式Wiki NNPP非公式Wiki 1st Support & Foreign Aid (1SFA) \"Despite the name, 1SFA serves as a black operations unit of Bloxian-trained East Noobians to infiltrate and destroy the plants.\" - その名とは裏腹に、1SFAはブロキアによって訓練された東ヌービア人による非公認作戦（ブラック・オペレーション）部隊であり、プラントへの潜入と破壊を目的とする。 概要 1st Support & Foreign Aid (1SFA) は、 Bloxian Commonwealth (BFO) の隠しサブチームである。解放には、BFO（Bloxian Foreign Oversight）で 1,000,000 XP 、および 西ヌービア軍 (WNAF) で 300,000 XP に到達する必要がある極めて高度なエンドコンテンツ用チームである。 このチームを有効化しているプレイヤーは、リーダーボード上のユーザー名の横に「？」マークが表示される仕様になっている。 外見と特徴 通常のブロキア兵とは大きく異なり、ヌービア人に似た黄色の肌トーンを持つ。また、プレイヤーが装着しているRobloxアクセサリーがそのまま表示されるのが特徴である。さらに、弾帯（バンダリア）ベスト、ベルトに装着されたガスマスク、追加のポーチなどが専用装飾として付属する。 使用する制服は「5NSO（第5ヌービア特殊作戦群）」および「GSP（グランドサービスパーソネル）」のものであり、敵地への潜入や変装を目的とした部隊であることを示唆している。 任務 BFOやWNAFと同様に、ナラモ原子力発電所の機能停止・破壊が最終目標となる。また、BFOのサブチーム扱いであるため、強力な車両である XM64 や XM64A1 をスポーンさせる権限も引き継いでいる。 専用装備 ※BFOと共通のクラス固有武器は除外し、1SFAの代表的な固有装備のみを掲載。 BR-177S: BR-18Cにサプレッサーを装着したカスタムモデル。威力（ヘッドショット23 / ボディ15）や発射速度は通常版と同じだが、銃声が消音化されている。 Model 17: サブ武器として携行できる強力なハンドガン。連射速度は遅めだが、一発の威力が非常に高い（ヘッドショット53 / ボディ35）。 Advanced Hacking Device: 高度ハッキングデバイス。施設内のセキュリティ突破に使用する。 階級表 階級名 必要要件 外見の変化 Operator BFO: 1M XP & WNAF: 300k XP バンダリアベスト、ベルトのガスマスク、追加ポーチ、5NSO/GSPの衣装が解禁"
+  },
+  {
+    "url": "2nd_Noobic_Intelligence_Agency.html",
+    "title": "2nd Noobic Intelligence Agency (2NIA) - NNPP非公式Wiki",
+    "content": "2nd Noobic Intelligence Agency (2NIA) - NNPP非公式Wiki NNPP非公式Wiki 2nd Noobic Intelligence Agency (2NIA) [クラス1 ロックダウン発動中] この記事は 2nd Wiki Intelligence Agency によって編集がロックされています。 追記や内容の変更を希望する場合は、次の指示があるまで管理者へ連絡してください。 概要 2nd Noobic Intelligence Agency (2NIA) は、Noobic Stratocracyの諜報・間諜部門（スパイ機関）であり、西ヌービア（West Noobia）などの敵対国家からのデータ調達を任務としている。その極秘特性（ブラック・オペレーション）ゆえに作戦行動や関連情報は厳重に秘密指定されており、一般にはほとんど知られていない。主な任務は情報収集および対革命・対敵諜報活動（カウンター・インテリジェンス）と推測されるが、ナラモ原子力発電所ゲーム内における公式な任務や役割の詳細は謎に包まれている。 現在はモデレーターおよび開発者（8NEC/NAMS）専用のチームとなっており、モデレーターツールが付属しているため、 一般プレイヤーがこのチームに参加・入隊する方法は存在しない （極めて稀に選考・テストが開催されるとの噂もあるが、合格してもチーム自体には所属できない仕様となっている）。 外見（アピアランス） 兵装メニューから異なる外見を選択可能となっている。 Combat Appearance（戦闘服）: ゴーグルがマウントされたライオットヘルメット（防弾ヘルメット）に黒の戦闘服、タクティカルベスト、バックパックを装備。肩パッドと膝パッドには「2NIA」の刻印が入る。 Field Operations Appearance（野戦服）: バラクラバ（目出し帽）、マイク付きヘルメット、ベスト、膝パッド、ゴーグル（またはサングラス）を着用。特定の精鋭部隊にのみ支給される特殊兵器「D-23 Spectre」を携行している。 Sector Chief（部門長）: ベスト、膝パッド、肩パッドを着用。ベストには追加の無線機や各種ポーチ類が備わっており、サングラスとキャップを着用している。 階級表 ※以下はこれまでに確認された文書や目撃情報に基づくものであり、一般に公開されていない未知の階級が存在する可能性があります。 階級名 要件・対象 権限・特徴 Recruit NAMSのチームリード以上によって設定される 一時的な2NIAチームへのアクセス権。 Operative 2NIAの正式メンバー 永続的な2NIAチームへのアクセス権。 Senior Operative 2NIAのシニアメンバー 詳細不明 Field Agent NAMSゲームモデレーター 詳細不明 Sector Chief NAMSチームリーダー 他プレイヤーを一時的に2NIAチームへ割り当てる権限。 Operations Supervisor NAMSヘッドモデレーター以上 詳細不明 Agency Director (?) アクセス不可（おそらく開発者のBlaley氏用） 他プレイヤーを永続的に2NIAチームへ割り当てる権限。 装備・モデレーターツール 2NIAは連邦政府（Federal Government）と同様の特殊管理ツール一式を保有している。 Detain tool（拘束ツール）: プレイヤーを掴んで強制移動させる。 View tool（監視ツール）: 離れた場所からでも対象のプレイヤーの視点を監視する。 Warn tool / Vehicle deleter: ルール違反者への警告、および道を塞ぐ車両を強制削除するツール。 Z Card: 最高クラスのセキュリティカード。 デベロッパー専用兵器: 非常に強力な銃器である「D-23 Spectre」や「Model 117 リボルバー」が支給される。"
+  },
+  {
+    "url": "ANRO.html",
+    "title": "ANRO - NNPP非公式Wiki",
+    "content": "ANRO - NNPP非公式Wiki NNPP非公式Wiki Advanced Noobic Reactor Operations (ANRO) \"The Advanced Noobic Reactor Operations is a group of Reactor Operations who are trained to delay Naramo's impending nuclear winter.\" - ナラモに迫る核の冬を遅らせるために訓練された、原子炉オペレーターの精鋭グループ。 概要 Advanced Noobic Reactor Operations (ANRO) は、エネルギー省（Department of Energy）の契約下で、高度な原子炉管理を専門とするグループである。一般のオペレーターとは異なる専用のユニフォームを着用している。現在のChief Nuclear Officer（オーナー）はdoop931である。 加入にはオリエンテーションの受講および試験の合格が必要である。ANROはポイントシステムを採用しており、イベント、資格取得、シフトへの参加などで付与される。 階級表 区分 階級名 要件 LR Junior Reactor Operator ANROオリエンテーション合格 LR Reactor Operator タービン・ソロ資格、25ポイント、シフト2回参加 LR Senior Reactor Operator 緊急・グリッド資格、75ポイント、シフト10回参加 LR Shift Technical Advisor スーパーバイザー資格、125ポイント、シフト15回参加 MR Shift Supervisor MR申請・試用期間合格、175ポイント、シフト20回参加 MR Control Room Supervisor SU2週間・部門職1週間保持、MRO指名、250ポイント MR Field Operation Inspector 他部門での士官職保持、MRO指名 HR Command Staff HR申請合格、指名制 HR Section Chief SLによる指名 SL Deputy Director of Operations CNOまたはDoOによる指名 SL Director of Operations CNOによる指名 SL Chief Nuclear Officer 前任者からの継承 部門 Training and Qualification (TQUAL) ANROの訓練部門。試用期間を終えたインストラクターは、独立してトレーニングや資格付与セッションを開催できる。「Instructor Management」「Documentation Management」「Operations Management」の3部門で構成され、スタッフや資料の管理を行う。 サブ部門：NIRU"
+  },
+  {
+    "url": "Bloxian.html",
+    "title": "Bloxian Commonwealth (BFO) - NNPP非公式Wiki",
+    "content": "Bloxian Commonwealth (BFO) - NNPP非公式Wiki NNPP非公式Wiki Bloxian Commonwealth (BFO) \"Supporting its puppet state of West Noobia, the Bloxian Commonwealth serves as the spearhead of the assault into Naramo.\" - 傀儡国家である西ヌービアを支援し、ナラモへの強襲の先鋒を務める。 概要 Bloxian Commonwealth (BFO) は、ゲームパス（2,500 Robux）で参加可能なチームである。西ヌービアを傀儡国家として利用し、ナラモの資源獲得を狙っている。精鋭兵を「軍事オブザーバー」として派遣しており、非常に強力な火力を有する。 BFO XP 100万および西ヌービア XP 30万に到達することで、隠しチームである「1st Support and Foreign Aid」が解放される。 任務 西ヌービア (WN) と協力し、プラントの機能停止を目的として戦闘を行う。FRRを装備している間はカメラスキャンでマークされないという特性を持つ。 階級表 階級名 要件 主な解禁要素 Support Operative ゲームパス BR-18A2, M80 Support Specialist 25,000 XP PMV Scout, BR-18C Fireteam Leader 50,000 XP AMR APC Squad Leader 100,000 XP - Field Advisor 150,000 XP - Military Attache 300,000 XP XM64A1 装備・車両 専用の高性能武器に加え、西ヌービアの武器（BR-10, BR-18, B63等）を初期からXP制限なしで使用可能。多種多様な車両を保有しており、 レイド において圧倒的な優位性を持つ。 ※ただし、Model 17、M53 CCS、M52 APC \"Garbage\" は使用不可。 豆知識 BFO内で、使用車両（RM-5, XM-3, RM-3）の性能比較について三つの派閥（論争）が存在する。"
+  },
+  {
+    "url": "CSO.html",
+    "title": "Chief Supply Officer (CSO) - NNPP非公式Wiki",
+    "content": "Chief Supply Officer (CSO) - NNPP非公式Wiki NNPP非公式Wiki Chief Supply Officer (CSO) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"The Chief Supply Officer is responsible for managing and directing all logistical efforts. Their task is to make sure the power plant is fully supplied at all times.\" - ロジスティクス業務全般の管理・指揮を担う。プラントに常に十分な物資が供給されている状態を維持する責任がある。 概要 Chief Supply Officer (CSO) は、 Logistical Operations (LO) 部門を統括する職位である。到達には600,000 XPが必要であり、サーバー内で1名のみに制限されている。 通常のLOの能力に加え、ロジスティクスチームに対して具体的な指示を出し、業務の優先順位を設定する権限を持つ。優先対象の物資を配送したプレイヤーには、30%のXPボーナスが付与される。 権限・能力 Broadcast: 全てのLO労働者に対し、グローバルメッセージを送信できる。 Prioritize task: 以下のタスクを優先設定し、達成時のXPを30%増加させる。 施設内部の再備蓄 物資の配送 原子炉燃料棒の配送 Executive Radio: 専用の無線機器を使用し、「Rally」「Redirect」「Resupply」「Proximity danger」などのマーカーを設置できる。"
+  },
+  {
+    "url": "Civilians.html",
+    "title": "Civilians - NNPP非公式Wiki",
+    "content": "Civilians - NNPP非公式Wiki NNPP非公式Wiki Civilians \"Civilians of the nearby town, able to tour the plant when management of the plant allow.\" - 近隣の町の市民。プラント管理者の許可があれば施設を見学できる。 概要 Civilians は、市の中心部（市庁舎前や公園付近）にスポーンする最も基本的なチームである。主に市内やプラント周辺を自由に探索することが可能。 施設内へ立ち入るには、 Plant Security または Local Military Police (NMP) による認可（Authorization）が必要となる。許可なく侵入した場合、職員から攻撃を受ける可能性がある。なお、認可を受けるとインベントリ内の武器はすべて消去される。 任務・行動 明確な任務はなく、街を散策したり他者と交流したりすることが主な目的である。また、DX-21武器パスを所有している場合はDX-21を使用できるが、使用すると指名手配（Wanted）状態になる。 階級表 階級名 必要XP 外装 Civilian 0 自身のRobloxアバター 装備 初期装備は特になし。ただし、DX-21を付与されるゲームパスを所有している場合はDX-21が付与される。"
+  },
+  {
+    "url": "Corporate.html",
+    "title": "Corporate - NNPP非公式Wiki",
+    "content": "Corporate - NNPP非公式Wiki NNPP非公式Wiki Corporate \"Maintains surveillance across the plant, operates public tours, and carries authority to lockdown the plant.\" - プラント全域の監視、一般向けツアーの運営を行い、プラントのロックダウン権限を有する。 概要 Corporate は、 Plant Director の補佐を行う部門である。施設の維持管理の監督、ロックダウンの実施、方針の策定、一般市民へのツアー運営などが主な業務である。 権限・能力 レベル3 ロックダウン の開始 貨物列車の要請 企業会議への出席（会議のクールダウンをスキップ可能） カメラ の監視 民間人に対するツアーの許可 解放条件 Shift Manager にて30,000 XPに到達、またはゲームパスを800 Robuxで購入。 階級表 階級名 必要XP 主な解禁要素 Unpaid Intern 0 BrikTek Gladiator Paid-With-Experience Intern 10,000 - Slightly-Paid Intern 20,000 - Junior Associate 30,000 - Associate 50,000 Leroy Large Yellow Bus Personal Secretary 60,000 - Secretary 70,000 - Assistant to the Regional Manager 75,000 - Regional Manager to the Assistant Manager 80,000 - Assistant Manager 100,000 - Manager 150,000 BrikTek Gladiator Red Senior Management 200,000 - Board of Directors 250,000 BrikTek Gladiator Silver Department of Energy Executive 600,000 BrikTek Gladiator Blue / カスタマイズの制限解除 豆知識 Corporateは「知識の共有」を掲げているが、批判的な言動をとった者は給与減額や調査の対象になるという噂がある。 企業方針は「L.I.V.E」。 「Regional Manager to the Assistant Manager」は、ナラモで最も長い階級名である。"
+  },
+  {
+    "url": "DOE_Exec.html",
+    "title": "Department of Energy Executive (DOEE) - NNPP非公式Wiki",
+    "content": "Department of Energy Executive (DOEE) - NNPP非公式Wiki NNPP非公式Wiki Department of Energy Executive (DOEE) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 概要 Department of Energy Executive (DOEE) は、 Corporate チームにおける最高職位（Plant Executive）である。600,000 XPに到達することで解放され、プラントの防衛や運営を補助するための特別な権限を行使できる。サーバー内で同時に存在できるのは1名のみである。 権限・能力 通常のCorporate能力に加え、プラント防衛のための強力な「Act（法案/令）」を発動できる。一つのActを発動すると、他のActには20分間のクールダウンが発生する。 Exigent Circumstances Act: 非戦闘員のDoEメンバーにCMP-44を支給する。レイダーとDoEの比率に応じてクールダウンが動的に変動する。 Enhanced Security Act: Plant Security に強力な対戦車兵器とSV-1のスポーン権限を付与する。（クールダウン：20分） Reinforced Supplies Act: Logistical Operations に対し、装甲強化されたHTVの使用を許可する。（クールダウン：20分） Team Announcement: Corporateチーム内のみに表示されるアナウンスを作成可能。 専用装備・車両 BrikTek Gladiator（ブルーバリアント）への独占アクセス権。"
+  },
+  {
+    "url": "Director_of_Security.html",
+    "title": "Director of Security Forces - NNPP非公式Wiki",
+    "content": "Director of Security Forces - NNPP非公式Wiki NNPP非公式Wiki Director of Security Forces このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"The Director of Security Forces is responsible for keeping the plant secure. They direct and manage all security forces around the plant to accomplish this.\" - 警備隊長はプラントの安全維持を担当する。その目的達成のため、プラント周辺の全警備部隊を指揮・管理する。 概要 Director of Security Forces は、 Plant Security チームの Plant Executive である。600,000 XPに到達することで解放され、プラントの警備部隊を組織的に統率するための能力が付与される。 能力 警備部隊の調整役として、以下の能力を行使できる。 Patrol Orders (パトロール命令): 警備隊員を指定の地点へ誘導する。命令に従った隊員は追加の経験値を得る。 Team Announcement (チーム全体アナウンス): Plant Securityチームのメンバー全員に対してメッセージを送信する。 ギャラリー 警備隊長の服装 [画像：1.png] 参照 https://i.imgur.com/6uPS9ke.png"
+  },
+  {
+    "url": "FMDF.html",
+    "title": "Federal Maritime Defense Force (FMDF) - NNPP非公式Wiki",
+    "content": "Federal Maritime Defense Force (FMDF) - NNPP非公式Wiki NNPP非公式Wiki Federal Maritime Defense Force (FMDF) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求めされています。 \"FMDF MEU Marines serves as the frontline force during the invasion of Naramo, operating as part of an expeditionary force.\" - 遠征部隊の一部として運用され、ナラモ侵攻において前線部隊として機能するFMDF MEU海兵隊。 概要 Federal Maritime Defense Force (FMDF) は、海洋戦をベースにした 西ヌービア (WNAF) のサブチームである。ゲームパス（275 Robux）を購入することで参加可能であり、ゲームパス専用の戦闘員チームとしては最も安価に設定されている。 特典・車両スポナー FMDFに参加すると、新しい青いユニフォームが支給されるほか、2つの車両スポナーへのアクセス権が与えられる。 第1スポナー（クールダウン：1分）: WNAF標準のM41 UtilityやM52 APCに加え、LVT-A1 (WN)、M41 Anti-Air (FMDF)、M52A2 APCをスポーン可能。 第2スポナー（クールダウン：5分）: LVT-A1 (WN) を直接スポーン可能。 クラスユニフォーム（旧仕様） ※現在は仕様が変更されている可能性があるが、以前はランクではなく選択したクラス（兵科）によってユニフォームが変化していた。 クラス 特徴・当時の分類 Rifleman 標準ユニフォーム Heavy 重装兵ユニフォーム Scout 斥候兵ユニフォーム Anti-Tank 対戦車兵ユニフォーム Heavy Anti-Tank 重対戦車兵ユニフォーム Ranged 遠距離兵ユニフォーム"
+  },
+  {
+    "url": "FRR.html",
+    "title": "Federal Ranger Regiment (FRR) - NNPP非公式Wiki",
+    "content": "Federal Ranger Regiment (FRR) - NNPP非公式Wiki NNPP非公式Wiki Federal Ranger Regiment (FRR) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"The Rangers are the West Noobian's premier special operations force responsible for reconnaissance and direct action.\" - 偵察および直接行動を担当する、西ヌービア最高峰の特殊作戦部隊。 概要 Federal Ranger Regiment (FRR) は、ステルス、偵察、潜入に特化した 西ヌービア のチームである。ゲームパス（700 Robux）を購入することで参加可能となる。 特典・能力 レンジャーのメンバーには専用の黒いユニフォームが支給され、強力な固有の能力や装備が解禁される。 ステルス特性: レンジャーは カメラスキャンによって検出されない 。また、このゲームパスを所有していると、通常のWNAF、FMDF、BFOチームでプレイしている間もこのステルス効果が共有される。 専用装備: 施設への潜入用に「Q-Card」、および「WN Hacking Device」「Advanced Hacking Device」があらかじめ支給される。 車両スポナー: 2つの専用スポナーにアクセス可能。 第1スポナー: Captured LLMV、Captured Security Car、Sedan（セダン） 第2スポナー（クールダウン：5分）: Armored LLMV、Armored Captured Security Car、ミニガン搭載型の PMV-G 階級表 階級名 必要XP 主な固有装備・車両 Candidate 0 XP Weston Ranger, Advanced Hacking Device, Captured LLMV, Captured Security Car, Sedan Junior Ranger 10,000 XP + Armored Security Car Federal Ranger 25,000 XP + Armored LLMV Senior Federal Ranger 50,000 XP + T-3 Suppressed（消音型T-3） Veteran Ranger 100,000 XP + PMV-G Chalk Leader 200,000 XP - Field Major 300,000 XP + M19 Suppressed（消音型M19）"
+  },
+  {
+    "url": "GSP.html",
+    "title": "Ground Service Personnel - NNPP非公式Wiki",
+    "content": "Ground Service Personnel - NNPP非公式Wiki NNPP非公式Wiki Ground Service Personnel (GSP) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"Frontline soldiers of the Stratocracy's 3rd and 2nd Noobic Divisions. Assigned to Naramo after WNDF & Bloxian presence.\" - ストラトクラシー第3および第2ヌービック師団の前線兵士。WNDFおよびBloxianの存在を受けてNaramoに配属された。 概要 概要 Ground Service Personnel (GSP) は、連邦軍の基幹となる部隊である。主要なサブユニットには 13th Armored Cavaly Regiment 、 、 SOC が含まれる。 MED: GSPで50,000 XPに到達することで解放される。 Local Military Police: GSPで300,000 XPに到達することで解放される。 SOC: LMP、MED、GSPの全階級を完遂することで解放される。 任務とXP獲得方法 GSPはプラント警備の要であり、 West Noobian の襲撃に対する最前線の防衛部隊として機能する。また、 Logistical Operations が市内から物資を調達する際の警備も担当する。 XP獲得方法: 待機地点 (Circles): 制御室外、冷却室、メインチェックポイントの各地点で「待機状態」になると30秒ごとに5 XPを獲得できる。 車両追跡: LOトラックを車両で追跡すると30秒ごとに10 XPを獲得できる。 戦闘貢献: WNを撃破するごとに30 XP、双眼鏡でWNを発見するごとに30 XPを獲得できる。 階級表（Current Uniform） 階級名 必要XP 2nd (Reserve) Division, Enlisted 0 2nd (Reserve) Division, Senior Inf 5,000 2nd (Reserve) Division, Corporal 12,000 2nd (Reserve) Division, Squad Sergeant 25,000 3rd Division, Infantryman 40,000 3rd Division, Senior Inf. 60,000 3rd Division, Corporal 100,000 3rd Division, Squad Sergeant 120,000 3rd Division, Platoon Sergeant 200,000 3rd Division, Lieutenant 250,000 3rd Division, Captain 300,000 3rd Division, Colonel 500,000"
+  },
+  {
+    "url": "Incarcerated.html",
+    "title": "Incarcerated (刑務所/収監) - NNPP非公式Wiki",
+    "content": "Incarcerated (刑務所/収監) - NNPP非公式Wiki NNPP非公式Wiki Incarcerated (収監) 概要 プレイヤーが指名手配（ Wanted ）状態になり、 LMP または NMP に逮捕されると、刑務所に収監（ Incarcerated ）される。また、民間人スポーン付近にある交番（ Policebox ）を利用して自首するか、指名手配中にゲームを抜けて再参加することでも収監されるが、自首した場合は刑期が 50%短縮 される。 警告（Warning）の対象となる行為 認可（Authorized）済み、あるいは非武装の民間人（Civilian）を殺害する 民間人として銃器（DX-21）を使用し他者を殺害する 民間人としてM40無反動砲を使用する 民間人として運転が許可されていない車両を窃盗する NMPメンバーからゲーム内ルール違反として手動で警告を受ける ※民間人が無認可でプラントに侵入した場合は、警告（Warning）の対象にはならない（ただし職員から攻撃を受ける）。 一度「犯罪」を行うとMPから警告を受け、2回目の犯罪で指名手配（Wanted）状態になる。指名手配時の基本刑期は2分間で、警告が増えるごとに刑期が加算され、最大で30分まで延びる。 罪と罰（刑期表） 刑期 条件 1:00 警告1回の状態で 自首（Surrendering） した場合 2:00 警告1回の状態で 手錠（Handcuffs）で逮捕 された場合 7:30 自首した場合の最大刑期 15:00 逮捕された場合の最大刑期 逮捕後の流れ 逮捕、あるいは自首が成立すると、自動的にプラント内の「Zone D」にある刑務所にテレポートされ、刑期が満了するまで待つ必要がある。出所後は自動的に民間人（Civilian）チームに戻される。 階級 階級名 必要XP 外見 Prisoner 0 プレイヤー自身のデフォルトアバター"
+  },
+  {
+    "url": "LMP.html",
+    "title": "Local Military Police - NNPP非公式Wiki",
+    "content": "Local Military Police - NNPP非公式Wiki NNPP非公式Wiki Local Military Police (LMP) \"Naramo District MPs stationed under the auspices of the Civil Service, LMPs are responsible for civilian policing and arrests.\" — Game Description Local Military Police (LMP) は、民間の治安維持を目的とした軍事警察ユニットである。Noobic Military Police (NMP) よりも権限が制限されており、手配されていないプレイヤーを逮捕することはできない。獲得条件は、 Ground Service Personnel で300,000 XPに達するか、ゲームパスの購入が必要である。 主な任務 指名手配者の逮捕 NMPの支援 施設の重要エリアの防衛 施設内外の法と秩序の維持 階級表（Current Uniform） 階級名 必要XP 外見上の特徴 Police Trainee 0 デフォルト Junior Police Officer 3,000 - Police Officer 10,000 - Senior Police Officer 25,000 PASGT LMP Green LMP Supervisor 50,000 PASGT LMP CAMO Duty Sergeant 100,000 LMP Patrol Jeep LMP Lieutenant 200,000 ラジオ、バイザー等 LMP Shift Commander 300,000 Model 17 装備・車両 ツール: D-19, DX-21, A-Card, Taser, Handcuffs, Metal Detector, Authorize, Lantern。 車両: Police Cruiser, Sheriff Cruiser, LMP Cruiser, LMP LLUV, LMP Patrol Jeep。 特殊能力 手錠を装備中に「P」キーを押すことで、近くの指名手配者をスキャンし、赤点として表示できる。なお、Plant Directorによって解雇される可能性があるが、彼らが手配されている場合は逮捕が可能である。 よくある誤解: LMPは「West Noobian」をスタン（Taser）することはできない。また、LMPは経験値が獲得できるポイントに留まったり逮捕することではXPを獲得できない。"
+  },
+  {
+    "url": "LO.html",
+    "title": "Logistical Operations (LO) - NNPP非公式Wiki",
+    "content": "Logistical Operations (LO) - NNPP非公式Wiki NNPP非公式Wiki Logistical Operations (LO) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"Keeps the plant working like clockwork. Deliver supplies from the factory to the plant in armoured transports.\" - 工場からプラントへ物資を運び、プラントの時計仕掛けのような稼働を支える。 概要 Logistical Operations (LO) は、車両を駆使してプラント内外へ物資を配送する部門である。原子炉燃料棒、ディーゼル燃料、Bloxy Colaなどの供給を担い、プラントの稼働を維持するための重要な役割を果たす。 解放条件 Plant Maintenance で8,000 XPに到達 または、ゲームパスを200 Robuxで購入 階級表 階級名 必要XP 特記事項 Intern 0 デフォルト装備 Driver 1,000 - Supplier 3,000 - Experienced 7,500 - Manager 10,000 B-Keycard Assistant Supply Officer 50,000 A-Keycard Chief Supply Officer 600,000 専用の外装（50万XPで解禁） 任務遂行方法 核燃料棒 (Nuclear Fuel Rods) 「M41 DOE Nuclear」トラックをスポーンさせ、市内工場へ向かう。 工場内の黄色い枠内に停車し、壁の赤いボタンを押して燃料棒を積み込む。 プラントへ戻り、左側のトンネルを通過して原子炉室へ向かう。 トラックをクレーン下へ停め、燃料棒をクレーンにフックする。 供給物資 (Supply Crates) 工場の第二エリアまたはLOバイパスの貨物列車から集積する。 対象の車両（M41 DOE SupplyやHTVを推奨）でコンベアへ向かう。 コンベア/列車上の木箱をクリックして取得し、トラック内の透明な枠に配置する。 プラントの空コンベアエリアで木箱をクリックして荷下ろしを行う。 Bloxy Cola & 燃料 「DOE Supply Tug」をスポーンさせる。 スポーン地点付近のコンベアから、アイテムを回収してTugに積み込む。 プラント内の所定の棚に補充する（Tugはプラント内への立ち入りが許可されている唯一の車両である）。"
+  },
+  {
+    "url": "NES.html",
+    "title": "Noobic Engineering Service (NES) - NNPP非公式Wiki",
+    "content": "Noobic Engineering Service (NES) - NNPP非公式Wiki NNPP非公式Wiki Noobic Engineering Service (NES) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"SAFETY SERVICE REPAIR\" - 安全・奉仕・修理 概要 Noobic Engineering Service (NES) は、Plant Maintenance、メンテナンス作業員、修理技術者で構成される組織である。NNPPの最高水準の維持管理を目的とし、Zone B（メンテナンスエリア）およびプラント外部の変圧器を管理する。現在のEngineering Chairwomanはthywickedoneである。 所属にはオリエンテーションおよび試験の合格が必要である。NESにおいて「Engineer」以上の階級を有する者は、最高ランクに到達せずとも発電機を停止させる権限が付与される。 階級表 階級区分 階級名 要件 Low Rank (LR) Engineering Intern (EI) NESオリエンテーションの合格 Low Rank (LR) Junior Engineer (JE) 30ポイント、Engineering Qualificationの取得 Low Rank (LR) Engineer (E) 60ポイント、計2つのアワード/実績の取得 Low Rank (LR) Technical Engineer (TE) 100ポイント、計3つのアワード/実績の取得 Low Rank (LR) Senior Engineer (SE) 160ポイント、計4つのアワード/実績の取得 Low Rank (LR) Specialist Engineer (SPCE) MR+からの選出および推薦 Low Rank (LR) Staff Engineering Intern (SEI) MR申請合格後の選出 Middle Rank (MR) Staff Engineer (STE) SEIとしての試用期間の完了 Middle Rank (MR) Senior Staff Engineer (SSE) ホスト資格の取得、200ポイント以上の獲得で昇格検討 Middle Rank (MR) Staff Engineering Supervisor (SES) 300ポイント以上の獲得で昇格検討 High Rank (HR) Staff Engineering Officer (SEO) MRからの選出、HRの過半数合意および試用期間の完了 High Rank (HR) Senior Engineering Officer (SREO) CEOおよびHigh Commandの過半数による承認 High Rank (HR) Chief Engineering Officer (CEO) High Commandによる選出 High Command (HC) Engineering Executives (ExE) High Commandチームによる選出 High Command (HC) Engineering Secretary (ES) ECによる選出 High Command (HC) Engineering Chairman (EC) NESリーダー (thywickedone)"
+  },
+  {
+    "url": "NMP.html",
+    "title": "Noobic Military Police - NNPP非公式Wiki",
+    "content": "Noobic Military Police - NNPP非公式Wiki NNPP非公式Wiki Noobic Military Police (NMP) \"This unit houses all local Military Police for the Naramo area and other relevant Interior Service personnel.\" — Game Description Noobic Military Police (NMP) は、Noobic Stratocracyの指定軍事警察であり、Naramo原子力発電所内にステーションを構えている。公式派閥（Official Faction）であり、入隊には申請および士官学校（Cadet Academy）の修了が必須である。 任務 全てのDOE（エネルギー省）および戦闘要員（Combatant Personnel）の規律を監視・維持し、施設周辺の秩序と平和を守ることを主目的とする。 ※NMPはNAMSと同等の権限は保持していない。 階級と要件 階級 昇進要件 Patrol Cadet 申請合格（隔週金曜開示） Junior Patrol Officer オリエンテーション＋ユニットパトロール3回＋最終試験合格 Patrol Officer 100ポイント＋Junior Patrol Officerで1週間勤務 Senior Patrol Officer 200ポイント＋Patrol Officerで1週間勤務 Field Patrol Officer 300ポイント＋SPOとして1週間勤務 Lead Patrol Officer 400ポイント＋FPOとして2週間勤務 Patrol Specialist 指名制（2ヶ月以上の勤務必須） Patrol Corporal Junior NCOアプリケーション合格 Patrol Sergeant Junior Leadershipプログラム合格 Lieutenant以上 Chief of Police等による指名制 装備・ツール ツール 概要 Handcuffs 指名手配者を拘束。「P」キーで赤点表示。 Taser 手配者を麻痺させる。 Warning Clipboard 不正行為への警告用（2回で手配）。 Authorize Clipboard 民間人の認可/許可取り消し用。 Vehicle Deleter 道路閉塞車両の削除用。 士官学校（Cadet Academy） 候補生（Patrol Cadet）は、最終試験に向けて以下のフェーズを経て教育を受ける。 Phase 1: オリエンテーション 基本ルール、ツールの使い方、イベント、階級制度の学習。 Phase 2: パトロール ユニットパトロール3回およびシャドウパトロール1回の実施。 Phase 3: 最終試験 20分間の筆記試験（合格まで1回のみ）。合格でJunior Patrol Officerへ昇進。 ポイントシステム NMPは独自のポイント制を採用している。 Solo Patrol: 1pt/30分 (最大4pt) Unit Patrol: 3pt Shift Guarding: 2pt Joint Event: 5pt"
+  },
+  {
+    "url": "Naval_Service_Personnel.html",
+    "title": "Naval Service Personnel (NSP) - NNPP非公式Wiki",
+    "content": "Naval Service Personnel (NSP) - NNPP非公式Wiki NNPP非公式Wiki Naval Service Personnel (NSP) \"A detachment of the 1st Naval Fleet is stationed at the port's naval installation, supported by the Naval Aerial Corps and a small Marine contingent.\" - 第1海軍艦隊の分遣隊が港の海軍施設に駐留しており、海軍航空隊と小規模な海兵隊部隊によって支援されている。 概要 Naval Service Personnel (NSP) は、「East Noobian Marines」としても知られるNoobic Stratocracyの海軍・海兵隊チームである。西ヌービアの Federal Maritime Defense Force (FMDF) とはほぼ対極に位置する存在と言える。 かつては第1ヌービア艦隊（1st Noobic Fleet）の乗組員がアクセスできたが、現在はその特権が廃止され、ナラモの 品質保証（Quality Assurance: QA）チームのメンバーのみ に制限されている。 任務・特徴 主な任務はプラントへの侵入経路（進入点）の警備、および Ground Service Personnel (GSP) や Plant Security と協力した施設全体の防御支援である。 チョークポイント防衛: 装備されている水陸両用戦車 LVT（Landing Vehicles: Tracked） は通常の車載機関銃（C-18等）の攻撃を無効化できるため、狭い通路や開けたエリアの防衛において極めて高い能力を発揮する。 弱点と制限: NSPが保有するLVT-A1やLVTはロケット弾に対して非常に脆弱であり、一撃で破壊される可能性がある。また、GSPと比較すると武器のバリエーションがやや少なく、シチュエーションに応じた戦術の柔軟性という点では制限を受ける。 階級表 階級名 要件・条件 解禁要素・装備 Guest (2026年5月以降) Quality Assurance（QA）テスターであること LVT-A1, LVT, LLUV (T) (2ND), LLUV, M41 Utility (2ND), MTV-2 Enlistee (旧仕様) Noobic Stratocracyの基本訓練（Basic Training）に合格し、通信（comms）に参加 LVT-A2, LVT、およびGSPが獲得できるすべての装備 Crewman (旧仕様) 第1ヌービア艦隊（1st Noobic Fleet）での初期海上訓練を修了 - Able Crewman (旧仕様) 第1ヌービア艦隊でのアクティブな活動 - Senior Crewman (旧仕様) 第1ヌービア艦隊でのアクティブな活動 -"
+  },
+  {
+    "url": "Noobic_Stratocracy.html",
+    "title": "Noobic Stratocracy (NS) - NNPP非公式Wiki",
+    "content": "Noobic Stratocracy (NS) - NNPP非公式Wiki NNPP非公式Wiki Noobic Stratocracy (NS) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 概要 Noobic Stratocracy (NS) は、ナラモ市（Naramo City）およびナラモ原子力発電所が位置する国家であり、ゲームの舞台や世界観（ロア）の中心となる存在である。 2025年11月以前、NSはRoblox上のMilSim（ミリタリーシミュレーター）グループであり、ナラモのゲーム自体を所有していた。当時、ほとんどのチームはグループ内の特定派閥に限定されており、入隊には試験や申請、あるいは膨大なXPが必要だった。 しかし2025年11月、開発方針の不一致から、8NEC（Civil Service Personnel）の上層部とNSの間で「分離（The Split）」と呼ばれる合意が行われた。8NEC側はナラモを一般向けの公開ゲームに移行させたかったのに対し、NS側はグループ専用のレイドマップとして維持することを望んだためである。最終的に、8NECがNSに300万Robuxと全てのレイドマップおよびアセットを提供し、引き換えにNSはナラモのゲーム化権と今後の開発・設定アセットへのアクセス権を譲渡した。 この分離により、当時運用されていた多くの旧チームはアクセス不可になるか、大規模なリニューアルを経て一般公開、あるいは特定の役職専用チームへと置き換わることとなった。 新旧部隊・チーム対応表 元のチーム（旧NS） 概要 現在の置き換え・移行先 Noobic Armored Corps 戦車や重装備を保有するNS専用チーム。 13th Armoured Cavalry Regiment Ground Service Medical Corps 救急車や回復装備を持つNS専用の医療チーム。 Ground Service Field Medics 5th Noobic Special Operations 無反動砲（M40）搭載ジープなどの専用装備を持つ、選りすぐりの戦闘員で構成された精鋭部隊。 Special Operations Command Stratocratic Military Police 訓練や戦場での規律を監視する憲兵隊。用途に合わせて複数の部門が存在した。 Noobic Military Police (NMP) 1st, 2nd, &amp; 3rd Noobic Divisions NS地上軍の最大派閥。NS所属メンバーと一般（予備役）プレイヤーの混成。 Ground Service Personnel (GSP) Noobic Naval Aerial Corps 現在は削除されたヘリコプターやLVTを装備していた専用航空・海軍部門。 置き換えなし（QAテスター専用チーム「 Naval Service Personnel 」へ移行） 2nd Noobic Intelligence Agency 作戦の安全確保や国内外の情報収集を担当した専用軍事情報機関。 置き換えなし（モデレーター＆開発者専用チーム「 2nd Noobic Intelligence Agency 」へ移行）"
+  },
+  {
+    "url": "POC.html",
+    "title": "Plant Operations Chief (POC) - NNPP非公式Wiki",
+    "content": "Plant Operations Chief (POC) - NNPP非公式Wiki NNPP非公式Wiki Plant Operations Chief (POC) \"The Plant Operations Chief is tasked with managing all maintenance operations within the plant to keep the reactor operating at maximum efficiency.\" - プラント内の全メンテナンス業務を管理し、原子炉を最大限の効率で稼働させる責任を負う。 概要 Plant Operations Chief (POC) は、 Plant Maintenance 部門を統括する職位である。非常に高い経験値が求められるやり込み要素の強い役職であり、サーバー内で1名のみに制限されている。 権限・能力 通常のメンテナンススタッフとしての能力に加え、以下の特権を持つ。 優先エリアの設定: Feedwater、Turbines、Generators、Pipes、Junction boxes (カメラボックス)、通信塔を優先エリアとして指定可能。 XPブースト: 指定したエリア内の機器を修理したスタッフに対し、30%のXPボーナスを付与できる。 Executive Radio: 専用無線を使用し、懸念地点や支援が必要な場所へマーカーを設置できる。 アナウンス機能: プラント全体へメッセージを送信できる。"
+  },
+  {
+    "url": "PSD.html",
+    "title": "Personal Security Detachment - NNPP非公式Wiki",
+    "content": "Personal Security Detachment - NNPP非公式Wiki NNPP非公式Wiki Personal Security Detachment (PSD) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"PSD serves to exclusively defend key Department of Energy executives, Naramo's Plant Director, and personnel deemed vital to the operation of the Stratocracy's jewel of the North.\" - PSDは、DOEの主要幹部、プラント責任者、および施設運営に不可欠とみなされる人員を専属的に防衛する役割を担う。 概要 Personal Security Detachment (PSD) は、 Tactical Response Team (TRT) のサブユニットであり、エリート警備チームである。専用装備としてサプレッサー付きのJerico SMG-Sが支給されるほか、TRTの全武器も使用可能である。 解放条件: Tactical Response Team で1,500,000 XP、かつ Plant Security で500,000 XPが必要。 車両 専用車両として PSD Cruiser および Armoured Limo へのアクセス権が付与される。これらは汎用スポーン地点から呼び出し可能である。 階級 階級名 必要XP 制服 Agent 2,000,000 XP PSD-Dark 豆知識 PSDのスポーン地点は、通常のTRTスポーンではなく管理棟の「Compliance & Productivity room」である。また、手動でCCTV（監視カメラ）を使用する権限を持つ。 TRTの全装飾品が使用可能であり、独自の装飾品と組み合わせて幅広いカスタマイズができる。 Dev Rank（開発者ランク）として「Support Agent」という役職が存在する。"
+  },
+  {
+    "url": "Plant_Director.html",
+    "title": "Plant Director (PD) - NNPP非公式Wiki",
+    "content": "Plant Director (PD) - NNPP非公式Wiki NNPP非公式Wiki Plant Director (PD) \"Plant Directors serve as the face of the Power Plant, and are in-charge of all operations within NNPP.\" - プラントの顔であり、NNPP内の全オペレーションを統括する。 概要 Plant Director (PD) は、エネルギー省 (DoE) の最終チームである。サーバー内で1名のみに制限されており、一般プレイヤーの中では最高権限を持つ存在として扱われる。スポーン地点は管理複合施設 (Administrative Complex) である。 権限・能力 レベル2 ロックダウン の開始 カメラ スキャンの実行 DoEおよびGSP職員の解雇（5分間） 企業会議の招集および プラント方針 の投票 ナラモ内でのアナウンス機能 ※PDによる解雇は、SMによるものと異なり、対象をすべてのDoEおよびNSチームから除名し、民間人 (Civilian) にする効果がある。なお、 NMP 職員には解雇に対する完全な免責が与えられている。 解放条件 Corporate にて6,000 XPに到達することで解放される。 階級表 階級名 要件 Executive Director PD昇格に必要なチーム全てのXPを、次ランク到達値まで保有している Director ゲームパス購入者、または昇格条件を満たしていない場合 装備 Q-card、Model 17、懐中電灯、クリップボード アドバイス Bloxy Colaの禁止は厳禁： これを行うとDoEやGSPスタッフによる暴動を誘発する可能性がある。Bloxy Colaはメルトダウン時のROチームの生存・原子炉救済にも役立つ。 アナウンス機能は、過度に使用すると周囲に不快感を与える可能性があるため、最小限の使用に留めること。"
+  },
+  {
+    "url": "Plant_Maintenance.html",
+    "title": "Plant Maintenance - NNPP非公式Wiki",
+    "content": "Plant Maintenance - NNPP非公式Wiki NNPP非公式Wiki Plant Maintenance (PM) このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"The backbone of the plant. Maintenance staff repairs infrastructure and handles supplies delivered by Logistics.\" - プラントの背骨。メンテナンススタッフはインフラを修理し、ロジスティクスによって配送された物資を扱う。 概要 Plant Maintenance (PM) は、プラントの維持管理を専門とするチームである。発電設備やインフラの修理を行い、正常な稼働を支える。修理対象となる主要設備には以下のものがある。 Feedwater: FW Emergency Diesel Generators: EDG / Ges Turbines: Turbs / Turbines / TB External Transformers: Ext / External (Power Bus Panelの維持に不可欠であり、WNの破壊対象となる) Comms Box: Comms (無線通信システムを司る。PMが4名以上の場合、WNの破壊対象となる) Pipes: 施設内に点在する配管。破壊されると放射性物質を噴出し、接近したプレイヤーにダメージを与える。 階級表 階級名 必要XP 装備・特記事項 Intern 0 D-Keycard Junior Technician 500 - Technician 2,000 - Senior Technician 4,000 - Supervisor 7,500 - Head Technician 25,000 B-Keycard Plant Operations Manager 100,000 A-Keycard / 発電機の停止権限 Plant Operations Chief 600,000 エグゼクティブアクセス 任務遂行方法 機器の修理: レンチを装備して故障箇所をクリックし、ミニゲームを行う。QとEを適切なタイミングで押すことで効率的に修理できる。修理ごとに約150 XPの報酬を得る。 発電機の給油: ジェリカンを入手し、発電機右側の給油口に合わせて補充する。 送電網の管理: Power Bus Panel を参照。 原子炉の燃料補給: サーバー内のPM人数が4名以下の場合はReactor Operationsがクレーンを操作可能。通常時はPMがクレーンを操作し、Reactor Operationsが指示に従い燃料棒を交換する。 新任PMへのアドバイス Coolant Roomの冷却装置は常に稼働させておくこと。 発電機は上級者や Reactor Operations の指示を待ってから起動すること。 修理場所の特定にはレンチを使い、慣れないうちは Maps ページを活用すること。"
+  },
+  {
+    "url": "Plant_Security.html",
+    "title": "Plant Security - NNPP非公式Wiki",
+    "content": "Plant Security - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia Plant Security \"DoE Security Forces (SECFOR) is responsible for checkpoint operations and interior security of the Naramo Power Plant.\" — DoE Security Forces (SECFOR) は、ナラモ発電所における検問所業務および施設内部の警備を担当している。 概要 Plant Security は、NNPPにおける初期役割の一つである。この役割を進めるめることで、30,000 XPで Tactical Response Team 、50,000 XPで Ground Service Personnel が解放される。Senior Guard以上になると、民間人の施設立ち入りを許可する権限が付与される。 階級 階級名 必要XP 装備 Junior Watchman 0 Weston SMG, M19, Ammo Box, Security Car Watchman 3,000 CMP-44 Probationary Guard 5,000 CMP-44 Junior Guard 7,000 CMP-44 Guard 10,000 T-42 Matchbox Senior Guard 12,000 D-19 STAR, PAT-1 Shift Assistant 25,000 DX-21 Shift Lead 50,000 C-11, Falkenkruez Security Sergeant 75,000 M-24, Security Car Security First Sergeant 100,000 PN-1P Transport Security Lieutenant 150,000 Security Car (Reinforced) Security Captain 200,000 - Security Commander 300,000 Keycards (A-Card) Director of Security Forces 600,000 Executive Radio 任務内容 主な任務は、West Noobianによる原子炉破壊を阻止することである。マップ上の指定ポイント（チェックポイント、制御室、発電機、冷却室）で待機することで、30秒ごとに5 XPを獲得できる。 敵の識別： 暗い服、赤いネームタグ、ライフルの携行が特徴。撃破時に30 XPを獲得。 民間人対応： 無許可の民間人を排除・制圧する（XP獲得はなし）。"
+  },
+  {
+    "url": "Reactor_Ops.html",
+    "title": "Reactor Operations (RO) - NNPP非公式Wiki",
+    "content": "Reactor Operations (RO) - NNPP非公式Wiki NNPP非公式Wiki Reactor Operations (RO) \"The heart of the Naramo Power Plant. Operates the reactor from the control room and completes power orders.\" - ナラモ原子力発電所の心臓部。制御室から原子炉を操作し、電力供給指令を遂行する。 概要 Reactor Operations (RO) は、原子炉の制御、電力供給、および発電の最適化を担う部門である。Shift Managerと共にプラント運営において最も重要な役割を果たす。ANRO（Advanced Noobic Reactor Operations）に関する詳細は こちら を参照。 解放条件 Logistical Operations にて8,000 XPに到達することで解放される。 任務 原子炉の燃料補給、電力供給指令（Power Orders）の遂行、メルトダウンの防止が主な任務である。また、Plant DirectorやShift Managerの指示による安全なSCRAM実施も担当する。 階級表 階級名 必要XP 特記事項 Trainee 0 デフォルト装備 Junior Operator 2,000 半袖ポロシャツ Reactor Operator 10,000 - Experienced Operator 25,000 - Engineer 50,000 - Chief Engineer 100,000 専用ベルト、赤いヘルメット、B-Keycard Head of Reactor Operations 200,000 黒いヘルメット、専用衣装、レンチ、A-Keycard 用語とヒント 詳細な操作は Reactor Guide ページを参照すること。 主な略語: SM (Shift Manager), PO (Power Order), FW (Feedwater), RO (Reactor Operations), HORO (Head of Reactor Operations), RV (Relief valves), CR (Control Room) ヒント: 制御棒 (Ctrl Rods) は効率化のため55%に維持すること。冷却ポンプ (Cooling pump) は略してはならない。"
+  },
+  {
+    "url": "SOC.html",
+    "title": "Special Operations Command - NNPP非公式Wiki",
+    "content": "Special Operations Command - NNPP非公式Wiki NNPP非公式Wiki Special Operations Command (SOC) 📝 このページは加筆が望まれています。 内容をより充実させるため、さらなる情報の追加や詳細な記述が求められています。 \"Soldiers of the 011th Mountain Battalion of the GSSOC, they are trained to survive and prevail through the worst.\" - GSSOC第011山岳大隊の兵士たち。彼らは最悪の状況下でも生き残り、勝利するよう訓練されている。 概要 Special Operations Command (SOC) （別名：NOOBSOC）は、 Ground Service Personnel のユニットの一つである。エリート戦闘部隊として、 West Noobian Assault Force や敵対的な襲撃（Hostile Raid）に対する最後の砦としての役割を担う。 解放条件: Ground Service Personnel で500,000 XP、 Ground Service Field Medics で300,000 XP、 Local Military Police で300,000 XPの合計1,100,000 XPが必要。 任務 攻撃・防衛の両面において価値を発揮する万能ユニットである。 West Noobia 、 Bloxian Commonwealth 、 Federal Ranger Regiment による攻撃を緩和・阻止することを主な目標とする。 階級 階級名 必要XP Candidate 0 Commando Third Class 10,000 Commando Second Class 25,000 Commando First Class 50,000 Fireteam Leader 100,000 Squad Leader 200,000 Operations Chief 300,000 装備と車両 D-23 Spectre、D-22 STAR、Münzwurf（消音ショットガン）など、独占的な装備を多数使用可能。車両は旧 5th Noobic Special Operations が使用していた JEEP 等が利用可能である。"
+  },
+  {
+    "url": "Shift_Manager.html",
+    "title": "Shift Manager (SM) - NNPP非公式Wiki",
+    "content": "Shift Manager (SM) - NNPP非公式Wiki NNPP非公式Wiki Shift Manager (SM) \"Leads Reactor Operators and oversees all plant systems to ensure power orders are completed.\" - 原子炉オペレーターを率い、電力供給指令が確実に完了するようプラントの全システムを監視する。 概要 Shift Manager (SM) は、 Reactor Operations (RO) と連携し、原子炉の管理と電力供給指令の遂行を指揮する。プラント運営における重要なリーダー職である。 サーバー内に同時に存在できるのは1名のみで、加入には待機列が存在する。任期は最大2シフト（1800秒）で、終了後はROチームへ戻り、次のプレイヤーへ交代する。 なお「Fri-Yay」アップデート以降、シフト中にSMが離脱してもシフトは継続され、次期SMへ交代が可能となった。 解放条件 Reactor Operations にて30,000 XPに到達することで解放される。 権限・能力 ROメンバーの解任（解任されたメンバーはPlant Maintenanceチームへ強制転換される） 優秀なROメンバーへのボーナス支給（500 XP） 装備：A-Card、レンチ、ランタン、クリップボード 階級表 ※SMの服装は階級に関わらず変更されない。 階級名 必要XP Junior Manager 0 Experienced Manager 5,000 Veteran Manager 15,000 Master Manager 30,000"
+  },
+  {
+    "url": "TRT.html",
+    "title": "Tactical Response Team - NNPP非公式Wiki",
+    "content": "Tactical Response Team - NNPP非公式Wiki NNPP非公式Wiki Tactical Response Team (TRT) \"Handles threats and high-risk operations that regular SECFOR can't deal with. Responsible for protecting Plant Directors.\" — 通常の警備部隊では対処できない脅威や高リスクの作戦を処理する。プラント責任者（Plant Directors）の保護を担当する。 任務 Tactical Response Team (TRT) は、プラントを守るためのエリート即応部隊である。通常の部隊よりも高性能な武器や装備（ICV-1 APCなど）を運用する。主な任務は、施設本体およびプラントへの入り口の警備、そしてプラント責任者の護衛である。 階級と要件 階級名 必要XP 主な装備・変更点 Private 0 Weston SMG, CMP-44, DX-21, ICV-1 APC Corporal 10,000 Falkenkruez Sergeant 25,000 T-29 Springbolt, D-19 STAR Squad Leader 40,000 D-22 STAR Commander 100,000 PSAT, D-23 STAR, LLMV Special Response Team 600,000 TRT Blackouts Uniform 装備と車両 主な装備: D-23 STAR, M-19, Ammobox, Falkenkreuz, PAT-1, PSAT, T-29 Springbolt, BS-Card等。 ※TRTではHeavyクラスは使用不可。 使用可能な車両: Security Car, ICV-1 APC, Tactical Response LLMV。 豆知識 150万XPに到達すると、新チーム「 Personal Security Detachment (PSD) 」が解放される。ただし、これにはPlant Securityで50万XPが必要となる。"
+  },
+  {
+    "url": "WNAF.html",
+    "title": "West Noobian Assault Force (WNAF) - NNPP非公式Wiki",
+    "content": "West Noobian Assault Force (WNAF) - NNPP非公式Wiki NNPP非公式Wiki West Noobian Assault Force (WNAF) \"After a destructive Naval landing off the coast of East Noobia, WNSDF now begins attacks on Naramo and its Nuclear Plant.\" - 東ヌービア沿岸への破壊的な敵前上陸を経て、WNSDFはナラモとその原子力発電所への攻撃を開始する。 概要 West Noobian Assault Force (WNAF) は、ナラモ、東ヌービア、および Ground Service Personnel と敵対関係にある西ヌービア軍の師団である。他チームと比較して武器の解放に必要なXPが少なめだが、車両の解放にはより多くのXPを必要とする。このチームのXPは「1st Foreign Aid Detachment」の解放条件にも関わっている。 任務・行動指針 主な任務はメイン施設への攻撃、および Logistical Operations への妨害活動である。これによりプラントの燃料を枯渇させたり、制御室（Control Room）を占拠・確保して原子炉のメルトダウンを引き起こしたりすることが可能。 本部（WNAF HQ）にある地面の赤ボックスから車両をスポーンさせ、LOバイパス、検問所、地雷原、地下鉄などの様々なルートからプラントへ侵入できる。施設内では敵 combatants の排除、発電機の停止、Feedwaterの破壊などを行い、最終的にメルトダウンを起こして最大の混乱を招くことが目標となる。 階級表 階級名 必要XP 主な解禁要素 Conscript 0 XP T-42 Matchbox, T-29 Springbolt, BR-10, B63, M19, PMV Operative 10,000 XP BR-18 Senior Operative 20,000 XP BR-7, PMV (T) Field Sergeant 30,000 XP M41 Utility Master Sergeant 50,000 XP C-16 GPMG Warrant Officer 100,000 XP M52 APC \"Garbage\" Lieutenant 150,000 XP - Captain 200,000 XP T-3, M53 CCS Detachment Commander 300,000 XP Model 17 装備 BR-18, M-19, Model-17, B63 LMG, Falkenkreuz, R72, Super Bazooka, T-29 Springbolt, BR-7, C-16 GPMG, BR-10, T-42 Matchbox, Weston SMG, T-3, 双眼鏡（Scout/Ranged 用）など。詳細なスペックは Weapon stats および Vehicles のページを参照。"
+  },
+  {
+    "url": "bbs-general.html",
+    "title": "雑談掲示板 - NNPP非公式Wiki",
+    "content": "雑談掲示板 - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia 雑談掲示板 NNPPに関する雑談、ゲーム内の出来事などにご利用ください。 掲示板ルール 他人への誹謗中傷、荒らし行為、公式運営の迷惑になる投稿は禁止です。楽しく利用しましょう。 名前 本文 投稿する コメント一覧 読み込み中..."
+  },
+  {
+    "url": "bbs-qa.html",
+    "title": "質問掲示板 - NNPP非公式Wiki",
+    "content": "質問掲示板 - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia 雑談掲示板 NNPPに関する質問にのみご利用ください。 掲示板ルール 質問ではない投稿、他人への誹謗中傷、荒らし行為等は禁止です。 名前 本文 投稿する コメント一覧 読み込み中..."
+  },
+  {
+    "url": "departments.html",
+    "title": "部門一覧 - NNPP非公式Wiki",
+    "content": "部門一覧 - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia 部門一覧 Naramo Nuclear Plant (NNPP) における全役割の一覧である。一部は入隊に試験を必要とするが、それ以外の役割は誰でも選択が可能である。 1. Plant Defense 専門職（試験必須） Noobic Military Police (NMP) [試験必須] 一般職（誰でも可） Plant Security Director of Security Forces Tactical Response Team Personal Security Detachment Ground Service Personnel Special Operation Command 13th Armoured Cavalry Regiment Local Military Police 2. Department of Energy 専門職（試験必須） Noobic Engineering Service (NES) [試験必須] Advanced Noobic Reactor Operations (ANRO) [試験必須] 一般職（誰でも可） Plant Maintenance Plant Operations Chief Logistical Operations Chief Supply Officer Reactor Operations Shift Manager Corporate Department of Energy Executive Plant Director 3. External 一般職（誰でも可） West Noobian Assault Force Federal Maritime Defense Force Federal Ranger Regiment Bloxian Commonwealth 1st Support & Foreign Aid Civilians Incarcerated"
+  },
+  {
+    "url": "generate-search-index.js",
+    "title": "generate-search-index.js",
+    "content": "const fs = require('fs');\nconst path = require('path');\n\nconst excludeDirs = ['.git', '.github', 'node_modules'];\nconst excludeFiles = ['search.json'];\n\nfunction scanDir(dir, baseDir = dir) {\n    let results = [];\n    const list = fs.readdirSync(dir);\n\n    list.forEach(file => {\n        const filePath = path.join(dir, file);\n        const relativePath = path.relative(baseDir, filePath).replace(/\\\\/g, '/');\n        const stat = fs.statSync(filePath);\n\n        if (stat.isDirectory()) {\n            if (!excludeDirs.includes(file)) {\n                results = results.concat(scanDir(filePath, baseDir));\n            }\n        } else {\n            const ext = path.extname(file).toLowerCase();\n            if (!['.png', '.jpg', '.jpeg', '.webp'].includes(ext) && !excludeFiles.includes(relativePath)) {\n                try {\n                    const content = fs.readFileSync(filePath, 'utf8');\n                    let title = relativePath;\n                    let textContent = content;\n\n                    if (ext === '.html') {\n                        const titleMatch = content.match(/<title>(.*?)<\\/title>/i);\n                        if (titleMatch) title = titleMatch[1];\n\n                        textContent = content.replace(/<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>/gi, '')\n                                             .replace(/<style\\b[^<]*(?:(?!<\\/style>)<[^<]*)*<\\/style>/gi, '')\n                                             .replace(/<[^>]+>/g, ' ')\n                                             .replace(/\\s+/g, ' ')\n                                             .trim();\n                    }\n\n                    results.push({\n                        url: relativePath,\n                        title: title,\n                        content: textContent\n                    });\n                } catch (e) {}\n            }\n        }\n    });\n\n    return results;\n}\n\nconst searchData = scanDir('.');\nfs.writeFileSync('search.json', JSON.stringify(searchData, null, 2));\nconsole.log('search.json generated successfully!');\n"
+  },
+  {
+    "url": "index.html",
+    "title": "NNPP非公式Wiki",
+    "content": "NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia NNPP非公式Wikiへようこそ このサイトは、Robloxの原子力発電所シミュレーター「NNPP」のプレイヤー有志による非公式ファンWikiです。どなたでも自由に情報を閲覧・編集の参考にしていただけます。 免責事項 当サイトには間違った情報が掲載されている可能性があります。また、当サイトはFandomにあるNNPPWikiの非公式翻訳版とお考え下さい。 次のアップデートのサムネ NNPPとは？ Roblox上で動作する、原子炉の運用や施設内の警備を体験できるロールプレイ・シミュレーターゲームです。プレイヤーは様々な部門に所属し、日々の業務や緊急事態（メルトダウン等）への対処をリアルタイムで楽しみます。 注目コンテンツ ゲームメカニクス 原子炉の制御やシステムなど、ゲームの仕組み全般を解説しています。 部門紹介（全チームと役割） 警備部門や技術部門など、各部門の特徴や加入方法について。 マップ・拠点位置 発電所敷地内の構造や各ゾーンの配置に関する詳細です。 ビークル 移動や警備で使用される各種車両についての解説です。 武器・装備 警備や防衛で使用される銃器やツール類の一覧です。 ゲームパス 購入することで利用可能になる特殊な権限やアイテムの紹介です。 バッジ ゲーム内で獲得できる各種実績・バッジの条件について。 初心者攻略・マニュアル ゲームの始め方、基本操作、各アイテムやツールの使い方を分かりやすく解説しています。 編集に参加される方へ 記事の追加や修正の提案、新しい情報の提供は大歓迎です！記述を始める前に、まずはコミュニティルールを一読してください。 このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。 GitHubでこのページを編集する"
+  },
+  {
+    "url": "rules.html",
+    "title": "コミュニティルール - NNPP非公式Wiki",
+    "content": "コミュニティルール - NNPP非公式Wiki NNPP非公式Wiki コミュニティルール 利用規約とコミュニティルール 当Wikiの利用にあたっては、以下のルールを遵守すること。違反が確認された場合は編集権限の制限等の措置を講じる場合がある。 客観的な記述: 個人の主観や偏見に基づいた内容ではなく、ゲーム内の事実や検証結果に基づいた情報を記述すること。 荒らし行為の禁止: 意図的なページの改ざん、情報の削除、不正確な情報の流布、攻撃的な表現の使用は禁止である。 著作権の尊重: ゲームの素材等は適切に使用すること。権利関係に抵触する素材の無断転載は行わない。 プライバシー保護: 他プレイヤーの個人情報を特定、あるいは開示する行為は厳禁。 編集者募集 当Wikiでは、情報の更新に協力する編集者を募集しています。 応募方法 以下のフォームより、簡単な自己紹介、および連絡先としてメールアドレスまたはGitHubアカウントを送信してください。 編集者応募フォームはこちら 応募要件 NNPPのプレイヤーであり、ゲーム内容を十分に理解していること。 コミュニティルールを遵守し、中立的な立場での執筆が可能であること。"
+  },
+  {
+    "url": "sidebar.html",
+    "title": "sidebar.html",
+    "content": "Wiki内検索 案内 メインページ コミュニティルール 各部門の解説 初心者攻略・マニュアル 各種掲示板 雑談掲示板 質問掲示板 グループ宣伝掲示板 最近編集・作成された記事 初心者攻略・マニュアル 各部門の解説 コミュニティルール"
+  },
+  {
+    "url": "strategy.html",
+    "title": "初心者攻略・マニュアル - NNPP非公式Wiki",
+    "content": "初心者攻略・マニュアル - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia 初心者攻略・マニュアル 当ページでは、Robloxの原子力発電所シミュレーター「NNPP」の初心者プレイヤーに向けて、基本的なゲームの進行手順および操作方法の解説を行う。 編集について 掲載されている情報は執筆時点のものであり、アップデートにより仕様が変更される場合がある。情報の修正や追加を行う場合は、ページ下部のリンクよりGitHub上での編集を行うことができる。 1. ゲームの基本方針 NNPPは、プレイヤーがそれぞれ割り当てられた部門（または一般市民・来訪者）として原子力発電所の敷地内におけるロールプレイを行うシミュレーターである。参加者はまずゲームに接続し、発電所の構造を把握することが推奨される。 ルール遵守: サーバー内の規律および各部門の指示に従う義務を負う。 無線の活用: 緊急時や業務連絡においては、チャットおよび無線機を使用する。 2. 基本操作とインターフェース ゲーム内における主な操作および画面の構成は以下の通りである。 操作 / 項目 説明 移動・視点 一般的なRobloxの操作系統に準拠する（WASDキーによる移動、マウスによる視点変更）。 インタラクト 扉の開閉や各種ツールの使用は、対象をクリックまたはタップして実行する。 チャット・無線 周囲への発言や、所属部門ごとの通信チャンネルを状況に応じて使い分ける。 3. 緊急事態への対処 サイレンが作動した場合や、メルトダウンの兆候が確認された場合は、動揺することなく各部門（警備部門や技術部門など）の指示に従い行動する。 このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集を行うことができる。 ✏️ GitHubでこのページを編集する"
+  },
+  {
+    "url": "style.css",
+    "title": "style.css",
+    "content": "/* 全体のリセット設定 */\n* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif;\n}\n\nbody {\n    background-color: #f8f9fa;\n    color: #202122;\n    font-size: 14px;\n    line-height: 1.6;\n}\n\n/* =========================================\n   Wikipedia風リンク設定\n========================================= */\n\na {\n    color: #0645ad;\n    text-decoration: none;\n}\n\na:visited {\n    color: #0b0080;\n}\n\na:hover {\n    text-decoration: underline;\n}\n\na:active {\n    color: #faa700;\n}\n\n/* 上部ヘッダー */\n.top-bar {\n    background-color: #ffffff;\n    height: 55px;\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    padding: 0 20px;\n    border-bottom: 1px solid #a2a9b1;\n    position: fixed;\n    top: 0;\n    width: 100%;\n    z-index: 100;\n}\n\n.logo-area {\n    display: flex;\n    flex-direction: column;\n}\n\n.wiki-title {\n    font-size: 1.15rem;\n    font-weight: bold;\n    color: #000000;\n}\n\n.wiki-subtitle {\n    font-size: 0.7rem;\n    color: #54595d;\n    margin-top: -2px;\n}\n\n.search-box input {\n    padding: 6px 12px;\n    width: 220px;\n    border: 1px solid #a2a9b1;\n    border-radius: 2px;\n    font-size: 0.85rem;\n}\n\n.search-box input:focus {\n    border-color: #3366cc;\n    outline: none;\n}\n\n/* メインレイアウト */\n.container {\n    display: flex;\n    margin-top: 55px;\n    min-height: calc(100vh - 55px);\n}\n\n/* 左側ナビゲーション */\n.side-nav {\n    width: 190px;\n    background-color: #f8f9fa;\n    padding: 20px 10px 20px 20px;\n    flex-shrink: 0;\n}\n\n.nav-section {\n    margin-bottom: 20px;\n}\n\n.side-nav .nav-title {\n    font-size: 0.75rem;\n    color: #54595d;\n    font-weight: bold;\n    border-bottom: 1px solid #eaecf0;\n    padding-bottom: 3px;\n    margin-bottom: 6px;\n    letter-spacing: 0.5px;\n}\n\n.side-nav ul {\n    list-style: none;\n}\n\n.side-nav li {\n    margin-bottom: 5px;\n}\n\n/* 右側メインコンテンツ */\n.main-content {\n    flex: 1;\n    background-color: #ffffff;\n    padding: 30px 40px;\n    border-left: 1px solid #a2a9b1;\n}\n\n.page-title {\n    font-family: 'Linux Libertine', 'Georgia', 'Times New Roman', serif;\n    font-weight: normal;\n    font-size: 1.8rem;\n    border-bottom: 1px solid #a2a9b1;\n    padding-bottom: 3px;\n    margin-bottom: 15px;\n}\n\n.lead-text {\n    font-size: 1rem;\n    margin-bottom: 20px;\n}\n\nh2 {\n    font-family: 'Linux Libertine', 'Georgia', serif;\n    font-weight: normal;\n    font-size: 1.4rem;\n    border-bottom: 1px solid #a2a9b1;\n    padding-bottom: 3px;\n    margin-top: 30px;\n    margin-bottom: 12px;\n}\n\np,\nul {\n    margin-bottom: 15px;\n}\n\nul {\n    padding-left: 20px;\n}\n\nli {\n    margin-bottom: 4px;\n}\n\n/* 免責事項ボックス */\n.wiki-notice {\n    background-color: #ffffff;\n    border: 1px solid #a2a9b1;\n    border-left: 4px solid #d33;\n    padding: 12px 15px;\n    margin: 20px 0;\n    font-size: 0.9rem;\n}\n\n.notice-title {\n    font-weight: bold;\n    color: #d33;\n    margin-bottom: 3px;\n}\n\n/* メイン画像エリア */\n.main-visual-container {\n    width: 100%;\n    text-align: center;\n    margin: 20px 0;\n    background-color: #f8f9fa;\n    border: 1px solid #a2a9b1;\n    padding: 8px;\n}\n\n.main-visual-img {\n    max-width: 100%;\n    height: auto;\n    display: block;\n    margin: 0 auto;\n}\n\n/* グリッドレイアウト */\n.content-grid {\n    display: grid;\n    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n    gap: 15px;\n    margin: 20px 0;\n}\n\n.content-card {\n    background-color: #f8f9fa;\n    border: 1px solid #a2a9b1;\n    padding: 15px;\n    border-radius: 2px;\n}\n\n.content-card h3 {\n    font-size: 1rem;\n    margin-bottom: 8px;\n}\n\n.content-card p {\n    font-size: 0.85rem;\n    color: #202122;\n    margin-bottom: 0;\n}\n\n/* スマホ対応 */\n@media (max-width: 768px) {\n    .container {\n        flex-direction: column;\n    }\n\n    .side-nav {\n        width: 100%;\n        order: 2;\n        border-top: 1px solid #a2a9b1;\n        padding: 20px;\n        background-color: #f8f9fa;\n    }\n\n    .main-content {\n        width: 100%;\n        border-left: none;\n        padding: 20px;\n        order: 1;\n    }\n\n    .search-box input {\n        width: 140px;\n    }\n\n    .page-title {\n        font-size: 1.5rem;\n    }\n}\n"
+  },
+  {
+    "url": "vehicle-m41-doe-supply.html",
+    "title": "M41 DOE Supply - NNPP非公式Wiki",
+    "content": "M41 DOE Supply - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia メイン メインページ コミュニティルール 初心者攻略・マニュアル データベース 各部門の解説 ゲームメカニクス マップ・拠点位置 ビークル 武器・装備 ゲームパス バッジ コミュニティ 雑談掲示板 質問掲示板 グループ宣伝掲示板 M41 DOE Supply 編集ステータス / スタブ M41 DOE Supply は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！ 詳細については、この記事のノートページを参照してください。 M41 DOE Supply Gotta' haul 'em all! 体力 90 座席数 1 速度 69 後退速度 34 クールダウン なし 積載量 ボックス 8個 アクセス チーム LO 必要XP 0 目次 1 概要 2 外観 3 Tips 4 長所と短所 4.1 長所 4.2 短所 5 トリビア 6 ギャラリー 概要 M41 DOE Supply は、Logistical Operations がプラントへサプライボックスを輸送するために使用する主要なスターター車両である。M41 Utility Truck のバリエーションであり、基本的な防御性能を維持しつつ貨物輸送用に特化して改造されている。 トラックへの積載を行うには、サプライボックスを拾ってインベントリに保持した状態で、荷台にある透明なボックスをクリックする。トラックの荷台が一杯になるまでボックスの積載を続ける。これにより、プラントやバイパスエリアへの効率的な配送が可能となる。 外観 WIP Tips 敵の存在が確認されている地域を移動する際は、常に護衛を伴って行動すること。 待ち伏せのリスクを軽減するため、可能な限りオフロードの小道やバイパスルートを利用すること。 長所と短所 長所 WIP 短所 物資をトラックに積み込んでいる間は静止状態となるため、攻撃に対して無防備になる。 適切に護衛されていない場合、敵車両の対戦車兵器や車載銃の格好の標的となる。 トリビア WIP ギャラリー WIP このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。 ✏️ GitHubでこのページを編集する"
+  },
+  {
+    "url": "vehicle-maintenance-pickup.html",
+    "title": "Maintenance Pickup Truck - NNPP非公式Wiki",
+    "content": "Maintenance Pickup Truck - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia メイン メインページ コミュニティルール 初心者攻略・マニュアル データベース 各部門の解説 ゲームメカニクス マップ・拠点位置 ビークル 武器・装備 ゲームパス バッジ コミュニティ 雑談掲示板 質問掲示板 グループ宣伝掲示板 Maintenance Pickup Truck 編集ステータス / スタブ Maintenance Pickup Truck は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！ Maintenance Pickup Truck A light pickup... Wait, wheres my ladder? 体力 16 座席数 2 (運転手1 / 助手席1) 速度 63 後退速度 31 クールダウン なし アクセス チーム PM 必要XP 0 目次 1 概要 2 外観 3 Tips 4 長所と短所 4.1 長所 4.2 短所 5 アップデート歴 6 トリビア 7 ギャラリー 概要 Maintenance Pickup Truck は、主に Plant Maintenance が施設の維持管理や移動のために使用する車両である。同チームの専用車両として活躍する。 外観 ホワイトの車体に、側面にはPlant Maintenanceをテーマにした緑色のマーキングが施されている。 旧デザイン： 後部に大きな収納コンパートメントと、折りたたみ式のハシゴを積んだ高いラックを備えていた。荷台（トランク）には予備の配管パイプ数本、ロードコーン、木箱、ブロキシコーラのケース、灰色のツールボックスが積載されていた。 新デザイン： 旧デザインの代わりにフラットベッド（平らな荷台）仕様となっている。 ※LLUVまたはLLMVのPlant Maintenance向けモデルバリエーションである可能性が高い。 Tips プラント内の安全なエリアやメンテナンスゾーン内での使用に最適。 耐久性を維持するため、紛争地帯や敵対行為が発生しているエリアは避けて通行すること。 長所と短所 長所 Plant Maintenance専用車として、日常業務や移動に活用できる。 短所 装甲が薄く非武装のため、敵の攻撃に対して非常に脆弱である。 セダンやストリートワゴンと比較して目立って速度が遅い。 アップデート歴 「Wrenches and Workorders」アップデートで追加された。 追加される前は、Plant Maintenance の人員には専用車両が用意されておらず、施設内を移動する際は一般的な一般車両のスポナーに頼るしかなかった。 トリビア WIP ギャラリー WIP このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。 ✏️ GitHubでこのページを編集する"
+  },
+  {
+    "url": "vehicle-sedan.html",
+    "title": "Sedan - NNPP非公式Wiki",
+    "content": "Sedan - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia メイン メインページ コミュニティルール 初心者攻略・マニュアル データベース 各部門の解説 ゲームメカニクス マップ・拠点位置 ビークル 武器・装備 ゲームパス バッジ コミュニティ 雑談掲示板 質問掲示板 グループ宣伝掲示板 Sedan 編集ステータス / スタブ Sedan は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！ Sedan The standard civilian cruiser 体力 12 座席数 4 (運転手1 / 助手席3) 速度 45 後退速度 45 クールダウン なし アクセス 全チーム (All teams) 必要XP 0 目次 1 概要 2 外観 3 Tips 4 長所と短所 4.1 長所 4.2 短所 5 トリビア 6 ギャラリー 概要 Sedan は、民間人および非戦闘員の輸送用に設計された、基本的かつ非武装の車両である。軽量に作られており保護性能は最小限に抑えられているため、戦闘シナリオには適していない。 appearance ボディはさまざまなカラー（画像では赤）に変更可能で、非常にオーセンティックなスタイルの大きめのボンネットと黒いルーフを備えている。また、シルバーの縁取り、背面の2つの大きなウイング、前面には素敵なエンブレムが配置されている。 Tips 戦闘地域や、GSP/NMPの存在感が強いエリアは避けること。 ウェスト・ヌービア（WN）工作員が周囲に溶け込むための偽装ツールとして機能する。 色違いでスポーンできる唯一の車両である。 長所と短所 長所 ナラモ（Naramo）における一般市民やDOE従業員の一般的な移動手段として人気がある。 市街地、または発電所の駐車場でスポーンさせることができる。 ウェスト・ヌービア（WN）によって、発電所の近くや内部に潜入するための偽装用として時折使用される。 短所 あらゆる車載兵器や個人の武器に対して非常に脆い。 対ビークル攻撃に耐えることができない。 大型の車両に簡単に側面を突かれたり、体当たりされたりする。 トリビア 車両のモデルがメッシュで作られているため、窓は破壊されない仕様になっている。 ギャラリー WIP このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。 ✏️ GitHubでこのページを編集する"
+  },
+  {
+    "url": "vehicle-streetwagon.html",
+    "title": "Streetwagon - NNPP非公式Wiki",
+    "content": "Streetwagon - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia メイン メインページ コミュニティルール 初心者攻略・マニュアル データベース 各部門の解説 ゲームメカニクス マップ・拠点位置 ビークル 武器・装備 ゲームパス バッジ コミュニティ 雑談掲示板 質問掲示板 グループ宣伝掲示板 Streetwagon 編集ステータス / スタブ Streetwagon は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！ Streetwagon wait, IS THIS WHAT THE POLICE USE - a random civilian 体力 12 座席数 4 (運転手1 / 助手席3) 速度 75 後退速度 36 クールダウン なし アクセス 全チーム (All teams) 必要XP 0 目次 1 概要 2 外観 3 Tips 4 長所と短所 4.1 長所 4.2 短所 5 トリビア 6 ギャラリー 概要 Streetwagon（別名：Civilian Station Wagon）は、一般的な輸送や人員移動のために設計された民間車両である。セダンと同じ全体的な構造と性能を共有しており、4人の乗客を収容できる。そのデザインはセキュリティカー（Security Car）に酷似しており、共通のメーカーや車両ラインであることが示唆されている。 外観 ボルボやロールスロイスといった多くの実在の自動車に似た雰囲気を持っている。 四角い形状をしており、4つの座席を備えている。 Tips 市街地やプラントゾーン内での、リスクの低い移動に最適。 簡単に破壊されるのを防ぐため、戦闘地域や既知の敵対エリアは避けること。 一般市民や、身を隠して潜入しようとするウェスト・ヌービア軍（West Noobian Forces）の目立たない移動手段としても利用できる。 長所と短所 長所 市民によって日常の移動手段として一般的に使用されている。 DOE従業員や非戦闘員を含む、一般的な人員移動に適している。 無反動砲やプラントセキュリティの行動など、ランダムな事件の際に標的にされやすい。 FRRのセダンではないことが判別できるため、セダンよりも優れている。 短所 装甲が軽く、非常に脆い。 車載兵器、対戦車（AT）弾、あるいは激しい衝突からの攻撃に耐えることができない。 敵車両によって簡単に側面を取られたり、無力化されたりする。 トリビア この車には警察仕様（PS version）のSecurity Carが存在し、さらに「Security Car (Reinforced)」「Security Car (Supervisor)」「Captured Security Car」「PN-1P Security Transport（後部が大きくなっているもの）」という4つの派生バージョンが存在する。 ギャラリー WIP このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。 ✏️ GitHubでこのページを編集する"
+  },
+  {
+    "url": "vehicles.html",
+    "title": "Vehicles - NNPP非公式Wiki",
+    "content": "Vehicles - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia Vehicles 注意: このページでは、ゲーム内に登場するすべての車両と、それぞれの画像の一覧を掲載しています。車両やチームの詳細については、それぞれのリンク先ページを参照してください。チームの子見出しの下にリストされている車両はそのチーム専用であり、このパターンに従わない車両は、見出しに記載されているすべてのチームで使用可能です。 注意: 車両の速度は、画面中央にある赤いバーの単位であるSPS（Studs Per Second）で表記されています。ゲーム内のステータスページやUIに表示される速度は、不正確な速度である場合があります。 一般車両 すべてのチームがスポーンおよび操作できる車両。 Streetwagon Sedan 発電所メンテナンス Maintenance Pickup Truck 物資車両 Logistical Operationsチームがスポーンおよび操作できる車両。 M41 DOE Supply M41 DOE Nuclear M41 Cargo (Weaponised) 10,000 XP HTV 10,000 XP DOE Supply LLUV 3,000 XP DOE Supply Tug 強化物資令限定 これらの車両は、Department of Energy Executiveのエグゼクティブアクトによってのみスポーン可能です。 HTV (Reinforced) Cargo HTV (Reinforced) Nuclear CSOエグゼクティブアクト限定 これらの車両は、Chief Supply Officerのエグゼクティブアクトによってのみスポーン可能です。 LLCV 239th HTV 警備車両 Plant SecurityおよびTactical Response Teamがスポーンおよび操作できる車両。 Security Car Security Car (Supervisor) 75,000 XP PN-1P Security Transport 100,000 XP Security Car (Reinforced) 150,000 XP Traffic Enforcement Car 50,000 XP Retired Security Sedan 300,000 XP 拡張警備令限定 これらの車両は、Department of Energy Executiveのエグゼクティブアクトによってのみスポーン可能です。 SV-1 NFSF この車両はゲームに再追加されましたが、NFSF陣営はNNPPから離脱したため、NFSF所属メンバーがスポーンすることはできなくなっています。 戦術対応チーム ICV-1 APC Security Tactical Response LLMV 要人警護部隊 PSD Cruiser PSD TOW Jeep 開発者限定 Armoured Limo 企業車両 CorporateおよびPlant Directorチームがスポーンおよび操作できる車両。 BrikTek Gladiator Leroy Large Yellow Bus 50,000 XP BrikTek Gladiator Red 150,000 XP BrikTek Gladiator Silver 250,000 XP BrikTek Gladiator Blue 600,000 XP 連邦軍車両 Ground Service Personnel、第13機甲騎兵連隊、地上勤務野戦衛生兵、Naval Service Personnel、特殊作戦軍などのチームがスポーンおよび操作できる車両。 M41 Utility (2ND) 2,000 XP MTV-2 5,000 XP MTV Cannon レイド VT-1 レイド LLUVA2 100,000 XP LLUV LLUV (T) (2ND) 5,000 XP 突撃部隊 これらの車両は、3rd Division Commanderの戦闘ドクトリンによってのみスポーン可能です。 SV-1L Uparmored MTV-2 機甲陣地 これらの車両は、3rd Division Commanderの戦闘ドクトリンによってのみスポーン可能です。 VT-6 HAT-2 HAC-2 第13機甲騎兵連隊 VT-2A1 クールダウン VT-2E3 ACAV 300,000 XP VT-6 レイド ICV-1 APC RCV-1 クールダウン Recon Jeep 第4ヌービック支援大隊 VT-5E1 地上勤務野戦衛生兵 LLMV 25,000 XP MTV-M 300,000 XP 海軍勤務員 NH-34 削除済み・NNAC限定 LVT LVT-A1 第5ヌービック特殊作戦 5NSO JEEP 5NSO AT JEEP 特殊作戦軍 SOC JEEP SOC LSUV SOC LSUV (G) SOC AT JEEP 警察車両 Local Military PoliceおよびNoobic Military Policeチームがスポーンおよび操作できる車両。 現地憲兵 LMPのスポーナーには以下も追加されます：Security Car, LLUV, LLUV (T) (2ND) Police Cruiser Sheriff Cruiser LMP Cruiser 10,000 XP LMP Jeep 100,000 XP LMP LLUV 50,000 XP ヌービック憲兵 NMPのスポーナーには以下も追加されます：MTV-2 SV-1L MPSRT NMP中尉 RH-X (NMP) 開発者 MP Cruiser MP LLUV MP LSUV NMP伍長階級 西ヌービア車両 West Noobian Assault Force、Federal Ranger Regiment、Federal Maritime Defense Forceチームがスポーンおよび操作できる車両。 M41 Utility 30,000 XP M52 APC M52AA M52 Recon 50,000 XP M52 Artillery 200,000 XP WNAF M41 Tank レイド WNAF M41 Heavy Tank レイド WNAF M41 Mobile Gun System レイド WNAF APC 50,000 XP 連邦レンジャー連隊 FRR Jeep FRR AT Jeep 連邦海上防衛隊 FMDF RHIB FMDF Gunboat その他の車両 Admin Car 管理者限定 RH-X 開発者"
+  }
+]
