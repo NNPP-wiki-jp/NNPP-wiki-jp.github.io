@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初心者攻略・マニュアル - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title"><a href="index.html" style="color: inherit; text-decoration: none;">NNPP非公式Wiki</a></span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off">
+            </form>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">初心者攻略・マニュアル</h1>
+            <p class="lead-text">当ページでは、Robloxの原子力発電所シミュレーター「NNPP」を始めたばかりのプレイヤーに向けて、基本的なゲームの進め方や操作方法を解説している。</p>
+            
+            <div class="wiki-notice">
+                <div class="notice-title">編集について</div>
+                <p>掲載されている情報は執筆時点のものであり、アップデートによって仕様が変更される場合がある。誤りや新しい情報に気づいた場合は、ページ下部のリンクから編集に協力されたい。</p>
+            </div>
+
+            <h2>1. ゲームの基本方針</h2>
+            <p>NNPPでは、プレイヤーはそれぞれ割り当てられた部門（または一般市民・来訪者）として原子力発電所の敷地内でロールプレイを行う。まずはゲームに参加し、発電所の構造を把握することから始めるのが推奨される。</p>
+            <ul>
+                <li><strong>ルールを守る:</strong> サーバー内の規律や各部門の指示に従って行動しなければならない。</li>
+                <li><strong>無線を活用する:</strong> 緊急時や業務連絡にはチャットや無線機を使用する。</li>
+            </ul>
+
+            <h2>2. 基本操作と画面の見方</h2>
+            <p>ゲーム内における主な操作やインターフェースの概要は以下の通りである。</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px;">
+                <thead>
+                    <tr style="background: #f6f8fa; border-bottom: 2px solid #d0d7de;">
+                        <th style="padding: 10px; text-align: left; border: 1px solid #d0d7de;">操作 / 項目</th>
+                        <th style="padding: 10px; text-align: left; border: 1px solid #d0d7de;">説明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #d0d7de;"><strong>移動・視点</strong></td>
+                        <td style="padding: 10px; border: 1px solid #d0d7de;">一般的なRobloxの操作に準拠する（WASDキーによる移動、マウスによる視点変更）。</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #d0d7de;"><strong>インタラクト</strong></td>
+                        <td style="padding: 10px; border: 1px solid #d0d7de;">ドアの開閉やツールの使用は、対象をクリックまたはタップして行う。</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #d0d7de;"><strong>チャット / 無線</strong></td>
+                        <td style="padding: 10px; border: 1px solid #d0d7de;">周囲への発言や、所属部門ごとの通信チャンネルを状況に応じて使い分ける。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. 困ったときは？（緊急事態への対処）</h2>
+            <p>サイレンが鳴り響いた場合や、メルトダウンの兆候が確認された場合は、慌てずに各部門（警備部門や技術部門）の指示に従うこと。</p>
+
+            <!-- GitHub直接編集用ボタン・リンク -->
+            <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できる。</p>
+                <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/strategy.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                    ✏️ GitHubでこのページを編集する
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 共通サイドバーを読み込む処理
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            })
+            .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
+
+        // 検索機能用のページリスト（メインページと同様に定義）
+        const wikiPages = [
+            { url: "index.html", title: "メインページ" },
+            { url: "rules.html", title: "コミュニティルール" },
+            { url: "departments.html", title: "各部門の解説" },
+            { url: "strategy.html", title: "初心者攻略・マニュアル" },
+            { url: "bbs-general.html", title: "雑談掲示板" },
+            { url: "bbs-qa.html", title: "質問掲示板" },
+            { url: "bbs-group.html", title: "グループ宣伝掲示板" }
+        ];
+
+        let originalContent = "";
+
+        async function performSearch(event) {
+            event.preventDefault();
+            const searchInput = document.getElementById("search-input");
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (!keyword) return;
+
+            const mainContent = document.querySelector(".main-content");
+            if (!originalContent) {
+                originalContent = mainContent.innerHTML;
+            }
+
+            mainContent.innerHTML = `
+                <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
+                <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← ページに戻る</button>
+                <div class="fandom-search-container" style="margin-top: 15px;">
+                    <div class="fandom-search-main" style="width: 100%;">
+                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
+                        <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("btn-restore-wiki").addEventListener("click", () => {
+                mainContent.innerHTML = originalContent;
+                searchInput.value = ""; 
+                originalContent = "";    
+            });
+
+            const resultsList = document.getElementById("search-results-list");
+            let hitCount = 0;
+
+            for (const page of wikiPages) {
+                try {
+                    const response = await fetch(page.url);
+                    if (!response.ok) continue;
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    
+                    const contentText = doc.querySelector('.main-content')?.textContent || "";
+                    const htmlTitle = doc.title || "";
+
+                    let imageContext = "";
+                    doc.querySelectorAll('.main-content img').forEach(img => {
+                        imageContext += ` ${img.alt} ${img.src} photos photo image`;
+                    });
+
+                    const targetTextLower = `${contentText} ${page.title} ${htmlTitle} ${imageContext}`.toLowerCase();
+
+                    if (targetTextLower.includes(keyword)) {
+                        hitCount++;
+                        let snippet = "";
+                        const index = contentText.toLowerCase().indexOf(keyword);
+                        if (index !== -1) {
+                            const start = Math.max(0, index - 20);
+                            const end = Math.min(contentText.length, index + 60);
+                            snippet = `... ${contentText.substring(start, end).replace(/\s+/g, ' ').trim()} ...`;
+                        } else {
+                            snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
+                        }
+
+                        const li = document.createElement("li");
+                        li.style.marginBottom = "25px";
+                        li.style.paddingBottom = "15px";
+                        li.style.borderBottom = "1px solid #eaecf0";
+                        li.innerHTML = `
+                            <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
+                            <div style="font-size: 0.90rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
+                            <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
+                        `;
+                        resultsList.appendChild(li);
+                    }
+                } catch (e) {
+                    console.error(`${page.url} の解析エラー:`, e);
+                }
+            }
+
+            const statusText = document.getElementById("search-status");
+            if (hitCount === 0) {
+                statusText.textContent = "";
+                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
+            } else {
+                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
+            }
+        }
+    </script>
+</body>
+</html>
