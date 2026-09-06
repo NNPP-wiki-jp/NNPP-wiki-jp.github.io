@@ -30,7 +30,7 @@
             
             <div class="wiki-notice">
                 <div class="notice-title">免責事項</div>
-                <p>当サイトには間違った情報が掲載されている可能性があります。また、当サイトはFandomにあるNNPPWikiの非公式翻訳版とお考え下さい</p>
+                <p>当サイトには間違った情報が掲載されている可能性があります。また、当サイトはFandomにあるNNPPWikiの非公式翻訳版とお考え下さい。</p>
             </div>
 
             <div class="main-visual-frame">
@@ -46,16 +46,40 @@
             <h2>注目コンテンツ</h2>
             <div class="content-grid">
                 <div class="content-card">
+                    <h3><a href="factions.html">派閥・グループ</a></h3>
+                    <p>ゲーム内に存在する各種派閥や組織に関する解説です。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="mechanics.html">ゲームメカニクス</a></h3>
+                    <p>原子炉の制御やシステムなど、ゲームの仕組み全般を解説しています。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="departments.html">部門紹介（全チームと役割）</a></h3>
+                    <p>警備部門や技術部門など、各部門の特徴や加入方法について。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="map.html">マップ・拠点位置</a></h3>
+                    <p>発電所敷地内の構造や各ゾーンの配置に関する詳細です。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="vehicles.html">ビークル</a></h3>
+                    <p>移動や警備で使用される各種車両についての解説です。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="weapons.html">武器・装備</a></h3>
+                    <p>警備や防衛で使用される銃器やツール類の一覧です。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="gamepasses.html">ゲームパス</a></h3>
+                    <p>購入することで利用可能になる特殊な権限やアイテムの紹介です。</p>
+                </div>
+                <div class="content-card">
+                    <h3><a href="badges.html">バッジ</a></h3>
+                    <p>ゲーム内で獲得できる各種実績・バッジの条件について。</p>
+                </div>
+                <div class="content-card">
                     <h3><a href="strategy.html">初心者攻略・マニュアル</a></h3>
                     <p>ゲームの始め方、基本操作、各アイテムやツールの使い方を分かりやすく解説しています。</p>
-                </div>
-                <div class="content-card">
-                    <h3><a href="departments.html">部門紹介</a></h3>
-                    <p>警備部門（Security）や技術部門（Engineering）など、各部門の特徴や加入方法。</p>
-                </div>
-                <div class="content-card">
-                    <h3><a href="bbs-general.html">各種掲示板</a></h3>
-                    <p>プレイヤー同士の雑談、質問、クランのメンバー募集を行うコミュニティスペースです。</p>
                 </div>
             </div>
 
@@ -78,7 +102,7 @@
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             })
-            .catch(err => console.error("サイドバーの読み込みに失敗しました。ローカルサーバーで実行しているか確認してください:", err));
+            .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
 
         // 検索対象のページリスト
         const wikiPages = [
@@ -88,32 +112,32 @@
             { url: "strategy.html", title: "初心者攻略・マニュアル" },
             { url: "bbs-general.html", title: "雑談掲示板" },
             { url: "bbs-qa.html", title: "質問掲示板" },
-            { url: "bbs-group.html", title: "グループ宣伝掲示板" }
+            { url: "bbs-group.html", title: "グループ宣伝掲示板" },
+            { url: "factions.html", title: "派閥・グループ" },
+            { url: "mechanics.html", title: "ゲームメカニクス" },
+            { url: "map.html", title: "マップ・拠点位置" },
+            { url: "vehicles.html", title: "ビークル" },
+            { url: "weapons.html", title: "武器・装備" },
+            { url: "gamepasses.html", title: "ゲームパス" },
+            { url: "badges.html", title: "バッジ" }
         ];
 
-        // 元のメインコンテンツ（トップページ）のHTMLを保存する変数
         let originalContent = "";
 
         async function performSearch(event) {
             event.preventDefault();
-            
             const searchInput = document.getElementById("search-input");
             const keyword = searchInput.value.trim().toLowerCase();
             if (!keyword) return;
 
             const mainContent = document.querySelector(".main-content");
-            
-            // 初回検索時のみ、元のトップページ表示をバックアップ
             if (!originalContent) {
                 originalContent = mainContent.innerHTML;
             }
 
-            // メニューなし、すっきり横幅いっぱいの検索画面レイアウト
             mainContent.innerHTML = `
                 <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
-                
                 <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
-
                 <div class="fandom-search-container" style="margin-top: 15px;">
                     <div class="fandom-search-main" style="width: 100%;">
                         <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
@@ -122,7 +146,6 @@
                 </div>
             `;
 
-            // 「トップページに戻る」ボタンの処理
             document.getElementById("btn-restore-wiki").addEventListener("click", () => {
                 mainContent.innerHTML = originalContent;
                 searchInput.value = ""; 
@@ -136,47 +159,32 @@
                 try {
                     const response = await fetch(page.url);
                     if (!response.ok) continue;
-                    
                     const text = await response.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
                     
-                    // 1. 本文テキストの取得
                     const contentText = doc.querySelector('.main-content')?.textContent || "";
-                    
-                    // 2. 実際のHTMLの<title>内テキストを取得（「NNPP非公式Wiki」などの判定用）
                     const htmlTitle = doc.title || "";
 
-                    // 3. ページ内の画像要素（img）から情報・関連キーワードを生成
                     let imageContext = "";
-                    const images = doc.querySelectorAll('.main-content img');
-                    images.forEach(img => {
+                    doc.querySelectorAll('.main-content img').forEach(img => {
                         imageContext += ` ${img.alt} ${img.src} photos photo image`;
                     });
 
-                    // すべての検索対象テキストをドッキングして小文字化
                     const targetTextLower = `${contentText} ${page.title} ${htmlTitle} ${imageContext}`.toLowerCase();
 
-                    // 判定
                     if (targetTextLower.includes(keyword)) {
                         hitCount++;
-
-                        // キーワード周辺の文章（スニペット）を切り抜く
                         let snippet = "";
-                        const contentTextLower = contentText.toLowerCase();
-                        const index = contentTextLower.indexOf(keyword);
-                        
+                        const index = contentText.toLowerCase().indexOf(keyword);
                         if (index !== -1) {
                             const start = Math.max(0, index - 20);
                             const end = Math.min(contentText.length, index + 60);
-                            snippet = contentText.substring(start, end).replace(/\s+/g, ' ').trim();
-                            snippet = `... ${snippet} ...`;
+                            snippet = `... ${contentText.substring(start, end).replace(/\s+/g, ' ').trim()} ...`;
                         } else {
-                            // 本文にキーワードがない（タイトルや写真属性でヒットした）場合は冒頭部分を出す
                             snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
                         }
 
-                        // 結果一覧の生成
                         const li = document.createElement("li");
                         li.style.marginBottom = "25px";
                         li.style.paddingBottom = "15px";
@@ -189,15 +197,14 @@
                         resultsList.appendChild(li);
                     }
                 } catch (e) {
-                    console.error(`${page.url} の解析中にエラーが発生しました:`, e);
+                    console.error(`${page.url} の解析エラー:`, e);
                 }
             }
 
-            // 検索件数の結果アナウンス
             const statusText = document.getElementById("search-status");
             if (hitCount === 0) {
                 statusText.textContent = "";
-                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。別のキーワードを試してください。</p>`;
+                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
             } else {
                 statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
             }
