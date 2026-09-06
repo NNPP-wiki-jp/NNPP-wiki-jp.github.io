@@ -15,8 +15,10 @@
             <span class="wiki-subtitle">The Free Encyclopedia</span>
         </div>
         <div class="search-box">
-            <form id="wiki-search-form" onsubmit="performSearch(event)">
-                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off">
+            <!-- Googleのサイト内検索を利用するフォーム -->
+            <form action="https://www.google.com/search" method="get" target="_blank">
+                <input type="hidden" name="q" value="site:nnpp-wiki-jp.github.io">
+                <input type="text" name="q" placeholder="Wiki内を検索" autocomplete="off">
             </form>
         </div>
     </header>
@@ -85,7 +87,7 @@
             <div class="edit-section" style="margin-top: 30px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
                 <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
                 <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/index.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-                    ✏️ GitHubでこのページを編集する
+                    GitHubでこのページを編集する
                 </a>
             </div>
         </main>
@@ -99,113 +101,6 @@
                 document.getElementById('sidebar').innerHTML = data;
             })
             .catch(err => console.error("サイドバーの読み込みに失敗しました:", err));
-
-        // 検索対象のページリスト（ここに追加していくだけで自動で本文まで検索対象になります）
-        const wikiPages = [
-            { url: "index.html", title: "メインページ" },
-            { url: "rules.html", title: "コミュニティルール" },
-            { url: "departments.html", title: "各部門の解説" },
-            { url: "strategy.html", title: "初心者攻略・マニュアル" },
-            { url: "bbs-general.html", title: "雑談掲示板" },
-            { url: "bbs-qa.html", title: "質問掲示板" },
-            { url: "bbs-group.html", title: "グループ宣伝掲示板" },
-            { url: "mechanics.html", title: "ゲームメカニクス" },
-            { url: "map.html", title: "マップ・拠点位置" },
-            { url: "vehicles.html", title: "ビークル" },
-            { url: "weapons.html", title: "武器・装備" },
-            { url: "gamepasses.html", title: "ゲームパス" },
-            { url: "badges.html", title: "バッジ" }
-        ];
-
-        let originalContent = "";
-
-        async function performSearch(event) {
-            event.preventDefault();
-            const searchInput = document.getElementById("search-input");
-            const keyword = searchInput.value.trim().toLowerCase();
-            if (!keyword) return;
-
-            const mainContent = document.querySelector(".main-content");
-            if (!originalContent) {
-                originalContent = mainContent.innerHTML;
-            }
-
-            mainContent.innerHTML = `
-                <h1 class="page-title">「${searchInput.value}」の検索結果</h1>
-                <button id="btn-restore-wiki" style="margin-bottom: 20px; padding: 6px 12px; cursor: pointer;">← トップページに戻る</button>
-                <div class="fandom-search-container" style="margin-top: 15px;">
-                    <div class="fandom-search-main" style="width: 100%;">
-                        <p class="lead-text" id="search-status" style="margin-top: 0; font-size: 0.95rem;">Wiki内を検索中...</p>
-                        <ul id="search-results-list" style="list-style: none; padding: 0; margin: 0;"></ul>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById("btn-restore-wiki").addEventListener("click", () => {
-                mainContent.innerHTML = originalContent;
-                searchInput.value = ""; 
-                originalContent = "";    
-            });
-
-            const resultsList = document.getElementById("search-results-list");
-            let hitCount = 0;
-
-            // 各ページを裏側でフェッチして日本語テキストを丸ごと検索
-            for (const page of wikiPages) {
-                try {
-                    const response = await fetch(page.url);
-                    if (!response.ok) continue;
-                    const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-                    
-                    const contentText = doc.querySelector('.main-content')?.textContent || "";
-                    const htmlTitle = doc.title || "";
-
-                    let imageContext = "";
-                    doc.querySelectorAll('.main-content img').forEach(img => {
-                        imageContext += ` ${img.alt} ${img.src} photos photo image`;
-                    });
-
-                    // ページ全体のテキストを小文字化して検索ワードが含まれるかチェック
-                    const targetTextLower = `${contentText} ${page.title} ${htmlTitle} ${imageContext}`.toLowerCase();
-
-                    if (targetTextLower.includes(keyword)) {
-                        hitCount++;
-                        let snippet = "";
-                        const index = contentText.toLowerCase().indexOf(keyword);
-                        if (index !== -1) {
-                            const start = Math.max(0, index - 20);
-                            const end = Math.min(contentText.length, index + 60);
-                            snippet = `... ${contentText.substring(start, end).replace(/\s+/g, ' ').trim()} ...`;
-                        } else {
-                            snippet = contentText.substring(0, 80).replace(/\s+/g, ' ').trim() + "...";
-                        }
-
-                        const li = document.createElement("li");
-                        li.style.marginBottom = "25px";
-                        li.style.paddingBottom = "15px";
-                        li.style.borderBottom = "1px solid #eaecf0";
-                        li.innerHTML = `
-                            <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
-                            <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
-                            <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
-                        `;
-                        resultsList.appendChild(li);
-                    }
-                } catch (e) {
-                    console.error(`${page.url} の解析エラー:`, e);
-                }
-            }
-
-            const statusText = document.getElementById("search-status");
-            if (hitCount === 0) {
-                statusText.textContent = "";
-                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
-            } else {
-                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
-            }
-        }
     </script>
 </body>
 </html>
