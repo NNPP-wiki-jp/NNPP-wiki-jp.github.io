@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sedan - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        .toc a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .wiki-notice {
+            background-color: #fcfcfc;
+            border: 1px solid #c8ccd1;
+            border-left: 4px solid #36c;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <!-- リアルタイムの検索候補ポップアップ -->
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar">
+            <div class="sidebar-section">
+                <h3>メイン</h3>
+                <ul>
+                    <li><a href="index.html">メインページ</a></li>
+                    <li><a href="rules.html">コミュニティルール</a></li>
+                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
+                </ul>
+                <h3>データベース</h3>
+                <ul>
+                    <li><a href="departments.html">各部門の解説</a></li>
+                    <li><a href="mechanics.html">ゲームメカニクス</a></li>
+                    <li><a href="map.html">マップ・拠点位置</a></li>
+                    <li><a href="vehicles.html">ビークル</a></li>
+                    <li><a href="weapons.html">武器・装備</a></li>
+                    <li><a href="gamepasses.html">ゲームパス</a></li>
+                    <li><a href="badges.html">バッジ</a></li>
+                </ul>
+                <h3>コミュニティ</h3>
+                <ul>
+                    <li><a href="bbs-general.html">雑談掲示板</a></li>
+                    <li><a href="bbs-qa.html">質問掲示板</a></li>
+                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <h1 class="page-title">Sedan</h1>
+            
+            <div class="wiki-notice">
+                <div class="notice-title">編集ステータス / スタブ</div>
+                <p>Sedan は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！</p>
+            </div>
+
+            <!-- インフォボックス -->
+            <div class="infobox">
+                <div class="infobox-title">Sedan</div>
+                <div class="infobox-image">
+                    <img src="SedanRemodel.png" alt="Sedan">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">The standard civilian cruiser</div>
+                <table>
+                    <tr>
+                        <th>体力</th>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>4 (運転手1 / 助手席3)</td>
+                    </tr>
+                    <tr>
+                        <th>速度</th>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし</td>
+                    </tr>
+                    <tr>
+                        <th>アクセス</th>
+                        <td>全チーム (All teams)</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>0</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#overview">1 概要</a></li>
+                    <li><a href="#appearance">2 外観</a></li>
+                    <li><a href="#tips">3 Tips</a></li>
+                    <li><a href="#pros-and-cons">4 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">4.1 長所</a></li>
+                            <li><a href="#cons">4.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">5 トリビア</a></li>
+                    <li><a href="#gallery">6 ギャラリー</a></li>
+                </ol>
+            </div>
+
+            <h2 id="overview">概要</h2>
+            <p>Sedan は、民間人および非戦闘員の輸送用に設計された、基本的かつ非武装の車両である。軽量に作られており保護性能は最小限に抑えられているため、戦闘シナリオには適していない。</p>
+
+            <h2 id="appearance">appearance</h2>
+            <p>ボディはさまざまなカラー（画像では赤）に変更可能で、非常にオーセンティックなスタイルの大きめのボンネットと黒いルーフを備えている。また、シルバーの縁取り、背面の2つの大きなウイング、前面には素敵なエンブレムが配置されている。</p>
+
+            <h2 id="tips">Tips</h2>
+            <ul>
+                <li>戦闘地域や、GSP/NMPの存在感が強いエリアは避けること。</li>
+                <li>ウェスト・ヌービア（WN）工作員が周囲に溶け込むための偽装ツールとして機能する。</li>
+                <li>色違いでスポーンできる唯一の車両である。</li>
+            </ul>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>ナラモ（Naramo）における一般市民やDOE従業員の一般的な移動手段として人気がある。</li>
+                <li>市街地、または発電所の駐車場でスポーンさせることができる。</li>
+                <li>ウェスト・ヌービア（WN）によって、発電所の近くや内部に潜入するための偽装用として時折使用される。</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>あらゆる車載兵器や個人の武器に対して非常に脆い。</li>
+                <li>対ビークル攻撃に耐えることができない。</li>
+                <li>大型の車両に簡単に側面を突かれたり、体当たりされたりする。</li>
+            </ul>
+
+            <h2 id="trivia">トリビア</h2>
+            <p>車両のモデルがメッシュで作られているため、窓は破壊されない仕様になっている。</p>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <p>WIP</p>
+
+            <!-- 編集セクション -->
+            <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
+                <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/sedan.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                    ✏️ GitHubでこのページを編集する
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // ページ内の情報（サイドバーのリンクや本文）を自動で収集して検索対象にする仕組み
+        function getAutoWikiPages() {
+            let pages = [];
+            
+            // サイドバーのリンクを自動で全取得
+            const sidebarLinks = document.querySelectorAll('.side-nav a');
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const title = link.textContent.trim();
+                if (href && title && !pages.some(p => p.url === href)) {
+                    pages.push({ url: href, title: title, content: title });
+                }
+            });
+
+            // 現在のページのタイトルと本文を自動で取得
+            const currentTitle = document.querySelector('.page-title') ? document.querySelector('.page-title').textContent : document.title;
+            const currentUrl = window.location.pathname.split('/').pop() || 'sedan.html';
+            
+            let currentContent = '';
+            document.querySelectorAll('main p, main li, main th, main td, main h2, main h3').forEach(el => {
+                currentContent += el.textContent + ' ';
+            });
+
+            const existingIndex = pages.findIndex(p => p.url === currentUrl);
+            if (existingIndex !== -1) {
+                pages[existingIndex].content = currentContent;
+            } else {
+                pages.push({ url: currentUrl, title: currentTitle, content: currentContent });
+            }
+
+            return pages;
+        }
+
+        function autoSearch(keyword) {
+            const popup = document.getElementById("search-results-popup");
+            const query = keyword.trim().toLowerCase();
+
+            if (!query) {
+                popup.style.display = "none";
+                popup.innerHTML = "";
+                return;
+            }
+
+            const wikiPages = getAutoWikiPages();
+            const matches = wikiPages.filter(page => 
+                page.title.toLowerCase().includes(query) || (page.content && page.content.toLowerCase().includes(query))
+            );
+
+            if (matches.length === 0) {
+                popup.style.display = "block";
+                popup.innerHTML = `<div style="padding: 10px; font-size: 0.9rem; color: #54595d;">一致するページはありません</div>`;
+                return;
+            }
+
+            let html = "<ul style='list-style: none; margin: 0; padding: 0;'>";
+            matches.forEach(page => {
+                html += `<li style='border-bottom: 1px solid #eaecf0;'>
+                    <a href="${page.url}" style='display: block; padding: 10px; text-decoration: none; color: #0645ad; font-size: 0.9rem;'>
+                        <strong>${page.title}</strong>
+                    </a>
+                </li>`;
+            });
+            html += "</ul>";
+
+            popup.innerHTML = html;
+            popup.style.display = "block";
+        }
+
+        function performSearch(event) {
+            event.preventDefault();
+        }
+
+        // 枠外をクリックしたらポップアップを閉じる
+        document.addEventListener("click", (e) => {
+            const searchBox = document.querySelector(".search-box");
+            if (!searchBox.contains(e.target)) {
+                document.getElementById("search-results-popup").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
