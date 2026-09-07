@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMV - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .gallery-item {
+            background: #fdfdfd;
+            border: 1px solid #eaecf0;
+            padding: 10px;
+            text-align: center;
+            width: 180px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .gallery-thumb {
+            width: 100%;
+            height: 110px;
+            background: #eaecf0;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-caption {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            
+            <div class="infobox">
+                <div class="infobox-title">PMV</div>
+                <div class="infobox-image">
+                    <img src="PMV.png" alt="PMV">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">
+                    LLUVのコピー＆ペースト
+                </div>
+                <table>
+                    <tr>
+                        <th>耐久値</th>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <th>最高速度</th>
+                        <td>66</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>33</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし</td>
+                    </tr>
+                    <tr>
+                        <th>所属チーム</th>
+                        <td>WN, FRR, FMDF, BFO, 1SFA</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>なし (N/A)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h1 class="page-title">PMV</h1>
+            <p><strong>PMV</strong>は、GSPのLLUVと速度および耐久性が類似している汎用軽車両である。WN（West Noobians）で最初にロック解除される車両であり、必要XPは0で、主に基本的な移動手段として機能する。</p>
+            <p>この車両はWNやBFOの人員をレイドへ輸送するために大いに頼られており、検問所の壁を登るためにも使用できるため、迅速な部隊の突入や増援において非常に多用途に活用される。</p>
+
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#appearance">1 外見</a></li>
+                    <li><a href="#tips">2 Tips</a></li>
+                    <li><a href="#pros-and-cons">3 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">3.1 長所</a></li>
+                            <li><a href="#cons">3.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">4 トリビア</a></li>
+                    <li><a href="#gallery">5 ギャラリー</a></li>
+                </ol>
+            </div>
+
+            <h2 id="appearance">外見</h2>
+            <p>1980年代のランドローバー・ワン・テン（Land Rover One Ten）をベースにしている。</p>
+
+            <h2 id="tips">Tips</h2>
+            <ul>
+                <li>戦闘目的というよりも、迅速な部隊移動やレイド目標への移動に最適である。</li>
+                <li>壁を登ったり、より重い車両ではアクセスできないエリアを移動するために活用できる。</li>
+                <li>敵地を移動する際は、グループで行動するか、護衛を伴って運用すべきである。</li>
+            </ul>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>最大7人の仲間を輸送できる</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>低い耐久値により、対戦車兵器や車載機関銃に対して脆弱である。</li>
+                <li>乗員に対する保護が最小限であり、ガンナーやドライバーが容易に狙撃される。</li>
+                <li>装甲や武装が欠如しているため、長期的な銃撃戦での性能が低い。</li>
+                <li>セダンよりも顕著に速度が遅い</li>
+            </ul>
+
+            <h2 id="trivia">トリビア</h2>
+            <ul>
+                <li>迷彩柄の古いジープのように見える。</li>
+                <li>貨物バイパスから警戒を避けてプラント内に侵入するには、セダンを使用すること。</li>
+            </ul>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-thumb"><img src="PMV.png" alt="PMV"></div>
+                    <div class="gallery-caption">PMV</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
