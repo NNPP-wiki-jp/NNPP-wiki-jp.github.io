@@ -100,43 +100,16 @@
     </header>
 
     <div class="container">
-        <!-- サイドバー -->
-        <nav class="side-nav" id="sidebar">
-            <div class="sidebar-section">
-                <h3>メイン</h3>
-                <ul>
-                    <li><a href="index.html">メインページ</a></li>
-                    <li><a href="rules.html">コミュニティルール</a></li>
-                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
-                </ul>
-                <h3>データベース</h3>
-                <ul>
-                    <li><a href="departments.html">各部門の解説</a></li>
-                    <li><a href="mechanics.html">ゲームメカニクス</a></li>
-                    <li><a href="map.html">マップ・拠点位置</a></li>
-                    <li><a href="vehicles.html">ビークル</a></li>
-                    <li><a href="weapons.html">武器・装備</a></li>
-                    <li><a href="gamepasses.html">ゲームパス</a></li>
-                    <li><a href="badges.html">バッジ</a></li>
-                </ul>
-                <h3>コミュニティ</h3>
-                <ul>
-                    <li><a href="bbs-general.html">雑談掲示板</a></li>
-                    <li><a href="bbs-qa.html">質問掲示板</a></li>
-                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
-                </ul>
-            </div>
-        </nav>
+        <nav class="side-nav" id="sidebar"></nav>
 
         <main class="main-content">
             <h1 class="page-title">Streetwagon</h1>
             
             <div class="wiki-notice">
-                <div class="notice-title">編集ステータス / スタブ</div>
-                <p>Streetwagon は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！</p>
+                <div class="notice-title">編集ステータス / 作成中</div>
+                <p>Streetwagon は現在作成中です。この記事は作成中です。知識を共有して NNPP非公式Wiki の発展にご協力ください！</p>
             </div>
 
-            <!-- インフォボックス -->
             <div class="infobox">
                 <div class="infobox-title">Streetwagon</div>
                 <div class="infobox-image">
@@ -175,7 +148,6 @@
                 </table>
             </div>
 
-            <!-- 目次 -->
             <div class="toc">
                 <div class="toc-title">目次</div>
                 <ol>
@@ -204,7 +176,7 @@
             <ul>
                 <li>市街地やプラントゾーン内での、リスクの低い移動に最適。</li>
                 <li>簡単に破壊されるのを防ぐため、戦闘地域や既知の敵対エリアは避けること。</li>
-                <li>一般市民や、身を隠して潜入しようとするウェスト・ヌービア軍（West Noobian Forces）の目立たない移動手段としても利用できる。</li>
+                <li>一般市民や、身を隠して潜入しようとする<a href="WNAF.html">ウェスト・ヌービア軍</a>の目立たない移動手段としても利用できる。</li>
             </ul>
 
             <h2 id="pros-and-cons">長所と短所</h2>
@@ -220,7 +192,7 @@
             <h3 id="cons">短所</h3>
             <ul>
                 <li>装甲が軽く、非常に脆い。</li>
-                <li>車載兵器、対戦車（AT）弾、あるいは激しい衝突からの攻撃に耐えることができない。</li>
+                <li>車載兵器、対戦車兵器、あるいは激しい衝突からの攻撃に耐えることができない。</li>
                 <li>敵車両によって簡単に側面を取られたり、無力化されたりする。</li>
             </ul>
 
@@ -230,73 +202,26 @@
             <h2 id="gallery">ギャラリー</h2>
             <p>WIP</p>
 
-            <!-- 編集セクション -->
             <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
                 <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
                 <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/streetwagon.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-                    ✏️ GitHubでこのページを編集する
+                    GitHubでこのページを編集する
                 </a>
             </div>
         </main>
     </div>
 
     <script>
-        // 検索対象のページリスト
-        const wikiPages = [
-            { 
-                url: "index.html", 
-                title: "メインページ", 
-                content: "NNPP非公式Wikiへようこそ Robloxの原子力発電所シミュレーターNNPPのプレイヤー有志による非公式ファンWikiです ゲームメカニクス 部門紹介 警備部門 技術部門 マップ 拠点位置 ビークル 武器 装備 ゲームパス バッジ 初心者攻略 マニュアル" 
-            },
-            { 
-                url: "rules.html", 
-                title: "コミュニティルール", 
-                content: "コミュニティルール 編集に関するガイドラインやマナーについて記載しています。" 
-            },
-            { 
-                url: "departments.html", 
-                title: "各部門の解説", 
-                content: "部門紹介 全チームと役割 警備部門 技術部門 Plant Maintenance PM など各部門の特徴や加入方法。" 
-            },
-            { 
-                url: "strategy.html", 
-                title: "初心者攻略・マニュアル", 
-                content: "初心者攻略 マニュアル ゲームの始め方 基本操作 アイテム ツールの使い方。" 
-            },
-            { 
-                url: "mechanics.html", 
-                title: "ゲームメカニクス", 
-                content: "原子炉の制御やシステムなど、ゲームの仕組み全般を解説しています。" 
-            },
-            { 
-                url: "map.html", 
-                title: "マップ・拠点位置", 
-                content: "発電所敷地内の構造や各ゾーンの配置に関する詳細です。" 
-            },
-            { 
-                url: "vehicles.html", 
-                title: "ビークル", 
-                content: "移動や警備で使用される各種車両についての解説です。" 
-            },
-            { 
-                url: "m41-doe-supply.html", 
-                title: "M41 DOE Supply", 
-                content: "M41 DOE Supply Logistical Operations LO サプライボックス 輸送 スターター車両 M41 Utility Truck 体力90 速度69 荷台" 
-            },
-            { 
-                url: "maintenance-pickup-truck.html", 
-                title: "Maintenance Pickup Truck", 
-                content: "Maintenance Pickup Truck Plant Maintenance PM 維持管理 プラントメンテナンス 車両 体力16 速度63 ブロキシコーラ ハシゴ Wrenches and Workorders" 
-            },
-            { 
-                url: "streetwagon.html", 
-                title: "Streetwagon", 
-                content: "Streetwagon Civilian Station Wagon セダン 民間車両 全チーム 体力12 速度75 セキュリティカー Security Car ウェスト・ヌービア軍" 
-            }
-        ];
+        // サイドバーを外部ファイルから読み込む
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
 
         let originalContent = "";
 
+        // 検索機能（自動生成された search.json を利用）
         function performSearch(event) {
             event.preventDefault();
             const searchInput = document.getElementById("search-input");
@@ -326,43 +251,54 @@
             });
 
             const resultsList = document.getElementById("search-results-list");
-            let hitCount = 0;
+            const statusText = document.getElementById("search-status");
 
-            for (const page of wikiPages) {
-                const targetTextLower = `${page.title} ${page.content}`.toLowerCase();
+            // search.json から動的に検索をかける
+            fetch('search.json')
+                .then(response => response.json())
+                .then(wikiPages => {
+                    let hitCount = 0;
 
-                if (targetTextLower.includes(keyword)) {
-                    hitCount++;
-                    let snippet = "";
-                    const index = page.content.toLowerCase().indexOf(keyword);
-                    if (index !== -1) {
-                        const start = Math.max(0, index - 20);
-                        const end = Math.min(page.content.length, index + 60);
-                        snippet = `... ${page.content.substring(start, end)} ...`;
-                    } else {
-                        snippet = page.content.substring(0, 80) + "...";
+                    for (const page of wikiPages) {
+                        const targetTextLower = `${page.title} ${page.content}`.toLowerCase();
+
+                        if (targetTextLower.includes(keyword)) {
+                            hitCount++;
+                            let snippet = "";
+                            const index = page.content.toLowerCase().indexOf(keyword);
+                            if (index !== -1) {
+                                const start = Math.max(0, index - 20);
+                                const end = Math.min(page.content.length, index + 60);
+                                snippet = `... ${page.content.substring(start, end)} ...`;
+                            } else {
+                                snippet = page.content.substring(0, 80) + "...";
+                            }
+
+                            const li = document.createElement("li");
+                            li.style.marginBottom = "25px";
+                            li.style.paddingBottom = "15px";
+                            li.style.borderBottom = "1px solid #eaecf0";
+                            li.innerHTML = `
+                                <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none; color: #0645ad;">${page.title}</a>
+                                <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5; color: #222;">${snippet}</div>
+                                <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px; color: #54595d;">URL: ${page.url}</div>
+                            `;
+                            resultsList.appendChild(li);
+                        }
                     }
 
-                    const li = document.createElement("li");
-                    li.style.marginBottom = "25px";
-                    li.style.paddingBottom = "15px";
-                    li.style.borderBottom = "1px solid #eaecf0";
-                    li.innerHTML = `
-                        <a href="${page.url}" style="font-size: 1.15rem; font-weight: bold; text-decoration: none;">${page.title}</a>
-                        <div style="font-size: 0.9rem; margin-top: 6px; line-height: 1.5;">${snippet}</div>
-                        <div style="font-size: 0.8rem; opacity: 0.6; margin-top: 5px;">URL: ${page.url}</div>
-                    `;
-                    resultsList.appendChild(li);
-                }
-            }
-
-            const statusText = document.getElementById("search-status");
-            if (hitCount === 0) {
-                statusText.textContent = "";
-                resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
-            } else {
-                statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
-            }
+                    if (hitCount === 0) {
+                        statusText.textContent = "";
+                        resultsList.innerHTML = `<p>"${searchInput.value}" に一致するページは見つかりませんでした。</p>`;
+                    } else {
+                        statusText.textContent = `"${searchInput.value}" の結果 約 ${hitCount} 件`;
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    statusText.textContent = "";
+                    resultsList.innerHTML = `<p>検索インデックスの読み込みに失敗しました。</p>`;
+                });
         }
     </script>
 </body>
