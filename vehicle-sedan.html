@@ -96,39 +96,12 @@
             <form id="wiki-search-form" onsubmit="performSearch(event)">
                 <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
             </form>
-            <!-- リアルタイムの検索候補ポップアップ -->
             <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
         </div>
     </header>
 
     <div class="container">
-        <!-- サイドバー -->
-        <nav class="side-nav" id="sidebar">
-            <div class="sidebar-section">
-                <h3>メイン</h3>
-                <ul>
-                    <li><a href="index.html">メインページ</a></li>
-                    <li><a href="rules.html">コミュニティルール</a></li>
-                    <li><a href="strategy.html">初心者攻略・マニュアル</a></li>
-                </ul>
-                <h3>データベース</h3>
-                <ul>
-                    <li><a href="departments.html">各部門の解説</a></li>
-                    <li><a href="mechanics.html">ゲームメカニクス</a></li>
-                    <li><a href="map.html">マップ・拠点位置</a></li>
-                    <li><a href="vehicles.html">ビークル</a></li>
-                    <li><a href="weapons.html">武器・装備</a></li>
-                    <li><a href="gamepasses.html">ゲームパス</a></li>
-                    <li><a href="badges.html">バッジ</a></li>
-                </ul>
-                <h3>コミュニティ</h3>
-                <ul>
-                    <li><a href="bbs-general.html">雑談掲示板</a></li>
-                    <li><a href="bbs-qa.html">質問掲示板</a></li>
-                    <li><a href="bbs-group.html">グループ宣伝掲示板</a></li>
-                </ul>
-            </div>
-        </nav>
+        <nav class="side-nav" id="sidebar"></nav>
 
         <main class="main-content">
             <h1 class="page-title">Sedan</h1>
@@ -138,7 +111,6 @@
                 <p>Sedan は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！</p>
             </div>
 
-            <!-- インフォボックス -->
             <div class="infobox">
                 <div class="infobox-title">Sedan</div>
                 <div class="infobox-image">
@@ -177,7 +149,6 @@
                 </table>
             </div>
 
-            <!-- 目次 -->
             <div class="toc">
                 <div class="toc-title">目次</div>
                 <ol>
@@ -204,7 +175,7 @@
             <h2 id="tips">Tips</h2>
             <ul>
                 <li>戦闘地域や、GSP/NMPの存在感が強いエリアは避けること。</li>
-                <li>ウェスト・ヌービア（WN）工作員が周囲に溶け込むための偽装ツールとして機能する。</li>
+                <li><a href="WNAF.html">ウェスト・ヌービア軍</a>（WN）工作員が周囲に溶け込むための偽装ツールとして機能する。</li>
                 <li>色違いでスポーンできる唯一の車両である。</li>
             </ul>
 
@@ -214,7 +185,7 @@
             <ul>
                 <li>ナラモ（Naramo）における一般市民やDOE従業員の一般的な移動手段として人気がある。</li>
                 <li>市街地、または発電所の駐車場でスポーンさせることができる。</li>
-                <li>ウェスト・ヌービア（WN）によって、発電所の近くや内部に潜入するための偽装用として時折使用される。</li>
+                <li><a href="WNAF.html">ウェスト・ヌービア軍</a>（WN）によって、発電所の近くや内部に潜入するための偽装用として時折使用される。</li>
             </ul>
 
             <h3 id="cons">短所</h3>
@@ -230,7 +201,6 @@
             <h2 id="gallery">ギャラリー</h2>
             <p>WIP</p>
 
-            <!-- 編集セクション -->
             <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
                 <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
                 <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/sedan.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
@@ -241,6 +211,13 @@
     </div>
 
     <script>
+        // サイドバーを外部ファイルから読み込む
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+
         // ページ内の情報（サイドバーのリンクや本文）を自動で収集して検索対象にする仕組み
         function getAutoWikiPages() {
             let pages = [];
