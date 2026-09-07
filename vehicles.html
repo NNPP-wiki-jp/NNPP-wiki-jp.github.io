@@ -721,10 +721,23 @@
 
                 <h2>その他の車両</h2>
                 <p>上記のカテゴリに記載されていないチームがスポーンおよび操作できる車両です。</p>
-                <div class="gallery">
+<div class="gallery">
                     <div class="gallery-item" data-img="M40 Recoilless Rifle.png">
                         <div class="gallery-thumb"><img src="M40 Recoilless Rifle.png" alt="M40 Recoilless Rifle"></div>
                         <div class="gallery-caption"><a href="vehicle-m40-recoilless-rifle.html">M40 無反動砲</a></div>
                     </div>
                 </div>
-            </div>
+            </div> <!-- ← ここが既存の最後の閉じタグ -->
+
+            <!-- ▼ このスクリプトをその下の最後に追記する ▼ -->
+            <script>
+                fetch('sidebar.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('sidebar').innerHTML = data;
+                    });
+            </script>
+        </main>
+    </div>
+</body>
+</html>
