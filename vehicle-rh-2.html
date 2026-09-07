@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RH-2 - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .gallery-item {
+            background: #fdfdfd;
+            border: 1px solid #eaecf0;
+            padding: 10px;
+            text-align: center;
+            width: 180px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .gallery-thumb {
+            width: 100%;
+            height: 110px;
+            background: #eaecf0;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-caption {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .dablink {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #54595d;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eaecf0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            
+            <div class="infobox">
+                <div class="infobox-title">RH-2</div>
+                <div class="infobox-image">
+                    <img src="RH-2.png" alt="RH-2">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">
+                    naramo's equivalent of a super-heavy tank
+                </div>
+                <table>
+                    <tr>
+                        <th>耐久値</th>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <th>最高速度</th>
+                        <td>16 (ゲームUI)</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>16 (ゲームUI)</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし (破壊された場合、別の装甲突撃が発令されるまで出撃不可)</td>
+                    </tr>
+                    <tr>
+                        <th>武器</th>
+                        <td>武器1: カノン砲 (HESH)<br>武器2: なし</td>
+                    </tr>
+                    <tr>
+                        <th>所属チーム</th>
+                        <td>WNAF, FRR, FMDF, BFO, 1SFA</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>N/A</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="dablink">
+                この記事はRH-2について扱っています。GSPのHAT-2をお探しの場合は該当ページをご覧ください。
+            </div>
+
+            <h1 class="page-title">RH-2</h1>
+            <p><em>「naramo版の超重戦車」</em></p>
+            <p><strong>RH-2</strong>は、主にWNAFで使用されている戦車である。しかし、FRR、FMDF、BFO、1SFAでも運用が可能である。一撃で敵の装甲に甚大なダメージを与えることができる非常に強力な車両であり、駆逐戦車に分類され、通常のAP弾やHE弾の代わりにHESH（High-Explosive Squash Head：粘着榴弾）を発射する。この戦車は圧倒的な300の総耐久値を誇り、他の装甲車両が羨むほどの攻撃に耐えることができる。西ヌビア少将の戦闘ドクトリン「装甲突撃（Armored Assault）」によってのみ出撃させることが可能である。</p>
+            <p>RH-2は、惨憺（さんたん）たる最高速度、加速力、旋回性能に非常に苦しめられる。後退時はさらに遅くなるため、回避機動が極めて困難であり、側面を突かれやすいため、プレイヤーは周囲の状況を常に把握し慎重に行動せよ。しかし、適切な手腕と位置取りを行えば、この戦車はVT-1、VT-2A1、VT-2E3 ACAV、VT-6、RCV-1にとって悪夢のような存在となる。</p>
+
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#appearance">1 外見</a></li>
+                    <li><a href="#weapons">2 武器</a>
+                        <ul>
+                            <li><a href="#main-cannon">2.1 メインカノン砲</a>
+                               <ul>
+                                   <li><a href="#hesh">2.1.1 HESH (High Explosive Squash Head)</a></li>
+                               </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#weapon-statistics">3 武器統計</a>
+                        <ul>
+                            <li><a href="#cannon">3.1 カノン砲</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#pros-and-cons">4 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">4.1 長所</a></li>
+                            <li><a href="#cons">4.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">5 トリビア</a></li>
+                    <li><a href="#gallery">6 ギャラリー</a></li>
+                </ol>
+            </div>
+
+            <h2 id="appearance">外見</h2>
+            <p>RH-2は、大型で箱型の砲塔と、砲盾付近にラッパーを備えた非常に大きなカノン砲が特徴の巨大な駆逐戦車である。戦車の特徴として、砲塔の左後方に外部クレーン、車体後部に燃料タンクを備えている。また、独特なホイールリムも特徴的である。</p>
+
+            <h2 id="weapons">武器</h2>
+            <h3 id="main-cannon">メインカノン砲</h3>
+            <p>大型のメインカノン砲は、弱点を直撃した際に装甲ターゲットに対して極めて高いダメージを与えるHESH弾を発射する。リロードには非常に長い時間がかかる（およそ15〜20秒？）。</p>
+            <h4 id="hesh">HESH (High Explosive Squash Head)</h4>
+            <p>WIP</p>
+
+            <h2 id="weapon-statistics">武器統計</h2>
+            <h3 id="cannon">カノン砲</h3>
+            <table>
+                <tr>
+                    <th>HESH</th>
+                    <th>ダメージ</th>
+                    <th>発射レート</th>
+                    <th>弾薬</th>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>1</td>
+                </tr>
+            </table>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>300の耐久値と極めて強力な装甲により、RH-2は激しい攻撃に耐えることができる。</li>
+                <li>RCV-1のオートキャノンに対してほぼ完全な無敵を誇り、対戦車攻撃に対する耐性も高く、適切な位置取りを行えば文字通り無敵の存在となる。</li>
+                <li>カノン砲のダメージは、敵車両を破壊せずとも一撃で無力化（行動不能）にするのに十分である。</li>
+                <li>戦車とのシナジーが非常に高く、特にレイドの第1段階において絶大な効果を発揮する。敵に接近を躊躇させると同時に、味方の援護射撃の恩恵を強く受けることができる。</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>惨憺たる最高速度、加速力、旋回性能。後退時はさらに遅くなる。これにより戦車が非常に側面攻撃に弱くなる（アドバイス：WNの有能なVT-6使いに護衛してもらうと、単独行動よりも圧倒的に生存が楽になる）。</li>
+                <li>自衛用の同軸機銃がないため、歩兵の群れに対して非常に無防備になる。</li>
+                <li>おそろしく遅いリロード速度のため、ほとんどの車両よりもDPSが低く、長期間にわたって無防備な状態が晒される。</li>
+                <li>出撃させるにはWN少将が「装甲突撃」を発令する必要がある。</li>
+                <li>ライフは1つ。つまり、次の装甲突撃が発令されるまで再出撃できない。</li>
+                <li>エンジンの背面屋根と砲塔の一番後ろの部分が、対戦車兵器やIFVオートキャノンAP弾、HEATミサイルによる最大ダメージを受ける主要な弱点である（砲塔の後部を撃たれた場合、ATおよびHATは45ダメージを与える可能性がある）。</li>
+                <li>MTV Cannonは正面装甲を貫通できるため、過信は禁物である。</li>
+            </ul>
+
+            <h2 id="trivia">トリビア</h2>
+            <p>Blaleyの動画「Hammerhead」に登場した。</p>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-thumb"><img src="RH-2.png" alt="RH-2"></div>
+                    <div class="gallery-caption">RH-2</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
