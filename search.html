@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>検索結果</title>
+    <link rel="stylesheet" href="style.css"> <!-- お使いのCSSファイル名に合わせて変更してください -->
+</head>
+<body>
+    <div class="container">
+        <h1 id="search-title">検索結果</h1>
+        <p><a href="index.html">&larr; トップページに戻る</a></p>
+        <hr>
+        <div id="search-results-container">
+            <p>検索中...</p>
+        </div>
+    </div>
+
+    <script>
+        // URLの ?q=〇〇 から検索キーワードを取得する
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q') ? urlParams.get('q').trim() : '';
+
+        const titleElem = document.getElementById('search-title');
+        const container = document.getElementById('search-results-container');
+
+        if (!query) {
+            titleElem.textContent = "検索結果";
+            container.innerHTML = `<p>検索キーワードが入力されていません。</p>`;
+        } else {
+            titleElem.textContent = `「${query}」の検索結果`;
+
+            // search.json を読み込んで一致するものを探す
+            fetch('search.json')
+                .then(response => response.json())
+                .then(searchIndex => {
+                    const qLower = query.toLowerCase();
+                    const matches = searchIndex.filter(page => 
+                        page.title.toLowerCase().includes(qLower) || page.content.toLowerCase().includes(qLower)
+                    );
+
+                    if (matches.length === 0) {
+                        container.innerHTML = `<p>"${query}" に一致するページは見つかりませんでした。</p>`;
+                        return;
+                    }
+
+                    let html = `<p>${matches.length}件のページが見つかりました。</p>`;
+                    html += `<ul style="line-height: 1.8;">`;
+                    matches.forEach(page => {
+                        html += `<li><a href="${page.url}" style="font-size: 1.1rem; color: #0645ad; font-weight: bold;">${page.title}</a><br><small style="color: #54595d;">${page.url}</small></li>`;
+                    });
+                    html += `</ul>`;
+
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    console.error(err);
+                    container.innerHTML = `<p>検索インデックスの読み込みに失敗しました。</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
