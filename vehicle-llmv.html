@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMV - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .dablink {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #54595d;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eaecf0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            
+            <div class="dablink">
+                この記事はLLMVについて扱っています。鹵獲されたLLMV（Captured LLMV）をお探しの場合は該当ページをご覧ください。
+            </div>
+
+            <div class="infobox">
+                <div class="infobox-title">LLMV</div>
+                <div class="infobox-image">
+                    <img src="NARAMOTOPS LLMV.png" alt="LLMV">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">
+                    ストレッチャーの魔法を見よ
+                </div>
+                <table>
+                    <tr>
+                        <th>耐久値</th>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <th>最高速度</th>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし</td>
+                    </tr>
+                    <tr>
+                        <th>所属チーム</th>
+                        <td>メディックス（Medics）</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>25,000 XP</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h1 class="page-title">LLMV</h1>
+            <p><em>軽装甲医療車両、戦闘地域から負傷した人員を輸送する</em></p>
+            <p><em>ストレッチャーの魔法を見よ</em></p>
+            <p><strong>LLMV</strong>（Lee's Light Medical Vehicleの略）は、これをアンロックするために25,000 EXPを獲得した地上サービス野戦衛生兵（Ground Service Field Medics）が使用する救急車である。負傷した人員の治療と輸送のために設計されている。</p>
+            <p>LLMVの内部では、患者がストレッチャーで休息することができ、これにより怪我が急速に治癒し、大口径弾薬や爆発物によって失われた四肢を修復することができる。非装甲であるにもかかわらず、LLMVは非装甲車両の中で最も高い体力プールの一つを持っている。</p>
+
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#appearance">1 外見</a></li>
+                    <li><a href="#tips">2 Tips</a></li>
+                    <li><a href="#pros-and-cons">3 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">3.1 長所</a></li>
+                            <li><a href="#cons">3.2 Cons</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">4 トリビア</a></li>
+                </ol>
+            </div>
+
+            <h2 id="appearance">外見</h2>
+            <p>そのかさばる形状が似ていることから、ハンヴィー 2-CT 救急車（Humvee 2-CT Ambulance）をベースにしている可能性が最も高い。</p>
+
+            <h2 id="tips">Tips</h2>
+            <p>LLMVは、通常配備される2つの主要な場所である、メインエントランスの駐車場とチェックポイントで最もよく見られる。</p>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>LLMVの医療ベッドは、失われた四肢を修復し、急速に治療することができる。</li>
+                <li>かなりのダメージに耐えるだけの十分な耐久値を持っている。</li>
+                <li>MTV-Mよりも速い。</li>
+            </ul>
+
+            <h3 id="cons">Cons</h3>
+            <ul>
+                <li>LLMVは対戦車兵器や重機関銃に対して非常に脆弱である。放置された場合、患者もドライバーも無防備になる。</li>
+            </ul>
+
+            <h2 id="trivia">Trivia</h2>
+            <ul>
+                <li>興味深いことに、連邦レンジャー連隊が使用する鹵獲車両は、元のデザインから奪われたものであるにもかかわらず、機能はまったく同じである。</li>
+                <li>LLMVはおそらくM997マキシ救急車に基づいている可能性がある。[1]</li>
+                <li>この車両は、分割前のプレ・スプリット時代にはGSMCにのみ支給されていた。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
