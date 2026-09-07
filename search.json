@@ -182,7 +182,7 @@
   {
     "url": "search.html",
     "title": "検索結果",
-    "content": "検索結果 検索結果 &larr; トップページに戻る 検索中..."
+    "content": "検索結果 &larr; トップページに戻る 検索結果 検索中..."
   },
   {
     "url": "search.js",
