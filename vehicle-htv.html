@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTV - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        .toc a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .wiki-notice {
+            background-color: #fcfcfc;
+            border: 1px solid #c8ccd1;
+            border-left: 4px solid #36c;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-area">
+            <span class="wiki-title">NNPP非公式Wiki</span>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <!-- リアルタイムの検索候補ポップアップ -->
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- サイドバー（sidebar.htmlから自動読み込み） -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <main class="main-content">
+            <h1 class="page-title">HTV</h1>
+            
+            <div class="wiki-notice">
+                <div class="notice-title">編集ステータス / スタブ</div>
+                <p>HTV は現在編集中です。この記事はスタブです。知識を共有して NNPP非公式Wiki の発展にご協力ください！</p>
+            </div>
+
+            <!-- インフォボックス -->
+            <div class="infobox">
+                <div class="infobox-title">HTV</div>
+                <div class="infobox-image">
+                    <!-- 画像ファイル名は必要に応じて変更してください -->
+                    <img src="HTV.png" alt="HTV">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">"Who parked an HTV in front of Security Spawn?" - PS</div>
+                <table>
+                    <tr>
+                        <th>体力</th>
+                        <td>175</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <th>速度</th>
+                        <td>42</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>22</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし</td>
+                    </tr>
+                    <tr>
+                        <th>積載量</th>
+                        <td>物資箱 18個</td>
+                    </tr>
+                    <tr>
+                        <th>アクセス</th>
+                        <td>LO (Logistical Operations)</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>10,000</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#overview">1 概要</a></li>
+                    <li><a href="#appearance">2 外観</a></li>
+                    <li><a href="#tips">3 Tips</a></li>
+                    <li><a href="#pros-and-cons">4 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">4.1 長所</a></li>
+                            <li><a href="#cons">4.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">5 トリビア</a></li>
+                    <li><a href="#gallery">6 ギャラリー</a></li>
+                </ol>
+            </div>
+
+            <h2 id="overview">概要</h2>
+            <p>HTV（Heavy Transport Vehicle / 大型輸送車両）は、戦闘部隊に属さない数少ない重装甲車両の一つである。驚くべきことに、多くの戦車やAPCよりも高い耐久性を誇る。ロジスティカル・オペレーション（LO）の人員がアンロックするには10,000 EXPが必要となる。</p>
+            <p>HTVは18個のサプライ（物資箱）を積載できる一方で、小火器や口径の小さい武器に対して優れた防御力を提供するが、その代わり速度が低下する。</p>
+
+            <h2 id="appearance">外観</h2>
+            <p>WIP</p>
+
+            <h2 id="tips">Tips</h2>
+            <ul>
+                <li>ウェスト・ヌービア軍（<a href="WNAF.html">WNAF</a>）に頻繁に巡回されているため、主要道路は避けること。</li>
+                <li>倉庫へのより直接的なルートとして、線路の交差部へと通じるオフロードの小道を利用すること。</li>
+                <li>丘陵地帯は大きな弱点であり、その巨体と重量ゆえに急斜面では苦戦する。</li>
+                <li>敵に追跡されている場合はチェックポイントに向かい、そこにいる戦闘員に脅威を迎撃してもらうこと。</li>
+                <li>バイパスが開いている場合はそれを活用すること。</li>
+                <li>NNPPへの物資輸送量を最大化する。</li>
+                <li>WNAFが強力な時は安全に物資を移動させるためにHTVの保護が必要となる。</li>
+                <li>ウエスト・ヌービア軍によるレイドの有無に関わらず、一時的に道路をブロックする。</li>
+            </ul>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>多くの物資箱を積載できるため、プレイヤーに多くのXPをもたらす。</li>
+                <li>戦車の砲撃に耐えることができる。</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>曲がる能力が低いため、熟練したドライバーが求められる。</li>
+                <li>速度が遅いため、対戦車兵器や重装甲を貫通可能な弾薬を備えた敵に対して脆弱である。</li>
+                <li>敵部隊が車両に侵入し、ドライバーをキルすることがある。</li>
+                <li>C-18 HMGは弾薬数が多くダメージも高いため、簡単に破壊されてしまう。</li>
+                <li>敵対者が助手席に座り、隠れ家や安全地帯として利用することがある。</li>
+            </ul>
+
+            <h2 id="trivia">トリビア</h2>
+            <ul>
+                <li>倉庫のヤードには、緑色に塗装されたマッププロップ版のバリアントが配置されているが、こちらは純粋に装飾用である。</li>
+                <li>Oshkosh Defense社製のHEMTT（Heavy Expanded Mobility Tactical Truck）に非常によく似ている。</li>
+            </ul>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <p>WIP</p>
+
+            <!-- 編集セクション -->
+            <div class="edit-section" style="margin-top: 40px; padding: 15px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;">
+                <p style="margin: 0 0 10px 0; font-size: 0.95rem;">このページの内容を修正・追加したい場合は、以下のボタンからGitHub上で直接編集できます。</p>
+                <a href="https://github.com/nnpp-wiki-jp/nnpp-wiki-jp.github.io/edit/main/vehicle-htv.html" target="_blank" rel="noopener" style="display: inline-block; background: #2ea44f; color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+                    GitHubでこのページを編集する
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // サイドバーを外部ファイルから読み込む
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+
+        // ページ内の情報（サイドバーのリンクや本文）を自動で収集して検索対象にする仕組み
+        function getAutoWikiPages() {
+            let pages = [];
+            
+            // サイドバーのリンクを自動で全取得
+            const sidebarLinks = document.querySelectorAll('.side-nav a');
+            sidebarLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const title = link.textContent.trim();
+                if (href && title && !pages.some(p => p.url === href)) {
+                    pages.push({ url: href, title: title, content: title });
+                }
+            });
+
+            // 現在のページのタイトルと本文を自動で取得
+            const currentTitle = document.querySelector('.page-title') ? document.querySelector('.page-title').textContent : document.title;
+            const currentUrl = window.location.pathname.split('/').pop() || 'vehicle-htv.html';
+            
+            let currentContent = '';
+            document.querySelectorAll('main p, main li, main th, main td, main h2, main h3').forEach(el => {
+                currentContent += el.textContent + ' ';
+            });
+
+            const existingIndex = pages.findIndex(p => p.url === currentUrl);
+            if (existingIndex !== -1) {
+                pages[existingIndex].content = currentContent;
+            } else {
+                pages.push({ url: currentUrl, title: currentTitle, content: currentContent });
+            }
+
+            return pages;
+        }
+
+        function autoSearch(keyword) {
+            const popup = document.getElementById("search-results-popup");
+            const query = keyword.trim().toLowerCase();
+
+            if (!query) {
+                popup.style.display = "none";
+                popup.innerHTML = "";
+                return;
+            }
+
+            const wikiPages = getAutoWikiPages();
+            const matches = wikiPages.filter(page => 
+                page.title.toLowerCase().includes(query) || (page.content && page.content.toLowerCase().includes(query))
+            );
+
+            if (matches.length === 0) {
+                popup.style.display = "block";
+                popup.innerHTML = `<div style="padding: 10px; font-size: 0.9rem; color: #54595d;">一致するページはありません</div>`;
+                return;
+            }
+
+            let html = "<ul style='list-style: none; margin: 0; padding: 0;'>";
+            matches.forEach(page => {
+                html += `<li style='border-bottom: 1px solid #eaecf0;'>
+                    <a href="${page.url}" style='display: block; padding: 10px; text-decoration: none; color: #0645ad; font-size: 0.9rem;'>
+                        <strong>${page.title}</strong>
+                    </a>
+                </li>`;
+            });
+            html += "</ul>";
+
+            popup.innerHTML = html;
+            popup.style.display = "block";
+        }
+
+        function performSearch(event) {
+            event.preventDefault();
+        }
+
+        // 枠外をクリックしたらポップアップを閉じる
+        document.addEventListener("click", (e) => {
+            const searchBox = document.querySelector(".search-box");
+            if (!searchBox.contains(e.target)) {
+                document.getElementById("search-results-popup").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
