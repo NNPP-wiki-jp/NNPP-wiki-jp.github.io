@@ -43,6 +43,11 @@ function autoSearch(keyword) {
     popup.style.display = "block";
 }
 
-function performSearch(event) {
-    event.preventDefault();
-}
+// ページの外側をクリックしたらポップアップを閉じる親切設計
+document.addEventListener('click', (e) => {
+    const popup = document.getElementById("search-results-popup");
+    const input = document.getElementById("search-input");
+    if (popup && input && !popup.contains(e.target) && e.target !== input) {
+        popup.style.display = "none";
+    }
+});
