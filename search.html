@@ -4,19 +4,86 @@
     <meta charset="UTF-8">
     <title>検索結果</title>
     <link rel="stylesheet" href="style.css"> <!-- お使いのCSSファイル名に合わせて変更してください -->
+    <style>
+        /* 検索結果ページ専用のきれいなスタイル */
+        .search-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-family: sans-serif;
+            color: #222;
+        }
+        .search-container h1 {
+            font-size: 1.8rem;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #0645ad;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .search-meta {
+            font-size: 0.95rem;
+            color: #54595d;
+            margin-bottom: 20px;
+        }
+        .search-results-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .search-result-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eaecf0;
+        }
+        .search-result-title {
+            font-size: 1.15rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .search-result-title a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        .search-result-title a:hover {
+            text-decoration: underline;
+        }
+        .search-result-url {
+            font-size: 0.85rem;
+            color: #006621;
+            margin-bottom: 4px;
+        }
+        .search-result-snippet {
+            font-size: 0.9rem;
+            color: #484848;
+            line-height: 1.5;
+        }
+        .no-results {
+            font-size: 1rem;
+            color: #54595d;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="search-container">
+        <a href="index.html" class="back-link">&larr; トップページに戻る</a>
         <h1 id="search-title">検索結果</h1>
-        <p><a href="index.html">&larr; トップページに戻る</a></p>
-        <hr>
         <div id="search-results-container">
-            <p>検索中...</p>
+            <p class="search-meta">検索中...</p>
         </div>
     </div>
 
     <script>
-        // URLの ?q=〇〇 から検索キーワードを取得する
+        // URLの ?q=〇〇 から検索キーワードを取得
         const urlParams = new URLSearchParams(window.location.search);
         const query = urlParams.get('q') ? urlParams.get('q').trim() : '';
 
@@ -25,11 +92,11 @@
 
         if (!query) {
             titleElem.textContent = "検索結果";
-            container.innerHTML = `<p>検索キーワードが入力されていません。</p>`;
+            container.innerHTML = `<p class="no-results">検索キーワードが入力されていません。</p>`;
         } else {
             titleElem.textContent = `「${query}」の検索結果`;
 
-            // search.json を読み込んで一致するものを探す
+            // search.json を読み込んで検索処理
             fetch('search.json')
                 .then(response => response.json())
                 .then(searchIndex => {
@@ -39,22 +106,40 @@
                     );
 
                     if (matches.length === 0) {
-                        container.innerHTML = `<p>"${query}" に一致するページは見つかりませんでした。</p>`;
+                        container.innerHTML = `<p class="no-results">"${query}" に一致するページは見つかりませんでした。</p>`;
                         return;
                     }
 
-                    let html = `<p>${matches.length}件のページが見つかりました。</p>`;
-                    html += `<ul style="line-height: 1.8;">`;
-                    matches.forEach(page => {
-                        html += `<li><a href="${page.url}" style="font-size: 1.1rem; color: #0645ad; font-weight: bold;">${page.title}</a><br><small style="color: #54595d;">${page.url}</small></li>`;
-                    });
-                    html += `</ul>`;
+                    let html = `<p class="search-meta">${matches.length} 件のページが見つかりました。</p>`;
+                    html += `<ul class="search-results-list">`;
 
+                    matches.forEach(page => {
+                        // 本文からキーワードのまわりを少し切り出してスニペット（抜粋）を作る
+                        let snippet = page.content;
+                        const index = snippet.toLowerCase().indexOf(qLower);
+                        if (index !== -1) {
+                            const start = Math.max(0, index - 40);
+                            const end = Math.min(snippet.length, index + 100);
+                            snippet = (start > 0 ? '...' : '') + snippet.substring(start, end) + (end < snippet.length ? '...' : '');
+                        } else {
+                            snippet = snippet.substring(0, 100) + '...';
+                        }
+
+                        html += `
+                            <li class="search-result-item">
+                                <div class="search-result-title"><a href="${page.url}">${page.title}</a></div>
+                                <div class="search-result-url">${window.location.origin}/${page.url}</div>
+                                <div class="search-result-snippet">${snippet}</div>
+                            </li>
+                        `;
+                    });
+
+                    html += `</ul>`;
                     container.innerHTML = html;
                 })
                 .catch(err => {
                     console.error(err);
-                    container.innerHTML = `<p>検索インデックスの読み込みに失敗しました。</p>`;
+                    container.innerHTML = `<p class="no-results">検索インデックスの読み込みに失敗しました。</p>`;
                 });
         }
     </script>
