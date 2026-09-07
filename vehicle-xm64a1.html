@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XM64A1 - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .gallery-item {
+            background: #fdfdfd;
+            border: 1px solid #eaecf0;
+            padding: 10px;
+            text-align: center;
+            width: 180px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .gallery-thumb {
+            width: 100%;
+            height: 110px;
+            background: #eaecf0;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-caption {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            
+            <div class="infobox">
+                <div class="infobox-title">XM64A1</div>
+                <div class="infobox-image">
+                    <img src="XM64A1.png" alt="XM64A1">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">
+                    Estimated lifespan of 35 seconds or half an hour
+                </div>
+                <table>
+                    <tr>
+                        <th>耐久値</th>
+                        <td>120/120 HP</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>8 (乗員用)</td>
+                    </tr>
+                    <tr>
+                        <th>最高速度</th>
+                        <td>56 スタッド [35 Mph]</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>-30 スタッド [-18 Mph]</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>10分 [共有]</td>
+                    </tr>
+                    <tr>
+                        <th>武器</th>
+                        <td>
+                            武器1: 100発「オートカノン」 [APDS/HE]<br>
+                            武器2: 対戦車無誘導ミサイル [HEAT]
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>所属チーム</th>
+                        <td>BFO, 1SFA</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>300,000 XP</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="font-style: italic; color: #54595d; margin-bottom: 15px; font-size: 0.9em;">
+                この記事は XM64A1 についてのものです。XM64 をお探しですか？
+            </div>
+
+            <h1 class="page-title">XM64A1</h1>
+            <p><em>「歩兵を乗せて戦い、戦車に同行するように設計された装甲車両。プレイヤーの間では『ブラッドレー』として知られている。」</em> — XM64A1の車両説明</p>
+            <p><strong>XM64A1</strong>は、ゲーム「Naramo Nuclear Plant」に登場する装甲車両であり、主力戦車 [MBT] に誤って分類されている。ブロクシアン連邦 [BFO] チームの専用車両であり、装甲防御力が中程度から大幅に強化されている。残念ながら、最高速度がいくらか低下している（重量が原因と噂されている）が、攻撃力と奇襲における圧倒的な威力は損なわれていない。「Chutes and Ladders」アップデートにおいて、前バージョンのアップグレード版として追加された。</p>
+            <p>この車両を使用するには、ブロクシアン連邦 [BFO] チームで300,000 XPに到達しているか、同チーム内の階級「Military Attache」を有している必要がある。</p>
+
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#appearance">1 外見</a></li>
+                    <li><a href="#weapons">2 武器</a>
+                        <ul>
+                            <li><a href="#autocannon">2.1 オートカノン</a></li>
+                            <li><a href="#anti-tank-missile">2.2 対戦車無誘導ミサイル</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#weapon-statistics">3 武器統計</a>
+                        <ul>
+                            <li><a href="#stats-autocannon">3.1 オートカノン</a></li>
+                            <li><a href="#stats-integrated-rocket">3.2 統合ロケット</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#tips">4 Tips</a></li>
+                    <li><a href="#pros-and-cons">5 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">5.1 長所</a></li>
+                            <li><a href="#cons">5.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#gallery">6 ギャラリー</a></li>
+                    <li><a href="#update-history">7 アップデート履歴</a></li>
+                    <li><a href="#trivia">8 トリビア</a></li>
+                </ol>
+            </div>
+
+            <h2 id="appearance">外見</h2>
+            <p>XM64A1は、XM723 / MICV-65プロトタイプに似た外観をしており、淡いダークグリーンの色合いと、統合されたTREK装甲システムとその断片化によって可能となった幾何学的・三角形の形状をしている。また、砲塔リングに脆弱性を露出するコンパクトな砲塔を備えている。主にM2/M3 ブラッドレーおよびXM2をベースにしている。正面から見ると、リアライトと車体側面のハッチがある。砲塔には、リアライト、無線アンテナ、ハッチが備わっている。</p>
+            <p>XM64A1は、現実のBUSK（ブラッドレー都市型生存キット）に類似した改良型の防御機構を備えている。この車両には、前面と側面に確認できる溶接鋼板（SA、または「空間装甲」）が装備されている模様である。また、車両のやや高い部分を保護するための土嚢も備えられている。</p>
+
+            <h2 id="weapons">武器</h2>
+            <h3 id="autocannon">オートカノン</h3>
+            <p>XM64A1は、100発のベルト給弾式オートカノンを搭載している。RCV-1のものよりもはるかに大型であり、より強力な装甲車両の処理が可能である。カノン砲は主に以下の弾薬を使用する：</p>
+            <ul>
+                <li><strong>APDS [装弾筒付徹甲弾 / Armor-Piercing Discarding Sabot]</strong></li>
+                <li><strong>HE [榴弾 / High-Explosive]</strong></li>
+            </ul>
+            <p><em>— 注意: XM64A1の「オートカノン」はゲーム内で最も強力な武器の一つであり、歩兵の制圧から装甲ターゲットの排除まであらゆる用途に使用される。主武器として活用すべきである。</em></p>
+
+            <h3 id="anti-tank-missile">対戦車無誘導ミサイル</h3>
+            <p>XM64A1は、軽量装甲で覆われた単発の無誘導ミサイル用ロケットランチャーを搭載している（ゲーム内では機能しない）。これは露出しており、砲塔の上方に上向きにぶら下がっている（XM723/MICV-65と同様で非常によく似ている）。砲塔に直接接続されていないため精度は最高とは言えず、ドライバーの腕に大きく依存する。ミサイルは主に以下を使用する：</p>
+            <ul>
+                <li><strong>HEAT [対戦車榴弾 / High Explosive Anti-Tank]</strong></li>
+            </ul>
+            <p><em>— 注意: ゲーム内で最も強力な対戦車無誘導ミサイルの一つであり、戦車やAPC、あるいは一般のあらゆる車両といった大型の装甲車両に対して非常に有効である。成形薬弾であるため歩兵に対しては常時有効とは限らず、装甲車両に対してのみ必要となる。</em></p>
+
+            <h2 id="weapon-statistics">武器統計</h2>
+            
+            <h3 id="stats-autocannon">オートカノン</h3>
+            <p><strong>APDS (Armor-Piercing Discarding Sabot)</strong> | <em>「APDS弾は、重戦車の装甲を貫通するために専用設計された高速なサブキャリバー発射体です。爆薬を内蔵していないため、エリア爆発を発生させず直接命中によるダメージに限定されるため、歩兵やソフトターゲットに対して使用すべきではありません。」</em></p>
+            <table>
+                <tr>
+                    <th>ダメージ</th>
+                    <th>発射レート</th>
+                    <th>マガジン</th>
+                    <th>リロード時間</th>
+                </tr>
+                <tr>
+                    <td>~35 (基礎)<br>35 (胴体)<br>35 (ヘッドショット)</td>
+                    <td>110 RPM</td>
+                    <td>100発 ベルト給弾</td>
+                    <td>5 - 5.50秒</td>
+                </tr>
+            </table>
+
+            <p><strong>HE (High-Explosive)</strong> | <em>「榴弾（HE）弾薬は、強力な衝撃波によって歩兵や軽車両を排除するために専用設計された高爆薬を射出します。貫通能力を欠いているため、爆発が表面で散逸して装甲を損傷させないため、重戦車に対して使用すべきではありません。」</em>（ゲームバランス向のため、HEの着弾爆発は弱体化調整されている）</p>
+            <table>
+                <tr>
+                    <th>ダメージ</th>
+                    <th>発射レート</th>
+                    <th>マガジン</th>
+                    <th>リロード時間</th>
+                </tr>
+                <tr>
+                    <td>~22 (基礎)<br>22 (胴体)<br>35 (ヘッドショット)</td>
+                    <td>110 RPM</td>
+                    <td>100発 ベルト給弾</td>
+                    <td>5 - 5.50秒</td>
+                </tr>
+            </table>
+            <p>弾倉（ベルト）が完全に枯渇した場合のみリロードが可能。もう一つの方法は、<strong>[V]キー</strong>を押してマガジンをリロードすること。残弾が少ない場合にこれを実行するのが有効である。なぜなら、弾薬を完全に使い切るまで待ってしまうと、通常は最大のリロード時間が課されるためである。</p>
+
+            <h3 id="stats-integrated-rocket">統合ロケット</h3>
+            <p><strong>HEAT (High Explosive Anti-Tank)</strong> | <em>「HEAT弾薬は、あらゆるレンジで重戦車を貫通可能な溶融金属のジェットを射出します。他の発射体とは異なり、壁を挟んでも顕著な爆風ダメージを届けるため遮蔽物の裏の歩兵に対して致命的ですが、その主機能は依然として装甲車両の破壊です。」</em>（ゲームバランス調整のため、HEATの爆発は弱体化調整されている）</p>
+            <table>
+                <tr>
+                    <th>ダメージ</th>
+                    <th>発射レート</th>
+                    <th>マガジン</th>
+                    <th>リロード時間</th>
+                </tr>
+                <tr>
+                    <td>~70 (基礎)<br>xNaN (胴体)<br>xNaN (ヘッドショット)</td>
+                    <td>7 RPM</td>
+                    <td>単発 (Single-Shot)</td>
+                    <td>7.90 - 9.70秒</td>
+                </tr>
+            </table>
+
+            <h2 id="tips">Tips</h2>
+            <ul>
+                <li>ゲームのTREKシステムのおかげで、防御力が最も高くなる車体正面を常に向けるように心がけること。同様に、都市型キットを装備していても、弱点を晒せば最大のダメージを受けることになる。</li>
+                <li>RCV-1は生存への大きな脅威となる。相手にHEATロケットを消費させ、その後で自前のロケットやオートカノンで撃破を狙うこと。XM64A1のほうが基礎耐久値が高い利点がある。</li>
+                <li>XM64A1のもう一つの運用法はレイド中である。ゲーム内で最も強力なロケットを所持しているため、VT-1、VT-2A1、VT-2E3 ACAV、VT-6といった装甲車両に甚大なダメージを与えることができる。敵の重装甲車両の側面や背面に対してオートカノンを使用すること（正面から射撃するとダメージが0になる）。</li>
+                <li>常に<strong>XM-3</strong>に同行するように心がけること。レイド中、XM-3は強力な味方となり、同じHEAT弾を使用して敵歩兵から身を守ってくれる。</li>
+            </ul>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>ゲーム内で最高の「装甲車両」の一つとして挙げられる。</li>
+                <li>このバリアントは前バージョンに比べて防御力が向上している。</li>
+                <li>HE弾は着弾半径がかなり広いため、対歩兵戦で有利に働く。[爆発/爆風半径]</li>
+                <li>ランクの割に弾薬スロットがかなり多く、その点で他の車両よりも優れている。</li>
+                <li>オートカノンにより、貫通力は非常に低くなるものの、かなりの距離から武装車両を破壊できる。</li>
+                <li>「装甲車両」カタログの中で2番目に長い寿命を持ち、非常に優れており使用していて楽しい。</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>HE弾は他の武装車両に対する貫通力がかなり乏しい。</li>
+                <li>砲塔にミサイルが統合されている他の装甲車両に対して脆弱。</li>
+                <li>車両の俯角（ガンデプレッション）が制限されており、待ち伏せ状況において退屈でフラストレーションが溜まる要因になる。</li>
+                <li>前バージョンと比較して総ヒットボックスが拡大している。</li>
+                <li>使用するために Bloxian Foreign Oversight ゲームパス（比較的高価）が必要となる。</li>
+                <li>統合ミサイルをかなりの遠距離から発射した場合、他の武装車両に対する貫通効果が失われる。</li>
+                <li>前バージョンに比べて速度が低下している。</li>
+            </ul>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-thumb"><img src="XM64A1.png" alt="XM64A1"></div>
+                    <div class="gallery-caption">XM64A1</div>
+                </div>
+            </div>
+
+            <h2 id="update-history">アップデート履歴</h2>
+            <p>（現在WIP）</p>
+
+            <h2 id="trivia">トリビア</h2>
+            <p>（現在WIP）</p>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
