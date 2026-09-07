@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M41 Utility - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        .infobox {
+            float: right;
+            width: 300px;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+        .infobox-title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            background: #eaecf0;
+            padding: 6px;
+            margin: -10px -10px 10px -10px;
+        }
+        .infobox-image {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .infobox-image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eaecf0;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .gallery-item {
+            background: #fdfdfd;
+            border: 1px solid #eaecf0;
+            padding: 10px;
+            text-align: center;
+            width: 180px;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .gallery-thumb {
+            width: 100%;
+            height: 110px;
+            background: #eaecf0;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-caption {
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .dablink {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #54595d;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eaecf0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            
+            <div class="infobox">
+                <div class="infobox-title">M41 Utility</div>
+                <div class="infobox-image">
+                    <img src="NARAMOTOPS M41 Utility.png" alt="M41 Utility">
+                </div>
+                <div style="text-align: center; font-style: italic; font-size: 0.85em; margin-bottom: 10px; color: #54595d;">
+                    "乗っている時間が長くなるほど、私の未来は灰色になっていく" — 検問所に近づくWN兵士
+                </div>
+                <table>
+                    <tr>
+                        <th>耐久値</th>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <th>座席数</th>
+                        <td>10 (最大10人搭乗可能 / 車体ステータス表記は1)</td>
+                    </tr>
+                    <tr>
+                        <th>最高速度</th>
+                        <td>69</td>
+                    </tr>
+                    <tr>
+                        <th>後退速度</th>
+                        <td>34</td>
+                    </tr>
+                    <tr>
+                        <th>クールダウン</th>
+                        <td>なし</td>
+                    </tr>
+                    <tr>
+                        <th>武器</th>
+                        <td>武器1: 防盾付きM2A1</td>
+                    </tr>
+                    <tr>
+                        <th>所属チーム</th>
+                        <td>WN</td>
+                    </tr>
+                    <tr>
+                        <th>必要XP</th>
+                        <td>
+                            WN (西ヌビア): 30,000 XP<br>
+                            BFO (ブロックスシアン外国監督局): 0 XP
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="dablink">
+                この記事はM41 Utilityについて扱っています。M41 Utility (2ND)をお探しの場合は<a href="vehicle-m41-utility-2nd.html">こちら</a>をご覧ください。
+            </div>
+
+            <h1 class="page-title">M41 Utility</h1>
+            <p><em>「乗っている時間が長くなるほど、私の未来は灰色になっていく」 — 検問所に近づくWN兵士</em></p>
+            <p><strong>M41 Utility</strong>は、複数の陣営で使用されている汎用兵員輸送車両である。西ヌビア攻撃軍（West Noobian Assault Force）では、多数の兵士を効率的に輸送するために主に使用されている。30の耐久値、防盾付きの機関銃、まともな最高速度、そして最大10人を収容する能力を備えており、M41は人員輸送において強力で信頼性の高い車両とみなされている。WNにはMTV-2のような車両へのアクセスがないため、ブロックスシアン連邦の車両を除けば、多数の部隊を一度に輸送できる唯一の輸送車両である。</p>
+
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#appearance">1 外見</a></li>
+                    <li><a href="#weapons">2 武器</a>
+                        <ul>
+                            <li><a href="#m2a1-hmg">2.1 M2A1 重機関銃</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#weapon-statistics">3 武器統計</a>
+                        <ul>
+                            <li><a href="#stats-m2a1">3.1 M2A1 重機関銃</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#tips">4 Tips</a></li>
+                    <li><a href="#pros-and-cons">5 長所と短所</a>
+                        <ul>
+                            <li><a href="#pros">5.1 長所</a></li>
+                            <li><a href="#cons">5.2 短所</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#trivia">6 トリビア</a></li>
+                    <li><a href="#gallery">7 ギャラリー</a></li>
+                </ol>
+            </div>
+
+            <h2 id="appearance">外見</h2>
+            <p>WIP</p>
+
+            <h2 id="weapons">武器</h2>
+            <h3 id="m2a1-hmg">M2A1 重機関銃</h3>
+            <p>C-18 HMGのスキン違い。歩兵や軽車両に対して有効である。ガンナーは前方180度の回転が可能。</p>
+
+            <h2 id="weapon-statistics">武器統計</h2>
+            <h3 id="stats-m2a1">M2A1 重機関銃</h3>
+            <table>
+                <tr>
+                    <th>ダメージ</th>
+                    <th>発射レート</th>
+                    <th>弾薬</th>
+                </tr>
+                <tr>
+                    <td>25 (胴体)<br>50 (ヘッドショット)</td>
+                    <td>800 RPM</td>
+                    <td>100発</td>
+                </tr>
+            </table>
+
+            <h2 id="tips">Tips</h2>
+            <ul>
+                <li>部隊の輸送や後方支援に最適である。</li>
+                <li>装甲車両とペアを組むか、遮蔽されたエリアで展開することで、側面攻撃に対する脆弱性を軽減できる。</li>
+                <li>満員のクルーを乗せることで、危険区域からの迅速な増援や人員の撤収を効率的に行うことができる。</li>
+                <li>BFOが大容量の兵員輸送車両に依存しているのと同様に、WN車両の中でも多数の兵士を輸送する主要な手段として機能する。</li>
+                <li>西ヌビアの車列、BFOの展開、および一般的な輸送作戦において一般的に見られる。</li>
+            </ul>
+
+            <h2 id="pros-and-cons">長所と短所</h2>
+            
+            <h3 id="pros">長所</h3>
+            <ul>
+                <li>速度、積載量、防盾付き武装の組み合わせにより、大規模作戦における信頼性の高い主力となる。</li>
+                <li>PMVやPMV (T)よりもわずかに高速である。</li>
+            </ul>
+
+            <h3 id="cons">短所</h3>
+            <ul>
+                <li>軽装甲のため、M41は対戦車兵器やより重い車両に対して脆弱である。</li>
+                <li>ガンナーは部分的に防護されているものの、銃を後方へ完全に回転させることができず、側面からの攻撃に対して無防備になる。</li>
+                <li>集中砲火を受けた際の耐久性が低いため、高ダメージの脅威との直接戦闘は避けるべきである。</li>
+            </ul>
+
+            <h2 id="trivia">トリビア</h2>
+            <p>WIP</p>
+
+            <h2 id="gallery">ギャラリー</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-thumb"><img src="NARAMOTOPS M41 Utility.png" alt="M41 Utility"></div>
+                    <div class="gallery-caption">M41 Utility</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
