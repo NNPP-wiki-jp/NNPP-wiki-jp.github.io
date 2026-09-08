@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>経験値 (XP) - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        /* 目次（TOC） */
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            min-width: 220px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        .wiki-table th, .wiki-table td {
+            border: 1px solid #a2a9b1;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .wiki-table th {
+            background-color: #eaecf0;
+            color: #202122;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+            <h1 class="page-title">経験値 (XP)</h1>
+            <p>経験値システム（ゲーム内では「XP」と表記）は、プレイヤーがゲームを進めるにつれてキャラクターにポイントを付与する、よくあるビデオゲームのメカニックです。ナラモ（Naramo）では、XPを使用してチーム、武器、乗り物をアンロックします。これらは主に「ランク」と呼ばれる称号付きのマイルストーンで付与されます。以下は、プレイヤーに経験値を付与するゲーム内アクティビティの一覧です。各チームのランク要件はそれぞれのページで確認できます。</p>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#general-xp-sources">1 一般的なXP獲得源</a>
+                        <ol>
+                            <li><a href="#meltdown-survival">1.1 メルトダウン生存</a></li>
+                            <li><a href="#reactor-startup">1.2 原子炉起動</a></li>
+                            <li><a href="#killing-people">1.3 敵の撃破</a></li>
+                            <li><a href="#raid-victory">1.4 レイド勝利</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#reactor-shift-operations">2 原子炉およびシフト運営</a>
+                        <ol>
+                            <li><a href="#power-orders">2.1 パワーオーダー</a></li>
+                            <li><a href="#end-of-shift-bonus">2.2 シフト終了ボーナス</a></li>
+                            <li><a href="#disrupting-shift-operations">2.3 シフト運営の妨害</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#team-specific-bonuses">3 チーム固有のボーナス</a>
+                        <ol>
+                            <li><a href="#repairs">3.1 修理</a></li>
+                            <li><a href="#delivering-cargo">3.2 物資輸送</a></li>
+                            <li><a href="#participating-in-corporate-meetings">3.3 企業会議への参加</a></li>
+                            <li><a href="#authorizing-civilians">3.4 市民の認可</a></li>
+                            <li><a href="#guarding-stations">3.5 ステーションの警備</a></li>
+                            <li><a href="#holding-ports">3.6 ポートの保持</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#xp-multipliers-mechanics-breakdown">4 XP倍率とメカニズムの解説</a>
+                        <ol>
+                            <li><a href="#server-wide-personal-boosts">4.1 サーバー全体および個人のブースト</a></li>
+                            <li><a href="#acts-bills">4.2 法案とアクト</a></li>
+                            <li><a href="#leadership-buffs">4.3 リーダーシップバフ</a></li>
+                            <li><a href="#server-penalties">4.4 サーバーペナルティ</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#other">5 その他</a>
+                        <ol>
+                            <li><a href="#noobtubers">5.1 ヌーブチューバーズ</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#trivia">6 トリビア</a></li>
+                </ol>
+            </div>
+
+            <h2 id="general-xp-sources">1 一般的なXP獲得源</h2>
+            <p>これらは特定のチームや役割に関係なく、ほとんどのプレイヤーが利用できるXP獲得方法です。</p>
+
+            <h3 id="meltdown-survival">1.1 メルトダウン生存</h3>
+            <p>メルトダウンを生き残ると 500 XP が獲得できます。これはすべてのプレイヤーに適用されます。</p>
+
+            <h3 id="reactor-startup">1.2 原子炉起動</h3>
+            <p>シフトマネージャーによって Bravo-8 または原子炉の起動が承認されると、すべてのプレイヤーが 100 XP を獲得します。</p>
+
+            <h3 id="killing-people">1.3 敵の撃破</h3>
+            <p>東ヌービアン（East Noobians）または西ヌービアン（West Noobians）は敵を倒すことでXPを獲得でき、1キルにつき 50 XP が付与されます。</p>
+
+            <h3 id="raid-victory">1.4 レイド勝利</h3>
+            <ul>
+                <li>プラントチームがレイドに勝利した場合：戦闘員（Combat Personnel）は 5,000 XP、その他のチームは 1,000 XP を獲得します。</li>
+                <li>西ヌービアン（WN）が勝利した場合：WN側は 2,000 XP を獲得します。</li>
+            </ul>
+
+            <h2 id="reactor-shift-operations">2 原子炉およびシフト運営</h2>
+
+            <h3 id="power-orders">2.1 パワーオーダー</h3>
+            <p>パワーオーダーは70秒ごとに発生します。パワーオーダーが来ると、原子炉運用担当は約20秒間、指定された電力ワット数（15,000〜49,000）を維持することが求められます。完了すると、外部チーム以外の全員にベースとして 150 XP が付与されます。</p>
+
+            <h3 id="end-of-shift-bonus">2.2 シフト終了ボーナス</h3>
+            <p>シフトの終了時に、達成されたパワーオーダー（PO）の数に基づいてティアが割り当てられます。このティアボーナスはすべてのDOEメンバーに与えられ、逆のティア報酬がWNチームに与えられます。</p>
+            <p><strong>注意:</strong> すべてのGSPチームの報酬は50%に削減されます。ただし、パーカッシブ・メンテナンス（Percussive Maintenance）アップデート前は、現在すべてのGSPチームにシフト報酬が支給されていません。ナラモ公式Discordのアップデートログに記載されていないため、これはおそらくバグです。</p>
+            
+            <h4>基本シフト報酬ボーナス</h4>
+            <table class="wiki-table">
+                <thead>
+                    <tr>
+                        <th>ティア</th>
+                        <th>パワーオーダーの数</th>
+                        <th>XP（DOE / 標準）</th>
+                        <th>GSPチーム（削減後）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ティア1シフト</td>
+                        <td>0〜3 POs</td>
+                        <td>500 XP</td>
+                        <td>250 XP</td>
+                    </tr>
+                    <tr>
+                        <td>ティア2シフト</td>
+                        <td>4〜6 POs</td>
+                        <td>1,000 XP</td>
+                        <td>500 XP</td>
+                    </tr>
+                    <tr>
+                        <td>ティア3シフト</td>
+                        <td>6回超の POs</td>
+                        <td>3,000 XP</td>
+                        <td>1,500 XP</td>
+                    </tr>
+                    <tr>
+                        <td>ティア4シフト</td>
+                        <td>?</td>
+                        <td>6,000 XP（2NIAにより削除 / 開発者限定）</td>
+                        <td>3,000 XP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 id="disrupting-shift-operations">2.3 シフト運営の妨害</h3>
+            <p>原子炉運用チームが低いシフトティアを記録した場合、西ヌービアン突撃部隊（とそのサブチーム）およびブロックス連邦（Bloxian Commonwealth）にXPが支給されます。</p>
+            
+            <h4>妨害時のシフト報酬ボーナス</h4>
+            <table class="wiki-table">
+                <thead>
+                    <tr>
+                        <th>ティア</th>
+                        <th>WN / ブロックス連邦へのXP支給額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ティア1シフト</td>
+                        <td>3,000 XP</td>
+                    </tr>
+                    <tr>
+                        <td>ティア2シフト</td>
+                        <td>1,000 XP</td>
+                    </tr>
+                    <tr>
+                        <td>ティア3シフト</td>
+                        <td>500 XP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="team-specific-bonuses">3 チーム固有のボーナス</h2>
+
+            <h3 id="repairs">3.1 修理</h3>
+            <p>主にプラント保守、および高ランクの原子炉運用担当やシフトマネージャーが原子炉のコンポーネントを修理することでXPを獲得できます。プラント内で修理が必要となる部品には、発電機、タービン、給水ポンプがあります。修理から得られるXPの量は修復された耐久度に直接比例しますが、通常は約 25 XP です。</p>
+
+            <h3 id="delivering-cargo">3.2 物資輸送</h3>
+            <p>物流業務（Logistical Operations）の作業員は、プラントへの貨物配達で 50 XP、ロッドの配達で 100 XP を獲得できます。</p>
+
+            <h3 id="participating-in-corporate-meetings">3.3 企業会議への参加</h3>
+            <p>会議の終了時に、TRTを除くすべての参加者が 500 XP を獲得します。</p>
+
+            <h3 id="authorizing-civilians">3.4 市民の認可</h3>
+            <p>ご存知ですか？市民をただ撃つ代わりに、実際にプラントへ入場（認可）させることができます。ほとんどのプラント警備の監視員はこれを知らないようです。ともあれ、プラント警備、企業、現地憲兵は、市民を認可することで1人につき 5 XP を獲得できます。</p>
+
+            <h3 id="guarding-stations">3.5 ステーションの警備</h3>
+            <p>冷却水のコンピュータ、チェックポイント、発電機室の制御ステーション、または制御室に通じる道路で待機すると、戦闘員は30秒ごとに 5 XP を獲得します。また、戦術対応チームのメンバーはプラントディレクターを、地上勤務員は物流業務の乗り物を警備することができます。</p>
+            <p><strong>ヒント:</strong> 地上勤務員（GSP）として物流を警備すると、5分ごとに 1,000 XP を獲得できます。</p>
+
+            <h3 id="holding-ports">3.6 ポートの保持</h3>
+            <p>ポートを保持すると、GSP司令部に3分ごとに 150 XP が付与されます。</p>
+
+            <h2 id="xp-multipliers-mechanics-breakdown">4 XP倍率とメカニズムの解説</h2>
+            <p><strong>基本ルール:</strong></p>
+            <ul>
+                <li><strong>XPモディファイア:</strong> 総XP獲得量は、有効なポリシー、グローバルなゲームイベント、およびその他の二次的要因によって変更される場合があります。</li>
+                <li><strong>倍率のスタック:</strong> 複数のXPブーストを組み合わせて同時に適用（スタック）させることができます。</li>
+                <li><strong>例外:</strong> デイリー報酬や引換コードなどの一部のXPソースは、いかなる倍率の影響も受けません。</li>
+            </ul>
+
+            <h3 id="server-wide-personal-boosts">4.1 サーバー全体および個人のブースト</h3>
+            <ul>
+                <li><strong>サーバー全体の倍率（2倍 / 3倍）:</strong> 週末や大型アップデート時に開発者（Naramo）によって有効化されます。一定期間、サーバー内のすべてのプレイヤーに適用されます。</li>
+                <li><strong>個人ブースト（2倍XP）:</strong> 個別に購入または獲得できる一時的な2倍XPブーストです。</li>
+            </ul>
+
+            <h3 id="acts-bills">4.2 法案とアクト</h3>
+            <ul>
+                <li><strong>危険手当法（Hazard Pay Bill）:</strong>
+                    <ul>
+                        <li>温度が 2100K 超の場合：XP倍率が増加します（最大 +45% ボーナス）。</li>
+                        <li>温度が 2100K 未満の場合：XP倍率が低下します（最大 -15% ペナルティ）。</li>
+                        <li><em>（ヒント：これはWNにも作用しますが、なぜ？）</em></li>
+                    </ul>
+                </li>
+                <li><strong>セキュリティボーナス法（Security Bonus Act）:</strong>
+                    <ul>
+                        <li>ペナルティ：シフト終了ボーナスが 10% 減少します。</li>
+                        <li>バフ：すべてのソースからの戦闘XPが 15% 増加します。</li>
+                    </ul>
+                </li>
+                <li><strong>貨物資金調達法（Cargo Funding Act）:</strong>
+                    <ul>
+                        <li>ペナルティ：物流業務（LO）の出荷配達からのXPが 15% 減少しますが、COは補給列車をより頻繁に呼び出せるようになります。</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 id="leadership-buffs">4.3 リーダーシップバフ</h3>
+            <ul>
+                <li><strong>部門長（PD、PM、LO）:</strong> 特定の部門の行動に対して +30% のXPボーナスを適用できます。</li>
+            </ul>
+
+            <h3 id="server-penalties">4.4 サーバーペナルティ</h3>
+            <ul>
+                <li><strong>低人口ペナルティ:</strong> サーバーのプレイヤー数が30人未満の場合、通常の総XP獲得量は通常の35%まで引き下げられます。</li>
+            </ul>
+
+            <h2 id="other">5 その他</h2>
+
+            <h3 id="noobtubers">5.1 ヌーブチューバーズ</h3>
+            <p>ヌーブチューバーズ社は、食品からグビーが発見された件で大変なバッシングを受けており、人気を回復させるために労働者への賃金支払いを開始しました。皿洗いは 10 XP、食事の提供は 25 XP です。</p>
+
+            <h2 id="trivia">6 トリビア</h2>
+            <ul>
+                <li>ティア4は、12個のパワーオーダーを完了することで達成できるように想定されていました。しかし、ゲームはハードコードされておりティア3のまま固定されています。開発者はコマンドを使用してティア4を達成することができます。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
