@@ -165,6 +165,11 @@
     "content": "Controls and Keybinds - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia Controls and Keybinds ゲーム内で使用できる操作方法（コントロール）とキーバインドの一覧です。知っておくと便利な隠しキーバインドも含まれています。 目次 1 Keybinds and Controls 1.1 役立つ隠しキーバインド 2 General（一般） 3 Weapon（武器） 4 Vehicle（車両） Keybinds and Controls Some helpful hidden keybinds that may help you out. ゲームプレイの助けとなる、役立つ隠しキーバインドです。 General キー 動作 Z ラジオのON/OFF切り替え X クイックチャットメニューを開く Ctrl + Shift + L クイックロッカーメニューを開く Weapon キー 動作 N クロスヘアスタイルの変更 T 武器をしまう（ホルスター） V 銃剣（T-42およびT-42専用） Q スコープ（M-80 AMRのみ） / ズームイン（銃を構えている間） R リロード Vehicle キー 動作 K 車両をひっくり返す（リセット） J 車両を駐車する 1 メイン銃器へ切り替え 2 サブ銃器へ切り替え V 弾薬タイプの切り替え R リロード L タレットのロック"
   },
   {
+    "url": "daily-reward.html",
+    "title": "Daily Reward - NNPP非公式Wiki",
+    "content": "Daily Reward - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia Daily Reward デイリー報酬システムに関する解説ページです。 目次 1 Information 2 Rewards Information デイリー報酬システムでは、プレイするたびに設定された報酬を受け取ることができます。この進捗は、7日目を達成した後、または1日ログインし損ねた場合にリセットされます。 PM、GSP、PSにはそれぞれ特別なユニフォームが存在します。これらの特殊ユニフォームは各チームのページで確認できます。すでに該当チームに所属している（または所持している）場合は、代わりにそのチームのXPが報酬として付与されます。チームの試用期間（トライアル）は累積（スタック）します。報酬はその日に受け取らなくても後からまとめて受け取ることが可能であるため、数日間受け取らずにプレイし、後日2日分以上の報酬をまとめて受け取ることもできます。 Rewards 日目 報酬内容 1日目 1,000 XP 2日目 GSP トライアル（20分） &amp; 2x XP（50分） 3日目 2x XP（60分） 4日目 LMP トライアル（20分） 5日目 2x XP（60分） 6日目 FMDF トライアル（30分） 7日目 ランダムな特殊ユニフォーム"
+  },
+  {
     "url": "departments.html",
     "title": "部門一覧 - NNPP非公式Wiki",
     "content": "部門一覧 - NNPP非公式Wiki NNPP非公式Wiki The Free Encyclopedia 部門一覧 Naramo Nuclear Plant (NNPP) における全役割の一覧である。一部は入隊に試験を必要とするが、それ以外の役割は誰でも選択が可能である。 1. Plant Defense 専門職（試験必須） Noobic Military Police (NMP) [試験必須] 一般職（誰でも可） Plant Security Director of Security Forces Tactical Response Team Personal Security Detachment Ground Service Personnel Special Operation Command 13th Armoured Cavalry Regiment Local Military Police 2. Department of Energy 専門職（試験必須） Noobic Engineering Service (NES) [試験必須] Advanced Noobic Reactor Operations (ANRO) [試験必須] 一般職（誰でも可） Plant Maintenance Plant Operations Chief Logistical Operations Chief Supply Officer Reactor Operations Shift Manager Corporate Department of Energy Executive Plant Director 3. External 一般職（誰でも可） West Noobian Assault Force Federal Maritime Defense Force Federal Ranger Regiment Bloxian Commonwealth 1st Support & Foreign Aid Civilians Incarcerated"
