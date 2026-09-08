@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiation - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        /* 目次（TOC） */
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            min-width: 220px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+        .wiki-table th, .wiki-table td {
+            border: 1px solid #a2a9b1;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .wiki-table th {
+            background-color: #eaecf0;
+            color: #202122;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+            <h1 class="page-title">Radiation</h1>
+            <p>放射線（Radiation）は、「WRENCHES & WORKORDERS」アップデートで導入されたゲームメカニクス。原子炉が安全運用温度を超えた場合や炉心溶融（爆発）時に放射線ダメージが追加される。これに対処するには防護服（Hazmat suit）を使用する必要がある。</p>
+            <p>放射線を測定するにはガイガーカウンターを使用する（同じく「WRENCHES & WORKORDERS」アップデートで導入）。放射線が致死量に達すると、警告灯が黄色に点灯する。点灯後、放射線ダメージを受け始める。</p>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#overview">1 Overview</a>
+                        <ol>
+                            <li><a href="#geiger-counter">1.1 Geiger Counter</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#radiation-info">2 Radiation Info</a></li>
+                    <li><a href="#fatal-radiation">3 Fatal Radiation (from the reactor)</a></li>
+                    <li><a href="#hazmat-suit">4 Hazmat Suit</a></li>
+                </ol>
+            </div>
+
+            <h2 id="overview">Overview</h2>
+            <p>放射線は「WRENCHES & WORKORDERS」アップデートで追加され、原子炉の温度が安全運用温度を超えた時や炉心爆発時に発生する。対策には防護服が必要となる。</p>
+            <p>測定にはガイガーカウンターを用い、致命的なレベルに達するとインジケーターが黄色く光って警告を発し、その後ダメージを受ける。</p>
+
+            <h3 id="geiger-counter">Geiger Counter</h3>
+            <p>ガイガーカウンターはプラントメンテナンス（Plant Maintenance）および原子炉オペレーション（Reactor Operations）の作業員に支給されるが、<code>[BACKSPACE]</code>キーを押することで他のクラスへ落として渡すこともできる。曝露している正確な放射線量を特定できるが、プレイヤーに影響を及ぼす閾値として重要なのは実際にダメージを受ける場合のみである。</p>
+
+            <h2 id="radiation-info">Radiation Info</h2>
+            <p>通常運用時、ガイガーカウンターが示すように以下の場所で放射線を検知できる：</p>
+            <ul>
+                <li>原子炉ホール（Reactor Hall）</li>
+                <li>制御室（Control Room）</li>
+                <li>制御室、原子炉ホール、発電機、およびロジスティカルオペレーション（Logistical Operations）の通路セクションを結ぶブリッジ</li>
+                <li>タービン周辺</li>
+                <li>給水ポンプエリア（部屋全体ではない）</li>
+                <li>冷却水系統（制御・ポンプエリア）</li>
+            </ul>
+            <p>この放射線によるダメージや影響はない。</p>
+            <p>放射性物質を運ぶ破壊可能なパイプは以下の場所に存在する：</p>
+            <ul>
+                <li>冷却水制御：1箇所</li>
+                <li>冷却水回廊：発電機入口付近に1箇所</li>
+                <li>発電機：2箇所（各入口に1箇所ずつ）</li>
+                <li>冷却水とブリッジを繋ぐ連絡回廊：1箇所</li>
+                <li>給水：1箇所</li>
+                <li>メインホール：2箇所（ROスポーン付近とPMスポーン付近に1箇所ずつ）</li>
+            </ul>
+            <p>これらのパイプは青色または黄色で、風化・汚れたテクスチャをしている。WN（West Noobian forces）によって破壊されると、Plant Maintenanceが修理するまで周囲に直ちに放射線を放出し続ける。</p>
+
+            <h2 id="fatal-radiation">Fatal Radiation (from the reactor)</h2>
+            <p>ステージ 0：約2000Kで、水位が低い場合に非致死性の放射線ダメージや画面上の塵（flecks）が見られ始める。</p>
+
+            <table class="wiki-table">
+                <thead>
+                    <tr>
+                        <th>ステージ</th>
+                        <th>条件（水位と温度）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ステージ 1</td>
+                        <td>2600Kで水位20%以下、2700Kで水位35%以下、2800Kで水位40%以下、2900Kで水位50%以下、3000Kで水位60%以下</td>
+                    </tr>
+                    <tr>
+                        <td>ステージ 2 (フェーズ1 メルトダウン)</td>
+                        <td>3120Kで水位100%以下</td>
+                    </tr>
+                    <tr>
+                        <td>ステージ 3 (フェーズ2 メルトダウン)</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>放射線マップ（影響を受けるエリア）</h3>
+            <ul>
+                <li><strong>ステージ 0</strong>：制御室および原子炉ホール・制御室・発電機間のブリッジ（非致死性）。原子炉ホールは低水位時に致死性の放射線が発生する。</li>
+                <li><strong>ステージ 1</strong>：原子炉ホール、制御室、原子炉ホール・制御室・発電機間のブリッジ。</li>
+                <li><strong>ステージ 2</strong>：原子炉ホール、制御室、原子炉ホール・制御室・発電機間のブリッジ。</li>
+                <li><strong>ステージ 3</strong>：原子炉ホール、制御室、タービン、ゾーンBブリッジ全体。</li>
+            </ul>
+
+            <h2 id="hazmat-suit">Hazmat Suit</h2>
+            <p>汚染地域で意味のある時間を生き延びるには、防護服（Hazmat suit）を装備する必要がある。防護服を所持しているチームは、Plant Maintenance、Logistical Operations、Reactor Operations、Shift Manager、Noobic Military Police、Federal Government / Civil Service Personnelのみである。各チームのスポーン地点で装備でき、原子炉ホール近くのLogistical Operationsアクセス・トンネル付近にも1着配置されている。チームごとに色が異なる：</p>
+            <ul>
+                <li>Plant Maintenance：オレンジ</li>
+                <li>Logistical Operations：ダークグリーン</li>
+                <li>Reactor Operations / PD：黄色</li>
+                <li>Shift Manager：ブルー</li>
+                <li>NMP / NAMS / 8NEC：ホワイト</li>
+            </ul>
+            <p>防護服は放射線ダメージを軽減するが、完全に防ぐわけではない。メルトダウンフェーズ2の最中には、防護服を装備していても制御室や原子炉ホールの放射線を生き延びることはできない。</p>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
