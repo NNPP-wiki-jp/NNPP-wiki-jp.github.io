@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Orders - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        /* ポラロイド風カードスタイル */
+        .infobox {
+            float: right;
+            width: 280px;
+            background: #ffffff;
+            border: 1px solid #a2a9b1;
+            padding: 10px 10px 14px 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .infobox-image-wrapper {
+            background: #ffffff;
+            border: 1px solid #d8dadc;
+            padding: 8px 8px 4px 8px;
+            margin-bottom: 12px;
+        }
+        .infobox-image {
+            text-align: center;
+        }
+        .infobox-image img {
+            width: 100%;
+            height: auto;
+            max-height: 160px;
+            object-fit: contain;
+            display: block;
+        }
+        .infobox-caption {
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: #202122;
+            padding: 8px 0 4px 0;
+            text-transform: uppercase;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        /* 目次（TOC） */
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            min-width: 220px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        /* テーブルスタイル */
+        .wiki-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .wiki-table th, .wiki-table td {
+            border: 1px solid #a2a9b1;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        .wiki-table th {
+            background-color: #eaecf0;
+            color: #202122;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+            <!-- 右上のインフォボックス -->
+            <div class="infobox">
+                <div class="infobox-image-wrapper">
+                    <div class="infobox-image">
+                        <img src="Power_Orders.png" alt="Power Orders">
+                    </div>
+                    <div class="infobox-caption">POWER ORDERS</div>
+                </div>
+                <table>
+                    <tr>
+                        <th>通常要求値</th>
+                        <td>15,000 〜 24,500</td>
+                    </tr>
+                    <tr>
+                        <th>POEA有効時</th>
+                        <td>30,000 〜 49,000</td>
+                    </tr>
+                    <tr>
+                        <th>最高報酬</th>
+                        <td>3,000 XP (Tier 3)</td>
+                    </tr>
+                    <tr>
+                        <th>カテゴリ</th>
+                        <td>Objectives</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h1 class="page-title">Power Orders</h1>
+            <p>Power Orders（PO）の達成はプラントの主要目的であり、味方チームにとっての主要なXP獲得源となる。</p>
+            <p>POの達成には、原子炉で生成される余剰エネルギー（Excess Energy）を調整し、POで要求される余剰量に一致させる必要がある。この調整は主にタービンバルブの制御によって行われるが、タービン導入前と同様に、原子炉温度を上げて圧力を調整することでも行える。</p>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#overview">1 達成条件</a></li>
+                    <li><a href="#policies">2 ポリシー (Policies)</a></li>
+                    <li><a href="#shift-tier">3 シフトティア (Shift Tier)</a></li>
+                </ol>
+            </div>
+
+            <h2 id="overview">達成条件</h2>
+            <p>通常、POの達成には以下の条件が求められる。</p>
+            <ul>
+                <li>両方のタービンが同期していること。</li>
+                <li>両方の給水ポンプ（Feedwater Pumps）が稼働しており、水位が100%であること。</li>
+                <li>温度が安定し、一定の最低閾値を超えていること。</li>
+                <li>原子炉に十分な燃料があること。</li>
+                <li>冷却システムが有効かつ開放されていること。</li>
+            </ul>
+
+            <h2 id="policies">ポリシー (Policies)</h2>
+            <p>POはプラントで採用されるポリシーによって変動する。Power Order Efficiency Act（POEA）が有効な場合、規模が2倍になるが、完了時に獲得できるXPも2倍になる。</p>
+            <p>要求される余剰量は、POEA無効時は15,000から24,500の範囲でランダムに変動し、POEA有効時は30,000から49,000の範囲で変動する。</p>
+
+            <h2 id="shift-tier">シフトティア (Shift Tier)</h2>
+            <p>完了したPOの数に応じて、シフト終了時に獲得できるXPの量が変化する。これを「Shift Tier」と呼び、1から3（T1、T2、T3）まで存在する。</p>
+            
+            <table class="wiki-table">
+                <thead>
+                    <tr>
+                        <th>レベル</th>
+                        <th>注文数</th>
+                        <th>報酬</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tier 1</td>
+                        <td>0 〜 3 POs</td>
+                        <td>500 XP</td>
+                    </tr>
+                    <tr>
+                        <td>Tier 2</td>
+                        <td>4 〜 6 POs</td>
+                        <td>1,000 XP</td>
+                    </tr>
+                    <tr>
+                        <td>Tier 3</td>
+                        <td>7 POs以上</td>
+                        <td>3,000 XP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
