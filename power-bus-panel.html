@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Bus Panel - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        /* ポラロイド風カードスタイル */
+        .infobox {
+            float: right;
+            width: 280px;
+            background: #ffffff;
+            border: 1px solid #a2a9b1;
+            padding: 10px 10px 14px 10px;
+            margin: 0 0 20px 20px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .infobox-image-wrapper {
+            background: #ffffff;
+            border: 1px solid #d8dadc;
+            padding: 8px 8px 4px 8px;
+            margin-bottom: 12px;
+        }
+        .infobox-image {
+            text-align: center;
+        }
+        .infobox-image img {
+            width: 100%;
+            height: auto;
+            max-height: 160px;
+            object-fit: contain;
+            display: block;
+        }
+        .infobox-caption {
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: #202122;
+            padding: 8px 0 4px 0;
+            text-transform: uppercase;
+        }
+        .infobox table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .infobox th, .infobox td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eaecf0;
+            text-align: left;
+        }
+        .infobox th {
+            width: 45%;
+            color: #54595d;
+        }
+        /* 目次（TOC） */
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            min-width: 220px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        /* 本文中の画像コンテナ */
+        .wiki-image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .wiki-image-container img {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            background: #fff;
+            padding: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .wiki-image-caption {
+            font-size: 0.85em;
+            color: #54595d;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+            <!-- 右上のインフォボックス -->
+            <div class="infobox">
+                <div class="infobox-image-wrapper">
+                    <div class="infobox-image">
+                        <img src="Power Bus Panel.png" alt="Power Bus Panel">
+                    </div>
+                    <div class="infobox-caption">POWER BUS PANEL</div>
+                </div>
+                <table>
+                    <tr>
+                        <th>担当</th>
+                        <td><a href="Plant_Maintenance.html">Plant Maintenance</a></td>
+                    </tr>
+                    <tr>
+                        <th>関連部門</th>
+                        <td><a href="Reactor_Ops.html">Reactor Operations</a></td>
+                    </tr>
+                    <tr>
+                        <th>電圧</th>
+                        <td>550,000V</td>
+                    </tr>
+                    <tr>
+                        <th>カテゴリ</th>
+                        <td>Mechanics</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h1 class="page-title">Power Bus Panel</h1>
+            <p><strong>Power Bus Panel</strong>は、<a href="Reactor_Ops.html">Reactor Operations</a>（RO）からの要求に応じて実際に電源グリッドを切り替えるために使用されるパネル。<a href="Plant_Maintenance.html">Plant Maintenance</a>（PM）の担当者が赴き、操作を実行する必要がある。</p>
+            <p>使用時は、まずグリッド変更を許可する「Master Arm Switch」をクリックして持ち上げる必要がある。操作を行うには、あらかじめReactor Operationsからグリッド変更の要求が出されている必要があり、その際に対応するレバーの横でライトが点滅する。</p>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#master-grid-switch">1 Master Grid Switch</a></li>
+                    <li><a href="#grid-overview">2 グリッド概要 </a></li>
+                    <li><a href="#to-recap">3 まとめ</a></li>
+                </ol>
+            </div>
+
+            <h2 id="master-grid-switch">Master Grid Switch</h2>
+            <div class="wiki-image-container">
+                <img src="Master Grid Switch.png" alt="Master Grid Switch">
+                <div class="wiki-image-caption">Master Grid Switch</div>
+            </div>
+            <p>スイッチを実際に切り替えるには、クリックしたままドラッグ操作を行う必要がある。また、他のスイッチを変更するためにもMaster Armスイッチを動かすことが必須となる。Masterスイッチが緑色の状態にフリップされている間は、作業完了後に戻すよう警告のブザー音蜂が鳴り続ける。</p>
+
+            <h2 id="grid-overview">Grid Overview</h2>
+            <p>グリッドの変更はReactor OperationsとPlant Maintenanceによって行われる（ただしPMはROが要求した内容のみ実行可能）。</p>
+            <ul>
+                <li><strong>外部バス（橙色のライン）</strong>：変圧器がダウンしていない場合の主要電源であり、プラント全体を稼働させるために必要な550,000Vを供給する。変圧器が機能している時のみ動作する。</li>
+                <li><strong>プライマリバス（黄色のライン / リアクターグリッドとも呼ばれる）</strong>：外部バスから電力を供給され、給水ポンプ1（Feedwater Pump 1）や冷却水ポンプ1（Coolant Pump 1）、脱気器（Deaerator）、復水器（Condenser）が含まれる（脱気器と復水器は機密事項のためOPSEC非公開）。</li>
+                <li><strong>タービン電源（紫色のライン）</strong>：タービンが外部へ電力を供給している状態を示し、利益（Power Orders）の達成に関わる。</li>
+                <li><strong>補助バス（緑色のライン）</strong>：プライマリバスから電力を供給するよう設定可能。給水ポンプ2（Feedwater Pump 2）、冷却水ポンプ2（Coolant Pump 2）、およびINOP（一般にはinoperableの意味とされる）が含まれる。緊急時は発電機（Generators）からの給電も可能。</li>
+                <li><strong>DCバス</strong>：照明や換気が含まれる。補助バスから電力を供給するよう設定可能。</li>
+            </ul>
+            <p>電力は上位のバスから下位のバスへと順次供給（trickle down）される。上流のグリッドに電力が供給されていない場合、それより下流のグリッドもすべて電力供給が失われる。例えば、補助バスへの電力が遮断された場合、DCバスも動作しなくなる。</p>
+            <p>ANRO R&Dにより確認されている通り、世間の噂に反して、DCパワーバスを切断してもウエスト・ヌービアン軍が通気口からプラントへ侵入するのを阻止することはできない。</p>
+
+            <h2 id="to-recap">TO RECAP</h2>
+            <ul>
+                <li>外部電源またはタービンはプライマリに給電可能。</li>
+                <li>プライマリまたは発電機は補助バスに給電可能。</li>
+                <li>補助バスはDCに給電可能。</li>
+                <li>グリッド変更の際は事前にMaster Arm Switchを入れる必要があり、スイッチは「クリック＆ホールド＆ドラッグ」で操作する。変更はReactor Operationsからの要求がある場合のみ実行可能。</li>
+                <li>電力はバスの下流へ流れる。</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
