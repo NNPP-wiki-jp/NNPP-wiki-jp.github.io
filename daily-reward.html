@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Reward - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        table.wikitable {
+            background-color: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            border-collapse: collapse;
+            margin: 1em 0;
+            width: 100%;
+        }
+        table.wikitable th, table.wikitable td {
+            border: 1px solid #a2a9b1;
+            padding: 8px 12px;
+        }
+        table.wikitable th {
+            background-color: #eaecf0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+            <h1 class="page-title">Daily Reward</h1>
+            <p>デイリー報酬システムに関する解説ページです。</p>
+
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#information">1 Information</a></li>
+                    <li><a href="#rewards">2 Rewards</a></li>
+                </ol>
+            </div>
+
+            <h2 id="information">Information</h2>
+            <p>デイリー報酬システムでは、プレイするたびに設定された報酬を受け取ることができます。この進捗は、7日目を達成した後、または1日ログインし損ねた場合にリセットされます。</p>
+            <p>PM、GSP、PSにはそれぞれ特別なユニフォームが存在します。これらの特殊ユニフォームは各チームのページで確認できます。すでに該当チームに所属している（または所持している）場合は、代わりにそのチームのXPが報酬として付与されます。チームの試用期間（トライアル）は累積（スタック）します。報酬はその日に受け取らなくても後からまとめて受け取ることが可能であるため、数日間受け取らずにプレイし、後日2日分以上の報酬をまとめて受け取ることもできます。</p>
+
+            <h2 id="rewards">Rewards</h2>
+            <table class="wikitable">
+                <tr>
+                    <th>日目</th>
+                    <th>報酬内容</th>
+                </tr>
+                <tr>
+                    <td>1日目</td>
+                    <td>1,000 XP</td>
+                </tr>
+                <tr>
+                    <td>2日目</td>
+                    <td>GSP トライアル（20分） &amp; 2x XP（50分）</td>
+                </tr>
+                <tr>
+                    <td>3日目</td>
+                    <td>2x XP（60分）</td>
+                </tr>
+                <tr>
+                    <td>4日目</td>
+                    <td>LMP トライアル（20分）</td>
+                </tr>
+                <tr>
+                    <td>5日目</td>
+                    <td>2x XP（60分）</td>
+                </tr>
+                <tr>
+                    <td>6日目</td>
+                    <td>FMDF トライアル（30分）</td>
+                </tr>
+                <tr>
+                    <td>7日目</td>
+                    <td>ランダムな特殊ユニフォーム</td>
+                </tr>
+            </table>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
