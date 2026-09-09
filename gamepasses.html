@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamepasses - NNPP非公式Wiki</title>
+    <link rel="stylesheet" href="style.css">
+    <link class="favicon" rel="icon" href="fabicoon.webp" type="image/webp">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #202122;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #a2a9b1;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-area .wiki-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+        }
+        .logo-area .wiki-subtitle {
+            font-size: 0.8rem;
+            color: #54595d;
+            margin-left: 8px;
+        }
+        .search-box input {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #a2a9b1;
+            border-radius: 2px;
+            width: 220px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #36c;
+            box-shadow: inset 0 0 0 1px #36c;
+        }
+        .container {
+            display: flex;
+            max-width: 1280px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #a2a9b1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .side-nav {
+            width: 220px;
+            flex-shrink: 0;
+            background-color: #f6f6f6;
+            border-right: 1px solid #a2a9b1;
+            padding: 20px 15px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 5px;
+            font-size: 2em;
+            margin-top: 0;
+        }
+        h2 {
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+            font-size: 1.5em;
+            margin-top: 1.5em;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        h4 {
+            font-size: 1.1em;
+            margin-top: 1em;
+        }
+        /* 目次（TOC） */
+        .toc {
+            display: inline-block;
+            background: #f8f9fa;
+            border: 1px solid #a2a9b1;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            min-width: 220px;
+        }
+        .toc-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eaecf0;
+            padding-bottom: 4px;
+        }
+        .toc ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .toc li {
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- トップバー -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <a href="index.html" class="wiki-title">NNPP非公式Wiki</a>
+            <span class="wiki-subtitle">The Free Encyclopedia</span>
+        </div>
+        <div class="search-box" style="position: relative;">
+            <form id="wiki-search-form" onsubmit="performSearch(event)">
+                <input type="text" id="search-input" placeholder="Wiki内を検索" autocomplete="off" oninput="autoSearch(this.value)">
+            </form>
+            <div id="search-results-popup" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #a2a9b1; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000; max-height: 300px; overflow-y: auto;"></div>
+        </div>
+    </header>
+
+    <!-- レイアウトコンテナ -->
+    <div class="container">
+        <!-- サイドバー -->
+        <nav class="side-nav" id="sidebar"></nav>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+            <h1 class="page-title">Gamepasses</h1>
+            <p>（Gamepassから転送）</p>
+
+            <!-- 目次 -->
+            <div class="toc">
+                <div class="toc-title">目次</div>
+                <ol>
+                    <li><a href="#administrative-gamepasses">1 Administrative Gamepasses</a>
+                        <ol>
+                            <li><a href="#corporate">1.1 Corporate</a></li>
+                            <li><a href="#plant-director">1.2 Plant Director</a></li>
+                            <li><a href="#shift-manager">1.3 Shift Manager</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#operations-gamepasses">2 Operations Gamepasses</a>
+                        <ol>
+                            <li><a href="#reactor-operations">2.1 Reactor Operations</a></li>
+                            <li><a href="#logistics-operations">2.2 Logistics Operations</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#security-military-gamepasses">3 Security & Military Gamepasses</a>
+                        <ol>
+                            <li><a href="#ground-service-personnel">3.1 Ground Service Personnel</a></li>
+                            <li><a href="#tactical-response-team">3.2 Tactical Response Team</a></li>
+                            <li><a href="#local-military-police">3.3 Local Military Police</a></li>
+                            <li><a href="#armored-cavalry-regiment">3.4 Armored Cavalry Regiment (13th Armored Cavalry Regiment)</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#raider-gamepasses">4 Raider Gamepasses</a>
+                        <ol>
+                            <li><a href="#federal-maritime-defense-force">4.1 Federal Maritime Defense Force</a></li>
+                            <li><a href="#bloxian-foreign-oversight">4.2 Bloxian Foreign Oversight</a></li>
+                            <li><a href="#fedaral-ranger-regiment">4.3 Fedaral Ranger Regiment</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#cosmetic-supporter-gamepasses">5 Cosmetic & Supporter Gamepasses</a>
+                        <ol>
+                            <li><a href="#game-supporter-vip">5.1 Game Supporter [VIP]</a></li>
+                            <li><a href="#investor">5.2 Investor</a></li>
+                            <li><a href="#gubby">5.3 Gubby</a></li>
+                            <li><a href="#dx-21">5.4 DX-21</a></li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+
+            <p>ゲームパス（Gamepasses）は、ナラモ原子力発電所（Naramo Nuclear Plant）全体を通して、固有のチーム、武器、乗り物、装備、およびサポーター報酬へのアクセスを提供します。</p>
+
+            <h2 id="administrative-gamepasses">Administrative Gamepasses</h2>
+            <p>施設の運営、ロックダウン、従業員のコーディネートを担当する、リーダーシップおよび管理職ロール。</p>
+
+            <h3 id="corporate">Corporate</h3>
+            <p>コーポレート担当者は、市民のツアーを調整し、施設全体での管理運営をサポートします。</p>
+            <h4>RESPONSIBILITIES</h4>
+            <ul>
+                <li>市民ツアーのガイド</li>
+                <li>ロックダウンの調整</li>
+                <li>施設管理のサポート</li>
+            </ul>
+            <h4>ABILITIES</h4>
+            <ul>
+                <li>リモートでの市民認可</li>
+                <li>クラス3ロックダウンの開始</li>
+                <li>カメラシステムへのアクセス</li>
+            </ul>
+            <h4>VEHICLES</h4>
+            <ul>
+                <li>Leroy大型イエローバス</li>
+                <li>BrikTek グラディエーター</li>
+            </ul>
+            <h4>PROGRESSION</h4>
+            <ul>
+                <li>シフトマネージャー（Shift Manager）を経由した進行によってもアンロック可能です。</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Corporate</li>
+                <li>価格: 880 Robux</li>
+            </ul>
+
+            <h3 id="plant-director">Plant Director</h3>
+            <p>緊急事態の調整と運用監視を担当する、施設内の最高管理職ロール。</p>
+            <h4>RESPONSIBILITIES</h4>
+            <ul>
+                <li>施設運営の監督</li>
+                <li>侵入時のカメラスキャンの実行</li>
+                <li>ロックダウンの調整</li>
+            </ul>
+            <h4>ABILITIES</h4>
+            <ul>
+                <li>全体スタッフ向け緊急放送</li>
+                <li>クラス2ロックダウン</li>
+                <li>カメラアクセス</li>
+                <li>従業員解雇権限</li>
+                <li>企業会議の招集</li>
+            </ul>
+            <h4>VEHICLES</h4>
+            <ul>
+                <li>BrikTek グラディエーター</li>
+                <li>サーバー制限: 1サーバーにつきアクティブなプラントディレクターは1人のみ。</li>
+            </ul>
+            <h4>PROGRESSION</h4>
+            <ul>
+                <li>コーポレート（Corporate）を経由した進行によってもアンロック可能です。</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Plant Director</li>
+                <li>価格: 2200 Robux</li>
+            </ul>
+
+            <h3 id="shift-manager">Shift Manager</h3>
+            <p>シフトマネージャーは原子炉スタッフを監督し、施設のシフト中の稼働効率を維持します。</p>
+            <h4>RESPONSIBILITIES</h4>
+            <ul>
+                <li>原子炉稼働の維持</li>
+                <li>パワーオーダーの完了</li>
+                <li>原子炉スタッフの調整</li>
+            </ul>
+            <h4>ABILITIES</h4>
+            <ul>
+                <li>従業員ボーナス</li>
+                <li>原子炉オペレーターの解雇権限</li>
+                <li>タービンおよび制御室のロック</li>
+                <li>青色防護服（Blue HAZMAT Suit）</li>
+                <li>サーバー制限: 1サーバーにつきアクティブなシフトマネージャーは1人のみ。</li>
+            </ul>
+            <h4>PROGRESSION</h4>
+            <ul>
+                <li>原子炉運用（Reactor Operations）を経由した進行によってもアンロック可能です。</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Shift Manager</li>
+                <li>価格: 1200 Robux</li>
+            </ul>
+
+            <h2 id="operations-gamepasses">Operations Gamepasses</h2>
+            <p>物流、原子炉の保守、および補給業務を担当するスタッフ。</p>
+
+            <h3 id="reactor-operations">Reactor Operations</h3>
+            <p>原子炉運用スタッフは、原子炉の安定性を維持し、電力生産オーダーを完了させます。</p>
+            <h4>RESPONSIBILITIES</h4>
+            <ul>
+                <li>原子炉の安定性維持</li>
+                <li>パワーオーダーの完了</li>
+                <li>シフトマネージャーの指示に従う</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Reactor Operations</li>
+                <li>価格: 400 Robux</li>
+            </ul>
+
+            <h3 id="logistics-operations">Logistics Operations</h3>
+            <p>物流担当スタッフは、施設のサプライチェーンを維持し、重要物資を輸送します。</p>
+            <h4>RESPONSIBILITIES</h4>
+            <ul>
+                <li>施設貨物の補充</li>
+                <li>発電機の給油</li>
+                <li>施設物資の配達</li>
+                <li>貨物列車の荷下ろし</li>
+            </ul>
+            <h4>VEHICLES</h4>
+            <ul>
+                <li>DOE補給用 LLUV</li>
+                <li>DOE補給用 タグ</li>
+                <li>M41 DOE補給車</li>
+                <li>M41 DOE補給車（核仕様）</li>
+                <li>HTV</li>
+                <li>HTV（強化型）</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Logistical Operations</li>
+                <li>価格: 200 Robux</li>
+            </ul>
+
+            <h2 id="security-military-gamepasses">Security & Military Gamepasses</h2>
+            <p>施設の防衛と法執行を担当する警備および軍事ユニット。</p>
+
+            <h3 id="ground-service-personnel">Ground Service Personnel</h3>
+            <p>地上勤務員は、敵の侵入に対して施設の外周を防衛します。</p>
+            <h4>RESPONSIBILITIES</h4>
+            <ul>
+                <li>施設の検問所の防衛</li>
+                <li>敵対レイダーとの交戦</li>
+                <li>重軍用車両の運用</li>
+            </ul>
+            <h4>EQUIPMENT</h4>
+            <ul>
+                <li>重火器へのアクセス</li>
+                <li>VT-1 戦車</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Ground Service Personnel</li>
+                <li>価格: 600 Robux</li>
+            </ul>
+
+            <h3 id="tactical-response-team">Tactical Response Team</h3>
+            <p>装甲防衛とVIP警護を専門とするエリートの迅速対応警備部隊。</p>
+            <h4>EQUIPMENT</h4>
+            <ul>
+                <li>高グレード兵器</li>
+                <li>対戦車重装備</li>
+                <li>ICV-1 装輪装甲車 (APC)</li>
+            </ul>
+            <h4>BONUSES</h4>
+            <ul>
+                <li>プラントディレクターを護衛してXPブーストを獲得</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Tactical Response Team</li>
+                <li>価格: 400 Robux</li>
+            </ul>
+
+            <h3 id="local-military-police">Local Military Police</h3>
+            <p>現地憲兵はナラモ地区全域で法を執行し、容疑者の拘束を支援します。</p>
+            <h4>EQUIPMENT</h4>
+            <ul>
+                <li>手錠</li>
+                <li>テイザー銃</li>
+                <li>警察車両</li>
+            </ul>
+            <h4>VEHICLES</h4>
+            <ul>
+                <li>ポリス・クルーザー</li>
+                <li>シェリフ・クルーザー</li>
+                <li>LMP LLUV</li>
+            </ul>
+            <h4>ARREST PROCEDURE</h4>
+            <ul>
+                <li>容疑者を刑務所セクターのゲートに連れて行く</li>
+                <li>逮捕プロンプトでQキーを押す</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Local Military Police</li>
+                <li>価格: 1400 Robux</li>
+            </ul>
+
+            <h3 id="armored-cavalry-regiment">Armored Cavalry Regiment (13th Armored Cavalry Regiment)</h3>
+            <p>第3ヌーブ師団の精鋭偵察兵および歩兵から選抜されたACRは、侵攻してくる西ヌービアに対する主要なスクリーニングおよび偵察部隊として機能します。</p>
+            <h4>EQUIPMENT</h4>
+            <ul>
+                <li>エリコ SMG</li>
+                <li>RCV-1 IFVへのアクセス（出撃クールダウンあり）</li>
+                <li>独自の偵察用ジープとICV-1 APC（ACR専用）、どちらもクールダウンなし！</li>
+            </ul>
+            <h4>VEHICLES</h4>
+            <ul>
+                <li>RCV-1 IFV（出撃に5〜10分のクールダウンあり）</li>
+                <li>VT-2A1（出撃に5〜20分のクールダウンあり）</li>
+                <li>VT-2E3 ACAV（出撃に5〜20分のクールダウンあり）</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>13th Armored Cavalry Regiment</li>
+                <li>価格: 1999 Robux</li>
+            </ul>
+
+            <h2 id="raider-gamepasses">Raider Gamepasses</h2>
+            <p>潜入および強襲作戦に特化した専門レイダー部隊。</p>
+
+            <h3 id="federal-maritime-defense-force">Federal Maritime Defense Force</h3>
+            <p>装甲強襲作戦を専門とする西ヌービアのエリート海兵隊。</p>
+            <h4>EQUIPMENT</h4>
+            <ul>
+                <li>M41 対空砲 (FMDF)</li>
+                <li>LVT-A1 (WN)</li>
+                <li>C-16</li>
+            </ul>
+            <h4>FEATURES</h4>
+            <ul>
+                <li>専用ユニフォーム</li>
+                <li>0 XPでの車両アンロック</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Federal Maritime Defense Force</li>
+                <li>価格: 275 Robux</li>
+            </ul>
+
+            <h3 id="bloxian-foreign-oversight">Bloxian Foreign Oversight</h3>
+            <p>ハイエンドのAPC、IFV、および実験的武器を装備した高度な軍事顧問部隊。</p>
+            <h4>EQUIPMENT</h4>
+            <ul>
+                <li>M52 APC ブロックス</li>
+                <li>XM64 IFV</li>
+                <li>XM64A1</li>
+                <li>M80 対物ライフル</li>
+                <li>BR-18A2</li>
+                <li>BR-18C</li>
+            </ul>
+            <h4>FEATURES</h4>
+            <ul>
+                <li>XPアンロックのバイパス</li>
+                <li>高度な乗り物</li>
+                <li>コスメティック報酬</li>
+                <li>要件: オンラインの防衛側が最低8人必要。</li>
+            </ul>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Bloxian Commonwealth</li>
+                <li>価格: 2500 Robux</li>
+            </ul>
+
+            <h3 id="fedaral-ranger-regiment">Fedaral Ranger Regiment</h3>
+            <p>西ヌービアのレンジャーは、単独または小規模グループでの潜入を得意としています。優れた装備とカメラスキャン透明化機能により、プラント内を簡単にスニークして任務を遂行できます。</p>
+            <h4>獲得できるもの:</h4>
+            <ul>
+                <li>消音付きウェストンSMG（よりモダンで静音性の高い銃）</li>
+                <li>カメラスキャン透明化</li>
+                <li>黒のレンジャーユニフォーム</li>
+                <li>潜入用に拿捕した施設車両</li>
+            </ul>
+            <p>防衛側の人数が不足している場合は、レイダーになることができません。</p>
+            <h4>MORE INFORMATION</h4>
+            <ul>
+                <li>Federal Ranger Regiment</li>
+                <li>価格: 700 Robux</li>
+            </ul>
+
+            <h2 id="cosmetic-supporter-gamepasses">Cosmetic & Supporter Gamepasses</h2>
+            <p>コスメティック報酬を受け取りながら、ナラモ原子力発電所の継続的な開発をサポートします。</p>
+
+            <h3 id="game-supporter-vip">Game Supporter [VIP]</h3>
+            <p>継続的な開発資金を支援するコスメティック系サポーターゲームパス。</p>
+            <h4>INCLUDES</h4>
+            <ul>
+                <li>サポーターネームタグ</li>
+                <li>価格: 250 Robux</li>
+            </ul>
+
+            <h3 id="investor">Investor</h3>
+            <p>限定コスメティック報酬を特徴とするプレミアム・サポーターゲームパス。</p>
+            <h4>INCLUDES</h4>
+            <ul>
+                <li>インベスターネームタグ</li>
+                <li>チャットタグ</li>
+                <li>CATのコンパニオン</li>
+                <li>価格: 1000 Robux</li>
+            </ul>
+
+            <h3 id="gubby">Gubby</h3>
+            <p>Gubbyコンパニオンを同梱したハイティア・サポーターゲームパス。</p>
+            <h4>INCLUDES</h4>
+            <ul>
+                <li>Gubbyのコンパニオン</li>
+                <li>価格: 10000 Robux</li>
+            </ul>
+
+            <h3 id="dx-21">DX-21</h3>
+            <p>この武器であなた自身と大切な友人たちを守りましょう！</p>
+            <h4>INCLUDES</h4>
+            <ul>
+                <li>DX-21</li>
+                <li>価格: 100 Robux</li>
+            </ul>
+
+        </main>
+    </div>
+
+    <script>
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
