@@ -1,0 +1,18 @@
+backend:
+  name: github
+  repo: nnpp-wiki-jp/nnpp-wiki-jp.github.io
+  branch: main
+
+media_folder: ""
+public_folder: ""
+
+collections:
+  - name: "pages"
+    label: "ページ編集"
+    files:
+      - file: "index.html"
+        label: "トップページ"
+        name: "index"
+        fields:
+          - {label: "ページタイトル", name: "title", widget: "string"}
+          - {label: "リード文", name: "lead_text", widget: "text"}
